@@ -1,0 +1,148 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.clearfix:after{
+	display:block;
+	content:"";
+	clear:both;
+}
+.clearfix { zoom:1; }   
+body,ul,ol,h1,h2,h3,p,form,input,ul,ol,input,textarea{font-family:"Microsoft Yahei";font-size:14px; color:#444444;}
+a{color:#444444;text-decoration: none;}
+.fl{float:left;}
+.fr{float:right;}
+.banner{
+	width:100%;
+	height: 356px;
+	background: #6ac4bb url("../images/banner.jpg") center top no-repeat;
+}
+.login-pannel{
+	margin:0 auto;
+	width:412px;
+	height:230px;
+}
+.login-iterm{
+	position:relative;
+	padding-left:44px;
+	width:100%;
+	height: 42px;
+	margin-bottom:15px;
+}
+.login-label{
+	position:absolute;
+	left:0;
+	top:0;
+	display:inline-block;
+	width:44px;
+	height:40px;
+	background: #6ac4bb;
+	text-align: center;
+}
+.input{
+	height: 40px;
+	line-height: 40px;
+	border:1px solid #dddddd;
+	outline: none;
+	box-sizing: border-box;
+	text-indent: 1em;
+}
+.login-input{
+	width:368px;
+	border-left:0;
+}
+.code-input{
+	width:240px;
+	float: left;
+}
+.refresh{
+	display:inline-block;
+	height: 40px;
+	line-height: 40px;
+}
+.refresh-code{
+	color:#3cbbb4;
+	text-decoration: underline;
+	margin-left:18px;
+}
+.login-code{
+	margin-bottom:15px;
+}
+.btn{
+	display:inline-block;
+	width:200px;
+	height: 40px;
+	line-height: 40px;
+	background: #1fb5ad;
+	color:#fff;
+	text-align: center;
+	cursor: pointer;
+	font-size:16px;
+	border:none;
+}
+.btn-submit:hover,.btn-submit:focus{
+	background: #21c4bb;
+}
+.btn-submit:active{
+	background: #1eaba3;
+}
+.btn-disabled{
+	background: #21c4bb;
+	cursor: not-allowed;
+}
+.btn-group{
+	width:100%;
+	margin-bottom:15px;
+}
+.btn-refresh{
+	background: #e8e8e8;
+	color:#444;
+}
+.btn-refresh:hover,.btn-refresh:focus{
+	background: #eeeded;
+}
+.btn-refresh:active{
+	background: #dddcdc;
+}
+.find-pwd{
+	color:#f9907e;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.tc{
+	text-align: center;
+}
+.error{
+	border:2px solid #e74c3c;
+}
+.error::-webkit-input-placeholder { /* WebKit browsers */ 
+color: #e74c3c; 
+} 
+.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+color: #e74c3c; 
+} 
+.error::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+color: #e74c3c; 
+} 
+.error:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+color: #e74c3c; 
+}
+.errors{
+	display: block;
+    height: 30px;
+    line-height: 30px;
+    color:#e74c3c;
+}
+.login-ico{
+	display:inline-block;
+	width:24px;
+	height:22px;
+	background:url("../images/login_ico.png") no-repeat;
+	margin-top: 8px;
+}
+.login-ico.i1{
+	background-position: 0 0;
+}
+.login-ico.i2{
+	background-position: 0 -25px;
+}

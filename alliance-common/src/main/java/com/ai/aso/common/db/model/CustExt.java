@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_CUST_EXT")
 public class CustExt {
     private Long custExtId;
 
@@ -62,7 +66,7 @@ public class CustExt {
     private String companyExt16;
 
     private String companyExt17;
-
+    @Id
     public Long getCustExtId() {
         return custExtId;
     }

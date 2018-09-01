@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_DATA_REC")
 public class DataRec {
     private String recNo;
 
@@ -100,7 +102,7 @@ public class DataRec {
     private String trdActivity;
 
     private String contNo;
-
+    @Id
     public String getRecNo() {
         return recNo;
     }

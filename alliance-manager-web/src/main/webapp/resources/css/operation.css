@@ -1,0 +1,118 @@
+.recharge-box{
+	position: absolute;
+	top:34px;
+	left: 0;
+	display: none;
+	width: 100%;
+	height: 240px;
+	border: 1px solid #e4e8eb;
+}
+.lot-item{
+	margin:30px 0 0 30px;
+	height: 70px;
+}
+.step-ico{
+	float: left;
+	display: inline-block;
+	width: 60px;
+	height: 70px;
+	background-image: url(../images/step.png);
+	background-repeat: no-repeat;
+}
+.step1{
+	background-position: 0 0;
+}
+.step2{
+	background-position: 0 -70px;
+}
+.download-btn{
+	float: left;
+	display: inline-block;
+	padding: 7px 20px;
+	margin-top: 22px;
+	border:1px solid #4cc4bd;
+	border-radius: 2px;
+	color: #4cc4bd;
+}
+.download-btn:hover{
+	color: #7CDCD6;
+	border:1px solid #7CDCD6;
+}
+.orb{
+	color: #f8a20f;
+	border:1px solid #f8a20f;
+}
+.orb:hover{
+	color: #FBC05B;
+	border:1px solid #FBC05B;
+}
+.step-group{
+	margin: 20px 0 0 20px;
+	float: left;
+	display: inline-block;
+	width: 150px;
+    height: 50px;
+}
+.ftip{
+	margin: 5px 0;
+	color: #7f7f7f;
+	font-size: 12px;
+}
+.line{
+	margin: 0 auto 15px auto;
+	width: 430px;
+	height: 0px;
+	border-top: 1px dashed #cacaca;
+}
+.tab{
+	position: relative;
+	float: left;
+	width: 110px;
+	height: 35px;
+	line-height: 35px;
+	border-top: 1px solid #e4e8eb;
+	border-right: 1px solid #e4e8eb;
+	border-left: 1px solid #e4e8eb;
+	border-bottom: 1px solid #e4e8eb;
+	background-color: #fafafa;
+	margin-right:-1px;
+	text-align: center;
+	cursor: pointer;
+	z-index: 1;
+}
+.tabs{
+	position: relative;
+	margin: 30px auto;
+	width: 430px;
+	height: 280px;
+}
+.tab.active{
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
+}
+.one-recharge{
+	height: 140px;
+}
+.onetab{
+	height:180px;
+}
+.tip{
+	color: #fe4200;
+	font-size: 12px;
+	margin-bottom: 20px;
+}
+.box{
+	padding:20px;
+}
+.msgtip{
+	margin: 20px 0;
+}
+.w100{
+	width: 100%;
+}
+
+input.Pw_btn_Attach{ background: url(../images/normal_btn_bg.png) no-repeat; width:90px; height:32px;display:inline;
+	border:none; color:#fff; text-align:center; line-height:32px;  font-weight:bold;
+	font-size:14px;cursor: pointer;display: inline; }
+input.Pw_btn_Attach:hover{ 
+   background:url(../images/normal_btn_bg_hover.png) no-repeat;}

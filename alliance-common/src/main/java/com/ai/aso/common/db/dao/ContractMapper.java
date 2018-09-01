@@ -3,8 +3,10 @@ package com.ai.aso.common.db.dao;
 import com.ai.aso.common.db.model.Contract;
 import com.ai.aso.common.db.model.ContractExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ContractMapper {
     int countByExample(ContractExample example);
 

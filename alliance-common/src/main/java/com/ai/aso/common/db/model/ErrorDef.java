@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_ERROR_DEF")
 public class ErrorDef {
     private String errCode;
 
@@ -16,7 +18,7 @@ public class ErrorDef {
     private String modelCode;
 
     private Integer ver;
-
+    @Id
     public String getErrCode() {
         return errCode;
     }

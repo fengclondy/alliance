@@ -1,9 +1,12 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Id;
+
 import javax.persistence.Entity;
 
 @Entity(name = "B_BLACK_LIST")
 public class Blacklist {
+
     private String blacklistKey;
 
     private String blacklistName;
@@ -11,7 +14,7 @@ public class Blacklist {
     private String blacklistValue;
 
     private Integer ver;
-
+    @Id
     public String getBlacklistKey() {
         return blacklistKey;
     }

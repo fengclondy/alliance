@@ -3,8 +3,10 @@ package com.ai.aso.common.db.dao;
 import com.ai.aso.common.db.model.CapitalRecord;
 import com.ai.aso.common.db.model.CapitalRecordExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CapitalRecordMapper {
     int countByExample(CapitalRecordExample example);
 

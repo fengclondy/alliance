@@ -3,19 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ai.aso</groupId>
-    <artifactId>alliance-base</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
-
-    <name>alliance-base</name>
-    <description>流量后项联盟系统基础服务</description>
-
     <parent>
         <groupId>com.ai.aso</groupId>
         <artifactId>alliance</artifactId>
         <version>1.0.0</version>
     </parent>
+    <artifactId>alliance-base</artifactId>
+    <packaging>jar</packaging>
+    <name>alliance-base</name>
+    <description>流量后项联盟系统基础服务</description>
+
 
     <dependencies>
         <dependency>
@@ -59,8 +56,32 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
-
     <build>
+        <finalName>alliance-base</finalName>
+        <sourceDirectory>src/main/java </sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>logback.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+    </build>
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -68,6 +89,6 @@
             </plugin>
         </plugins>
     </build>
-
+-->
 
 </project>

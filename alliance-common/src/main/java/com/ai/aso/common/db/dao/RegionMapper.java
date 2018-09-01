@@ -3,8 +3,10 @@ package com.ai.aso.common.db.dao;
 import com.ai.aso.common.db.model.Region;
 import com.ai.aso.common.db.model.RegionExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface RegionMapper {
     int countByExample(RegionExample example);
 

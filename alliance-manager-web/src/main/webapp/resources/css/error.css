@@ -1,0 +1,39 @@
+.error-box{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 724px;
+	height: 334px;
+	margin-top: -167px;
+	margin-left: -362px;
+	background:url(../images/error.jpg) 0 0 no-repeat;
+}
+.error-info{
+	position: absolute;
+	top: 228px;
+    left: 46px;
+}
+.sorry{
+	position: absolute;
+	top: 126px;
+    left: 45px;
+	width: 265px;
+	height: 86px;
+	background: url(../images/error.png) 0 -155px no-repeat;
+}
+.sorry_500{
+	position: absolute;
+	top: 126px;
+    left: 45px;
+	width: 265px;
+	height: 72px;
+	background: url(../images/error.png) 0 0 no-repeat;
+}
+.sorry_404{
+	position: absolute;
+	top: 126px;
+    left: 45px;
+	width: 265px;
+	height: 72px;
+	background: url(../images/error.png) 0 -80px no-repeat;
+}

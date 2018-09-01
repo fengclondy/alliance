@@ -3,31 +3,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ai.aso</groupId>
-    <artifactId>alliance-common</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
-
-    <name>alliance-common</name>
-    <description>流量后项经营系统公共服务</description>
-
     <parent>
         <groupId>com.ai.aso</groupId>
         <artifactId>alliance</artifactId>
         <version>1.0.0</version>
     </parent>
+    <artifactId>alliance-common</artifactId>
+    <packaging>jar</packaging>
+    <name>alliance-common</name>
+    <description>流量后项经营系统公共服务</description>
+
 
     <dependencies>
-        <dependency>
-            <groupId>com.ai.aso</groupId>
+        <!--<dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>alliance-base</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+            <version>${project.version}</version>
+        </dependency>-->
         <dependency>
-            <groupId>com.ai.aso</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>alliance-security</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
+      <!--  <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>

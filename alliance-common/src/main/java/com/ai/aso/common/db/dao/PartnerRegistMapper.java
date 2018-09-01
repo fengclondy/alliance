@@ -3,8 +3,10 @@ package com.ai.aso.common.db.dao;
 import com.ai.aso.common.db.model.PartnerRegist;
 import com.ai.aso.common.db.model.PartnerRegistExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface PartnerRegistMapper {
     int countByExample(PartnerRegistExample example);
 

@@ -1,9 +1,14 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Id;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.Date;
 @Entity(name = "B_CONT_BOOK_RECORD")
 public class ContbookRecord {
+
     private Long id;
 
     private String bookId;
@@ -25,7 +30,7 @@ public class ContbookRecord {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public Long getId() {
         return id;
     }

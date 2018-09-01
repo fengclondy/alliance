@@ -1,16 +1,17 @@
 package com.ai.aso.common.db.model;
 
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity(name="B_ACCT_ROLE")
 public class AcctRole {
-    @Id
+
     private String acctId;
 
     private Integer roleId;
-
+    @Id
     public String getAcctId() {
         return acctId;
     }

@@ -3,6 +3,7 @@
  */
 package com.ai.aso.common.db.dao.ext;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /** 
@@ -12,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @date 2016-10-8 下午1:00:04
  *
  */
-
+@Mapper
 public interface DataBookaExtMapper {
 	
 	public void updateDataBooka(@Param("cont_id") String cont_id, @Param("ver_") int ver_, @Param("amount") long amount);

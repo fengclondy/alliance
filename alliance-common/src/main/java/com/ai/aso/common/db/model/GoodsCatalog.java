@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_GOODS_CATALOG")
 public class GoodsCatalog {
     private String catalogId;
 
@@ -8,7 +12,7 @@ public class GoodsCatalog {
     private String catalogName;
 
     private Short catalogState;
-
+    @Id
     public String getCatalogId() {
         return catalogId;
     }

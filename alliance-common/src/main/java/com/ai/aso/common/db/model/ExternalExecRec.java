@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_EXTERNAL_EXEC_REC")
 public class ExternalExecRec {
     private Long execId;
 
@@ -30,7 +32,7 @@ public class ExternalExecRec {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public Long getExecId() {
         return execId;
     }

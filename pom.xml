@@ -22,6 +22,11 @@
         <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
         <spring-cloud.version>Finchley.SR1</spring-cloud.version>
     </properties>
+    <modules>
+        <module>alliance-base</module>
+        <module>alliance-security</module>
+        <module>alliance-common</module>
+    </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>

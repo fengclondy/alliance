@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql//lcoalhost:3306/alliance
+    url: jdbc:mysql://127.0.0.1:3306/alliance
     username: data
     password: data
   profiles:
@@ -9,15 +9,7 @@ spring:
   jpa:
     show-sql: true
     database: mysql
-      ddl-auto: update
     hibernate:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-#服务注册配置
-eureka:
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${server.port}
-  client:
-    service-url:
-      defaultZone: http://admin:admin123@localhost:8810/eureka/
+      ddl-auto: update

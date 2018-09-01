@@ -1,12 +1,16 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_LOGIN_IP")
 public class LoginIp {
     private Long id;
 
     private String acctId;
 
     private String loginIp;
-
+    @Id
     public Long getId() {
         return id;
     }

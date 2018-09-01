@@ -1,9 +1,14 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Id;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.Date;
 @Entity(name = "B_CAPITAL_RECORD")
 public class CapitalRecord {
+
     private Long id;
 
     private String custId;
@@ -35,7 +40,7 @@ public class CapitalRecord {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public Long getId() {
         return id;
     }

@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_COST_BILL_ITEM")
 public class CostBillItem {
     private Long costItemId;
 
@@ -50,7 +54,7 @@ public class CostBillItem {
     private Integer costRegionName;
 
     private Long costFee;
-
+    @Id
     public Long getCostItemId() {
         return costItemId;
     }

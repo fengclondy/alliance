@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_SEQUENCE_CONF")
 public class SequenceConf {
     private String seqKey;
 
@@ -18,7 +22,7 @@ public class SequenceConf {
     private Integer ver;
 
     private Integer numberLen;
-
+    @Id
     public String getSeqKey() {
         return seqKey;
     }

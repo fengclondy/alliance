@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.ai.aso.common.db.model.FlowOrderLog;
 import com.ai.aso.common.db.model.FlowOrderLogExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface FlowOrderLogMapper {
     int countByExample(FlowOrderLogExample example);
 

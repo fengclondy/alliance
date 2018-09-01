@@ -1,0 +1,66 @@
+.notice-title{
+	color: #06a79e;
+}
+.notice-title:hover{
+	text-decoration: underline;
+	color:#6acac5;
+}
+.rlabel {
+    display: inline-block;
+    width: 108px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    vertical-align: top;
+}
+.notice-row .rinput {
+    width: 950px;
+}
+.notice-row .textarea {
+	padding: 5px 12px;
+	margin: 0 5px;
+    width: 950px;
+    height: 420px;
+    border: 1px solid #e4e8eb;
+    border-radius: 4px;
+    resize: none;
+    outline: none;
+    overflow: auto;
+    vertical-align: middle;
+}
+.notice-content{
+	padding: 10px 0;
+}
+.notice-row{
+	margin-bottom: 10px;
+}
+.c1{
+	margin: 0 5px;
+}
+.notice-content .notice-view-title{
+    text-align: center;
+    margin: 20px 0;
+}
+.subtitle {
+	padding: 0 25px 16px 25px;
+    border-bottom: 1px dashed #e1e1e1;
+}
+.detail-content {
+    padding: 0 25px;
+    white-space: pre-line;
+    font-size: 14px;
+}
+.notice-content .notice-view-title span {
+    font-size: 18px;
+}
+.subtitle span {
+    color: #8c8c8c;
+}
+.subtitle span.s2 {
+    margin-left: 48px;
+}
+.subtitle span.s3 {
+    float: right;
+}

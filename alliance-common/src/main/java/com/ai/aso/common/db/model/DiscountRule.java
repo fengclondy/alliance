@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_DISCOUNT_RULE")
 public class DiscountRule {
     private String ruleId;
 
@@ -24,7 +28,7 @@ public class DiscountRule {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public String getRuleId() {
         return ruleId;
     }

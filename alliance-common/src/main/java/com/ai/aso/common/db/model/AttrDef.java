@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name="B_ATTR_DEF")
 public class AttrDef {
     private Integer attrId;
 
@@ -14,7 +18,7 @@ public class AttrDef {
     private Short attrSeq;
 
     private Short state;
-
+    @Id
     public Integer getAttrId() {
         return attrId;
     }

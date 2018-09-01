@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_ROLE")
 public class Role {
     private Integer roleId;
 
@@ -18,7 +20,7 @@ public class Role {
     private Date createDate;
 
     private Date modiDate;
-
+    @Id
     public Integer getRoleId() {
         return roleId;
     }

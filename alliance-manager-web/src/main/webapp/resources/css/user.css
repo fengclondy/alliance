@@ -1,0 +1,51 @@
+.roles-container{
+	display: inline-block;
+	width:auto;
+	height: 300px;
+	border:1px solid #e4e8eb;
+	border-radius: 4px;
+	vertical-align: top;
+}
+.role-assigned{
+	float: left;
+	width: 200px;
+	height: 100%;
+	overflow: auto;
+}
+.role-opr{
+	float: left;
+	width: 60px;
+	height: 100%;
+	border-left: 1px solid #e4e8eb;
+	border-right: 1px solid #e4e8eb;
+	text-align: center;
+	display:table;
+}
+.role-opr .arrow-btn-group{
+	vertical-align:middle;   
+    display:table-cell;   
+}
+.role-assigned ul li{
+	padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+	margin-bottom: 5px;
+}
+.role-assigned ul li:hover,.role-assigned ul li.selected{
+	background-color: #f7f7f7;
+}
+.arrow-btn{
+	margin:5px 0;
+	width: 10px;
+    text-align: center;
+}
+.privilege-list{
+	display: inline-block;
+	width: 250px;
+	height: 300px;
+	border: 1px solid #e4e8eb;
+    border-radius: 4px;
+	vertical-align: top;
+	overflow: auto;
+}

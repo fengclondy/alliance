@@ -1,0 +1,23 @@
+.pagination .controls input {
+border: 0;
+color: #999;
+width: 30px;
+padding: 0;
+margin: -3px 0 0 0;
+text-align: center;
+}
+.form-horizontal .control-group {
+margin-bottom: 8px;
+}
+.control-group {
+padding-bottom: 8px;
+margin-bottom: 0;
+border-bottom: 1px dotted #f1f1f1;
+}
+.form-horizontal .controls label.error {
+background-position: 0 2px;
+}
+label {
+display: inline-block;
+margin-bottom: 0;
+}

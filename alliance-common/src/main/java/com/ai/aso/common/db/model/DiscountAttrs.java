@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_DISCOUNT_ATTRS")
 public class DiscountAttrs {
     private Long id;
 
@@ -18,7 +22,7 @@ public class DiscountAttrs {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public Long getId() {
         return id;
     }

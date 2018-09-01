@@ -1,12 +1,16 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_ENABLER_HOST")
 public class EnablerHost {
     private Long id;
 
     private Long applyId;
 
     private String hostIp;
-
+    @Id
     public Long getId() {
         return id;
     }

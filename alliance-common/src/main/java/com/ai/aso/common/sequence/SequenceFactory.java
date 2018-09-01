@@ -4,22 +4,24 @@ import com.ai.aso.common.db.dao.SequenceConfMapper;
 import com.ai.aso.common.db.model.SequenceConf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Component
 public class SequenceFactory {
 
 	Logger logger = LoggerFactory.getLogger(SequenceFactory.class);
 
-	private static final Map<String, ISequence> sequences = new HashMap<String, ISequence>();
+	private static final Map<String, ISequence> sequences = new HashMap<>();
 
-	@Resource(name = "sequenceConfMapper")
+	@Autowired
 	private SequenceConfMapper seqConfDao;
 
-	@Resource(name = "redisSeqHelper")
+	@Autowired
 	private RedisSequenceHelper redisSeqHelper;
 
 	public void initAll() {

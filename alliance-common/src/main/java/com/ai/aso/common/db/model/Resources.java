@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_RESOURCES")
 public class Resources {
     private Integer sourceId;
 
@@ -50,7 +52,7 @@ public class Resources {
     private String ext1;
 
     private String ext2;
-
+    @Id
     public Integer getSourceId() {
         return sourceId;
     }

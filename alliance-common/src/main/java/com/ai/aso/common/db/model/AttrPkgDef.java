@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name="B_ATTR_PKG_DEF")
 public class AttrPkgDef {
     private String attrPkgCode;
 
@@ -10,7 +14,7 @@ public class AttrPkgDef {
     private String reloadClass;
 
     private Integer ver;
-
+    @Id
     public String getAttrPkgCode() {
         return attrPkgCode;
     }

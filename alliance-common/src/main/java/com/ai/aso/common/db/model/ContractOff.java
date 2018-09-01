@@ -1,12 +1,16 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_CONTRACT_OFF")
 public class ContractOff {
     private String contId;
 
     private Integer dataType;
 
     private Integer offRate;
-
+    @Id
     public String getContId() {
         return contId;
     }

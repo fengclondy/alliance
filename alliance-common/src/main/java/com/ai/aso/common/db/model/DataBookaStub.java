@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_DATA_BOOKA_STUB")
 public class DataBookaStub {
     private Long id;
 
@@ -14,7 +16,7 @@ public class DataBookaStub {
     private Long amount;
 
     private Date backDate;
-
+    @Id
     public Long getId() {
         return id;
     }

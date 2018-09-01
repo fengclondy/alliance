@@ -1,9 +1,14 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Id;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.Date;
 @Entity(name = "B_CONT_CARRYOVER_RECORD")
 public class ContCarryoverRecord {
+
     private Long operNo;
 
     private String custid;
@@ -27,7 +32,7 @@ public class ContCarryoverRecord {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public Long getOperNo() {
         return operNo;
     }

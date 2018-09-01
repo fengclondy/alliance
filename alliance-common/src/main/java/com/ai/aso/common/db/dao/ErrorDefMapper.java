@@ -3,8 +3,10 @@ package com.ai.aso.common.db.dao;
 import com.ai.aso.common.db.model.ErrorDef;
 import com.ai.aso.common.db.model.ErrorDefExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ErrorDefMapper {
     int countByExample(ErrorDefExample example);
 

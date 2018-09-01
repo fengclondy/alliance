@@ -1,0 +1,114 @@
+.btop{
+	border-top: 1px solid #e4e8eb;
+	box-sizing: content-box;
+}
+.ul-tab>li{
+	display: block;
+	float: left;
+	padding: 0 23px;
+	margin-right: -1px;
+	border-left: 1px solid #e4e8eb;
+	border-right: 1px solid #e4e8eb;
+	cursor: pointer;
+}
+.ul-tab>li.active{
+	background-color: #fff;
+}
+.lw65{
+	float: left;
+	width: 65%;
+}
+.lw35{
+	float: left;
+	width: 35%;
+}
+.bill-table .table tr{
+	border-left: none;
+	border-right: none;
+}
+.brright{
+	border-right: 2px solid #e4e8eb;
+	
+}
+.bill-table .table thead tr{
+	border-bottom: 2px solid #e4e8eb;
+}
+.bill-tab-item{
+	display: none;
+}
+.bill-deatil-btn{
+	float: right;
+	display: inline-block;
+	font-size: 12px;
+	margin-right: 20px;
+	padding-right: 10px;
+	background: url(../images/bill-arrow.png) right center no-repeat;
+}
+.form{
+	padding: 20px;
+	border-top: 1px solid #e4e8eb;
+}
+.form-group{
+	width: 100%;
+	border: 1px solid #e4e8eb;
+	margin-bottom: 20px;
+}
+.form-group-head{
+	height: 30px;
+	line-height: 30px;
+	background-color: #f7f7f7;
+	border-bottom: 1px solid #e4e8eb;
+}
+.form-group-content{
+	padding: 20px 0;
+}
+.textarea{
+    width: 841px;
+    height: 58px;
+    padding: 6px 12px;
+    margin: 0 5px;
+    border: 1px solid #e4e8eb;
+    border-radius: 3px;
+    vertical-align: middle;
+    resize : none;
+}
+.form-head-span{
+	margin-left: 20px;
+}
+
+/*2016.6.12*/
+.caozuo{
+	position: relative;
+	display: inline-block;
+	margin-left:5px;
+}
+.caozuo .input{
+	margin:0;
+}
+.caozuo .sel_main{
+	position: absolute;
+	top:29px;
+	left:0;
+	width: 260px;
+	max-height: 170px;
+	overflow-y: auto;
+}
+.caozuo .sel_main .sel_table{
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #fff;
+	font-size: 12px;
+}
+.caozuo .sel_main .sel_table tr{
+	border: 1px solid #e4e8eb;
+	cursor: pointer;
+}
+.caozuo .sel_main .sel_table tr td{
+	height:25px;
+	line-height:25px;
+	text-align: center;
+	border:1px solid #e4e8eb;
+}
+.p20{
+	padding: 10px 20px;
+}

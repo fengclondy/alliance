@@ -1,12 +1,16 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_ORDER_ITEM_ATTRS")
 public class OrderItemsAttrs {
     private String attrCode;
 
     private Long itemId;
 
     private String attrValue;
-
+    @Id
     public String getAttrCode() {
         return attrCode;
     }

@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_GLOBAL_PARAM")
 public class GlobalParam {
     private String paramKey;
 
@@ -10,7 +14,7 @@ public class GlobalParam {
     private Short isReload;
 
     private Integer ver;
-
+    @Id
     public String getParamKey() {
         return paramKey;
     }

@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_ORDER_ITEMS")
 public class OrderItems {
     private Long itemId;
 
@@ -36,7 +40,7 @@ public class OrderItems {
     private String ext4;
 
     private String ext5;
-
+    @Id
     public Long getItemId() {
         return itemId;
     }

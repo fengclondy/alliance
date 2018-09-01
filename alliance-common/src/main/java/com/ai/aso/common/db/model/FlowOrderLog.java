@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_FLOW_ORDER_LOG")
 public class FlowOrderLog {
     private String requestNo;
 
@@ -28,7 +30,7 @@ public class FlowOrderLog {
     private String backDesc;
 
     private Date backDate;
-
+    @Id
     public String getRequestNo() {
         return requestNo;
     }

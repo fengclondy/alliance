@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_LOGIN_NAME")
 public class LoginName {
     private Long id;
 
@@ -8,7 +12,7 @@ public class LoginName {
     private String loginName;
 
     private String systemCode;
-
+    @Id
     public Long getId() {
         return id;
     }

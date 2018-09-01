@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_PAYMENT")
 public class Payment {
     private String paymentId;
 
@@ -46,7 +48,7 @@ public class Payment {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public String getPaymentId() {
         return paymentId;
     }

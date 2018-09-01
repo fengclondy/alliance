@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_CONTRACT_ITEM")
 public class ContractItem {
     private Long itemId;
 
@@ -32,7 +36,7 @@ public class ContractItem {
     private String ext2;
 
     private String ext3;
-
+   @Id
     public Long getItemId() {
         return itemId;
     }

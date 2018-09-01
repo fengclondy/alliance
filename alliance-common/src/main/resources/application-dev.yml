@@ -3,3 +3,11 @@ server:
 spring:
   application:
     name: alliance-common
+#服务注册配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://admin:admin123@localhost:8000/eureka/

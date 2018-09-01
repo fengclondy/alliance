@@ -3,8 +3,10 @@ package com.ai.aso.common.db.dao;
 import com.ai.aso.common.db.model.CapitalBook;
 import com.ai.aso.common.db.model.CapitalBookExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CapitalBookMapper {
     int countByExample(CapitalBookExample example);
 

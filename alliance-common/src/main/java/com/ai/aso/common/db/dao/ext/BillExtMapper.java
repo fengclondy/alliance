@@ -1,7 +1,8 @@
 package com.ai.aso.common.db.dao.ext;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface BillExtMapper {
 
 	int batchObtainBillRec(String billBatch);

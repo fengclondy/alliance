@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_DATA_BOOKA_STOCK")
 public class DataBookaStock {
     private String stockId;
 
@@ -34,7 +38,7 @@ public class DataBookaStock {
     private String ext2;
 
     private String ext3;
-
+    @Id
     public String getStockId() {
         return stockId;
     }

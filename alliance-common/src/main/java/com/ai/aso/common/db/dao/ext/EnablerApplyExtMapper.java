@@ -5,6 +5,7 @@ package com.ai.aso.common.db.dao.ext;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /** 
@@ -14,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
  * @date 2016-10-28 上午10:39:02
  *
  */
-
+@Mapper
 public interface EnablerApplyExtMapper {
 	public List getIps(@Param("custId") String custId);
 	

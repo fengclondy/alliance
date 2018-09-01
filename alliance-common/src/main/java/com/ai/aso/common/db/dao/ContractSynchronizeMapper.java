@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.ai.aso.common.db.model.ContractSynchronize;
 import com.ai.aso.common.db.model.ContractSynchronizeExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface ContractSynchronizeMapper {
     int countByExample(ContractSynchronizeExample example);
 

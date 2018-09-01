@@ -1,14 +1,16 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_CONTRACT_SYNCHRONIZE")
 public class ContractSynchronize {
     private String contId;
 
     private String state;
 
     private Date createDate;
-
+    @Id
     public String getContId() {
         return contId;
     }

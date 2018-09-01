@@ -1,5 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "B_REGION")
 public class Region {
     private Integer regionId;
 
@@ -22,7 +26,7 @@ public class Region {
     private String billRegionCode;
 
     private String fpsRegionCode;
-
+    @Id
     public Integer getRegionId() {
         return regionId;
     }

@@ -3,8 +3,10 @@ package com.ai.aso.common.db.dao;
 import com.ai.aso.common.db.model.EnablerHost;
 import com.ai.aso.common.db.model.EnablerHostExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface EnablerHostMapper {
     int countByExample(EnablerHostExample example);
 

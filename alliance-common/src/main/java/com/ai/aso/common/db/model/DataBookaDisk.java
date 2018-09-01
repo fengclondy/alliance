@@ -1,7 +1,9 @@
 package com.ai.aso.common.db.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_DATA_BOOKA_DISK")
 public class DataBookaDisk {
     private String bookId;
 
@@ -58,7 +60,7 @@ public class DataBookaDisk {
     private String ext4;
 
     private String ext5;
-
+    @Id
     public String getBookId() {
         return bookId;
     }

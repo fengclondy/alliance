@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.BillExtMapper">
+
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.BillRec" >
+    <id column="Bill_Rec_Id" property="billRecId" jdbcType="BIGINT" />
+    <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
+    <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR" />
+    <result column="Source_Type" property="sourceType" jdbcType="INTEGER" />
+    <result column="Pay_Type" property="payType" jdbcType="SMALLINT" />
+    <result column="Data_Book_Id" property="dataBookId" jdbcType="VARCHAR" />
+    <result column="Cap_Book_Id" property="capBookId" jdbcType="VARCHAR" />
+    <result column="Rec_No" property="recNo" jdbcType="VARCHAR" />
+    <result column="Batch_Code" property="batchCode" jdbcType="BIGINT" />
+    <result column="Rec_Class" property="recClass" jdbcType="SMALLINT" />
+    <result column="Rec_Mode" property="recMode" jdbcType="INTEGER" />
+    <result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+    <result column="Cont_No" property="contNo" jdbcType="VARCHAR" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Cust_Name" property="custName" jdbcType="VARCHAR" />
+    <result column="Region_Id" property="regionId" jdbcType="INTEGER" />
+    <result column="Region_Name" property="regionName" jdbcType="VARCHAR" />
+    <result column="Busi_Mode" property="busiMode" jdbcType="INTEGER" />
+    <result column="User_Nbr" property="userNbr" jdbcType="VARCHAR" />
+    <result column="Cost_Region" property="costRegion" jdbcType="INTEGER" />
+    <result column="Cost_Region_Name" property="costRegionName" jdbcType="VARCHAR" />
+    <result column="Serv_Id" property="servId" jdbcType="VARCHAR" />
+    <result column="Bill_Offer_Id" property="billOfferId" jdbcType="VARCHAR" />
+    <result column="Offer_Inst" property="offerInst" jdbcType="VARCHAR" />
+    <result column="Goods_Id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="Goods_Type" property="goodsType" jdbcType="INTEGER" />
+    <result column="Data_Type" property="dataType" jdbcType="INTEGER" />
+    <result column="Goods_Name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="Data_Val" property="dataVal" jdbcType="BIGINT" />
+    <result column="Discount" property="discount" jdbcType="INTEGER" />
+    <result column="Bill_Fee" property="billFee" jdbcType="BIGINT" />
+    <result column="Total_Fee" property="totalFee" jdbcType="BIGINT" />
+    <result column="Off_Fee" property="offFee" jdbcType="BIGINT" />
+    <result column="Cost_Rate" property="costRate" jdbcType="INTEGER" />
+    <result column="Cost_Fee" property="costFee" jdbcType="BIGINT" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="Rec_State" property="recState" jdbcType="SMALLINT" />
+    <result column="Sub_Date" property="subDate" jdbcType="TIMESTAMP" />
+    <result column="Rec_Date" property="recDate" jdbcType="TIMESTAMP" />
+    <result column="Trd_Rec" property="trdRec" jdbcType="VARCHAR" />
+    <result column="Trd_Saler" property="trdSaler" jdbcType="VARCHAR" />
+    <result column="Trd_Activity" property="trdActivity" jdbcType="VARCHAR" />
+    <result column="Cost_Center" property="costCenter" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+
+	<insert id="batchObtainBillRec" parameterType="java.lang.String">
+		insert into TC_BILL_REC(
+			Bill_Month, Bill_Batch, Source_Type, Pay_Type, Data_Book_Id, Cap_Book_Id,
+			Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, Cust_Name,
+			Region_Id, Region_Name, Busi_Mode, User_Nbr, Cost_Region, Cost_Region_Name,
+			Serv_Id, Bill_Offer_Id, Offer_Inst, Goods_Id, Goods_Type, Data_Type,
+			Goods_Name, Data_Val, Discount, Bill_Fee, Total_Fee, Off_Fee, Cost_Rate,
+			Cost_Fee, Remarks, Rec_State, Sub_Date, Rec_Date, Trd_Rec, Trd_Saler,
+			Trd_Activity, Cost_Center, State, Ext1, Ext2, Ext3)
+		select
+			null Bill_Month, Bill_Batch, 100 Source_Type, 200 Pay_Type, null Data_Book_Id, null Cap_Book_Id,
+			Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, null Cust_Name,
+			Region_Id, null Region_Name, Busi_Mode, User_Nbr, Cost_Region, null Cost_Region_Name,
+			Serv_Id, Offer_Id, Offer_Inst, Goods_Id, Goods_Type, Data_Type,
+			Goods_Name, Data_Val, Discount, Bill_Fee, Total_Fee, Off_fee, 0 Cost_Rate,
+			0 Cost_Fee, Remarks, State, Create_Date, End_Date, Trd_Rec, Trd_Saler,
+			Trd_Activity, Cost_Center, 100 State, null, null, null
+		from TC_DATA_REC
+		where State = 2 and Bill_Batch = #{billBatch} and Bill_State=200
+	</insert>
+
+
+    <insert id="ObtainBillRec" parameterType="java.lang.String">
+        insert into TC_BILL_REC(
+        Bill_Month, Bill_Batch, Source_Type, Pay_Type, Data_Book_Id, Cap_Book_Id,
+        Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, Cust_Name,
+        Region_Id, Region_Name, Busi_Mode, User_Nbr, Cost_Region, Cost_Region_Name,
+        Serv_Id, Bill_Offer_Id, Offer_Inst, Goods_Id, Goods_Type, Data_Type,
+        Goods_Name, Data_Val, Discount, Bill_Fee, Total_Fee, Off_Fee, Cost_Rate,
+        Cost_Fee, Remarks, Rec_State, Sub_Date, Rec_Date, Trd_Rec, Trd_Saler,
+        Trd_Activity, Cost_Center, State, Ext1, Ext2, Ext3)
+        select
+        null Bill_Month, Bill_Batch, 100 Source_Type, 200 Pay_Type, null Data_Book_Id, null Cap_Book_Id,
+        Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, null Cust_Name,
+        Region_Id, null Region_Name, Busi_Mode, User_Nbr, Cost_Region, null Cost_Region_Name,
+        Serv_Id, Offer_Id, Offer_Inst, Goods_Id, Goods_Type, Data_Type,
+        Goods_Name, Data_Val, Discount, Bill_Fee, Total_Fee, Off_fee, 0 Cost_Rate,
+        0 Cost_Fee, Remarks, State, Create_Date, End_Date, Trd_Rec, Trd_Saler,
+        Trd_Activity, Cost_Center, 100 State, null, null, null
+        from TC_DATA_REC
+        where State = 2 and Bill_Batch = #{billBatch} and Bill_State=200 AND Cont_Id=#{contId}
+    </insert>
+
+	<update id="updateCostRate" parameterType="map">
+		update TC_BILL_REC
+		set Cust_Name = #{custName},
+		    Cost_Rate = #{costRate},
+		    Cost_Fee = Bill_Fee * #{costRate} /100
+		where Bill_Batch = #{billBatch} and Cust_Id = #{custId}
+	</update>
+<update id="updateCostRateCont" parameterType="map">
+		update TC_BILL_REC
+		set Cust_Name = #{custName},
+		    Cost_Rate = #{costRate},
+		    Cost_Fee = Bill_Fee * #{costRate} /100
+		where Bill_Batch = #{billBatch} and Cont_Id = #{contId}
+	</update>
+</mapper>

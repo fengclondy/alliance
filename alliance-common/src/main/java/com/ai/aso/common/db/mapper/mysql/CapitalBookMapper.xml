@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.CapitalBookMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CapitalBook" >
+    <id column="Book_Id" property="bookId" jdbcType="VARCHAR" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
+    <result column="Book_Type" property="bookType" jdbcType="SMALLINT" />
+    <result column="Amount" property="amount" jdbcType="BIGINT" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="Eff_Date" property="effDate" jdbcType="TIMESTAMP" />
+    <result column="Exp_Date" property="expDate" jdbcType="TIMESTAMP" />
+    <result column="Object_Id" property="objectId" jdbcType="VARCHAR" />
+    <result column="Ver_" property="ver" jdbcType="BIGINT" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Book_Id, Cust_Id, Acct_Id, Book_Type, Amount, `State`, Eff_Date, Exp_Date, Object_Id, 
+    Ver_, Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CapitalBookExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_capital_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_capital_book
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tc_capital_book
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CapitalBookExample" >
+    delete from tc_capital_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+    insert into tc_capital_book (Book_Id, Cust_Id, Acct_Id, 
+      Book_Type, Amount, `State`, 
+      Eff_Date, Exp_Date, Object_Id, 
+      Ver_, Ext1, Ext2, Ext3
+      )
+    values (#{bookId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{acctId,jdbcType=VARCHAR}, 
+      #{bookType,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, 
+      #{effDate,jdbcType=TIMESTAMP}, #{expDate,jdbcType=TIMESTAMP}, #{objectId,jdbcType=VARCHAR}, 
+      #{ver,jdbcType=BIGINT}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+    insert into tc_capital_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        Book_Id,
+      </if>
+      <if test="custId != null" >
+        Cust_Id,
+      </if>
+      <if test="acctId != null" >
+        Acct_Id,
+      </if>
+      <if test="bookType != null" >
+        Book_Type,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="effDate != null" >
+        Eff_Date,
+      </if>
+      <if test="expDate != null" >
+        Exp_Date,
+      </if>
+      <if test="objectId != null" >
+        Object_Id,
+      </if>
+      <if test="ver != null" >
+        Ver_,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookType != null" >
+        #{bookType,jdbcType=SMALLINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objectId != null" >
+        #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="ver != null" >
+        #{ver,jdbcType=BIGINT},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CapitalBookExample" resultType="java.lang.Integer" >
+    select count(*) from tc_capital_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_capital_book
+    <set >
+      <if test="record.bookId != null" >
+        Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookType != null" >
+        Book_Type = #{record.bookType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.amount != null" >
+        Amount = #{record.amount,jdbcType=BIGINT},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.effDate != null" >
+        Eff_Date = #{record.effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expDate != null" >
+        Exp_Date = #{record.expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.objectId != null" >
+        Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ver != null" >
+        Ver_ = #{record.ver,jdbcType=BIGINT},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_capital_book
+    set Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      Book_Type = #{record.bookType,jdbcType=SMALLINT},
+      Amount = #{record.amount,jdbcType=BIGINT},
+      `State` = #{record.state,jdbcType=INTEGER},
+      Eff_Date = #{record.effDate,jdbcType=TIMESTAMP},
+      Exp_Date = #{record.expDate,jdbcType=TIMESTAMP},
+      Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      Ver_ = #{record.ver,jdbcType=BIGINT},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+    update tc_capital_book
+    <set >
+      <if test="custId != null" >
+        Cust_Id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        Acct_Id = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookType != null" >
+        Book_Type = #{bookType,jdbcType=SMALLINT},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="effDate != null" >
+        Eff_Date = #{effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expDate != null" >
+        Exp_Date = #{expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objectId != null" >
+        Object_Id = #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="ver != null" >
+        Ver_ = #{ver,jdbcType=BIGINT},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+    update tc_capital_book
+    set Cust_Id = #{custId,jdbcType=VARCHAR},
+      Acct_Id = #{acctId,jdbcType=VARCHAR},
+      Book_Type = #{bookType,jdbcType=SMALLINT},
+      Amount = #{amount,jdbcType=BIGINT},
+      `State` = #{state,jdbcType=INTEGER},
+      Eff_Date = #{effDate,jdbcType=TIMESTAMP},
+      Exp_Date = #{expDate,jdbcType=TIMESTAMP},
+      Object_Id = #{objectId,jdbcType=VARCHAR},
+      Ver_ = #{ver,jdbcType=BIGINT},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </update>
+</mapper>

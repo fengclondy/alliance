@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.DataBookaExtMapper" >
+	<!-- <update id="updateDataBooka">
+		update TC_DATA_BOOKA  
+        set Cumu_Val=#{amount}+Cumu_Val,ver_=#{ver_}+1 
+        where cont_id=#{cont_id} and ver_=#{ver_} 
+	</update> -->
+	<update id="updateDataBooka">
+		update TC_DATA_BOOKA  
+        set Cumu_Val=#{amount} + Cumu_Val
+        where cont_id=#{cont_id} 	
+    </update>
+    
+    <update id="updateDataBookaReduce">
+		update TC_DATA_BOOKA  
+        set Cumu_Val=Cumu_Val - #{amount}
+        where cont_id=#{cont_id} 	
+    </update>
+    <update id="updateDataBookaBalance">
+		update TC_DATA_BOOKA  
+        set Bala_Val=Bala_Val-#{amount}
+        where cont_id=#{cont_id} 	
+    </update>
+    <update id="updateDataBookaTotal">
+		update TC_DATA_BOOKA  
+        set Total_Val=Total_Val- #{amount}
+        where cont_id=#{cont_id} 	
+    </update>
+    <update id="addDataBookaBalance">
+		update TC_DATA_BOOKA  
+        set Bala_Val=Bala_Val+#{amount}
+        where cont_id=#{cont_id} 	
+    </update>
+    <update id="addDataBookaTotal">
+		update TC_DATA_BOOKA  
+        set Total_Val=Total_Val+#{amount}
+        where cont_id=#{cont_id} 	
+    </update>
+</mapper> 

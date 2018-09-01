@@ -1,0 +1,17 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: alliance-base
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql//lcoalhost:3306/alliance
+#    username: data
+#    password: data
+#  jpa:
+#    show-sql: true
+#    database: mysql
+#      ddl-auto: update
+#    hibernate:
+#      naming:
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy

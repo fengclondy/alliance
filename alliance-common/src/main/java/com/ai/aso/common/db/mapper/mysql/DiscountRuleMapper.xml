@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.DiscountRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DiscountRule" >
+    <id column="Rule_Id" property="ruleId" jdbcType="VARCHAR" />
+    <result column="Rule_Class" property="ruleClass" jdbcType="INTEGER" />
+    <result column="Rule_Desc" property="ruleDesc" jdbcType="VARCHAR" />
+    <result column="Rule_Min" property="ruleMin" jdbcType="INTEGER" />
+    <result column="Rule_Max" property="ruleMax" jdbcType="INTEGER" />
+    <result column="Discount" property="discount" jdbcType="INTEGER" />
+    <result column="Payment" property="payment" jdbcType="BIGINT" />
+    <result column="Deposit" property="deposit" jdbcType="BIGINT" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Rule_Id, Rule_Class, Rule_Desc, Rule_Min, Rule_Max, Discount, Payment, Deposit, `State`, 
+    Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.DiscountRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_discount_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_discount_rule
+    where Rule_Id = #{ruleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tc_discount_rule
+    where Rule_Id = #{ruleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.DiscountRuleExample" >
+    delete from tc_discount_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.DiscountRule" >
+    insert into tc_discount_rule (Rule_Id, Rule_Class, Rule_Desc, 
+      Rule_Min, Rule_Max, Discount, 
+      Payment, Deposit, `State`, 
+      Ext1, Ext2, Ext3)
+    values (#{ruleId,jdbcType=VARCHAR}, #{ruleClass,jdbcType=INTEGER}, #{ruleDesc,jdbcType=VARCHAR}, 
+      #{ruleMin,jdbcType=INTEGER}, #{ruleMax,jdbcType=INTEGER}, #{discount,jdbcType=INTEGER}, 
+      #{payment,jdbcType=BIGINT}, #{deposit,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, 
+      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.DiscountRule" >
+    insert into tc_discount_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ruleId != null" >
+        Rule_Id,
+      </if>
+      <if test="ruleClass != null" >
+        Rule_Class,
+      </if>
+      <if test="ruleDesc != null" >
+        Rule_Desc,
+      </if>
+      <if test="ruleMin != null" >
+        Rule_Min,
+      </if>
+      <if test="ruleMax != null" >
+        Rule_Max,
+      </if>
+      <if test="discount != null" >
+        Discount,
+      </if>
+      <if test="payment != null" >
+        Payment,
+      </if>
+      <if test="deposit != null" >
+        Deposit,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ruleId != null" >
+        #{ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleClass != null" >
+        #{ruleClass,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDesc != null" >
+        #{ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleMin != null" >
+        #{ruleMin,jdbcType=INTEGER},
+      </if>
+      <if test="ruleMax != null" >
+        #{ruleMax,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=BIGINT},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.DiscountRuleExample" resultType="java.lang.Integer" >
+    select count(*) from tc_discount_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_discount_rule
+    <set >
+      <if test="record.ruleId != null" >
+        Rule_Id = #{record.ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleClass != null" >
+        Rule_Class = #{record.ruleClass,jdbcType=INTEGER},
+      </if>
+      <if test="record.ruleDesc != null" >
+        Rule_Desc = #{record.ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleMin != null" >
+        Rule_Min = #{record.ruleMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.ruleMax != null" >
+        Rule_Max = #{record.ruleMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.discount != null" >
+        Discount = #{record.discount,jdbcType=INTEGER},
+      </if>
+      <if test="record.payment != null" >
+        Payment = #{record.payment,jdbcType=BIGINT},
+      </if>
+      <if test="record.deposit != null" >
+        Deposit = #{record.deposit,jdbcType=BIGINT},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_discount_rule
+    set Rule_Id = #{record.ruleId,jdbcType=VARCHAR},
+      Rule_Class = #{record.ruleClass,jdbcType=INTEGER},
+      Rule_Desc = #{record.ruleDesc,jdbcType=VARCHAR},
+      Rule_Min = #{record.ruleMin,jdbcType=INTEGER},
+      Rule_Max = #{record.ruleMax,jdbcType=INTEGER},
+      Discount = #{record.discount,jdbcType=INTEGER},
+      Payment = #{record.payment,jdbcType=BIGINT},
+      Deposit = #{record.deposit,jdbcType=BIGINT},
+      `State` = #{record.state,jdbcType=INTEGER},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.DiscountRule" >
+    update tc_discount_rule
+    <set >
+      <if test="ruleClass != null" >
+        Rule_Class = #{ruleClass,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDesc != null" >
+        Rule_Desc = #{ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleMin != null" >
+        Rule_Min = #{ruleMin,jdbcType=INTEGER},
+      </if>
+      <if test="ruleMax != null" >
+        Rule_Max = #{ruleMax,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        Discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="payment != null" >
+        Payment = #{payment,jdbcType=BIGINT},
+      </if>
+      <if test="deposit != null" >
+        Deposit = #{deposit,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Rule_Id = #{ruleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.DiscountRule" >
+    update tc_discount_rule
+    set Rule_Class = #{ruleClass,jdbcType=INTEGER},
+      Rule_Desc = #{ruleDesc,jdbcType=VARCHAR},
+      Rule_Min = #{ruleMin,jdbcType=INTEGER},
+      Rule_Max = #{ruleMax,jdbcType=INTEGER},
+      Discount = #{discount,jdbcType=INTEGER},
+      Payment = #{payment,jdbcType=BIGINT},
+      Deposit = #{deposit,jdbcType=BIGINT},
+      `State` = #{state,jdbcType=INTEGER},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Rule_Id = #{ruleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

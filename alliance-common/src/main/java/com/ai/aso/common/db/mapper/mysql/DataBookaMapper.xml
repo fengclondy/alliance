@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.DataBookaMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataBooka" >
+    <id column="Book_Id" property="bookId" jdbcType="VARCHAR" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
+    <result column="Acct_Type" property="acctType" jdbcType="INTEGER" />
+    <result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+    <result column="Busi_Type" property="busiType" jdbcType="VARCHAR" />
+    <result column="Eff_Date" property="effDate" jdbcType="TIMESTAMP" />
+    <result column="Exp_Date" property="expDate" jdbcType="TIMESTAMP" />
+    <result column="Book_Type" property="bookType" jdbcType="INTEGER" />
+    <result column="Book_Name" property="bookName" jdbcType="VARCHAR" />
+    <result column="Goods_Type" property="goodsType" jdbcType="INTEGER" />
+    <result column="Book_State" property="bookState" jdbcType="SMALLINT" />
+    <result column="Region_Id" property="regionId" jdbcType="INTEGER" />
+    <result column="BIll_Rule" property="billRule" jdbcType="VARCHAR" />
+    <result column="Orig_Type" property="origType" jdbcType="INTEGER" />
+    <result column="Orig_Id" property="origId" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Service_Id" property="serviceId" jdbcType="VARCHAR" />
+    <result column="Total_Val" property="totalVal" jdbcType="BIGINT" />
+    <result column="Cumu_Val" property="cumuVal" jdbcType="BIGINT" />
+    <result column="Bala_Val" property="balaVal" jdbcType="BIGINT" />
+    <result column="Ver_" property="ver" jdbcType="INTEGER" />
+    <result column="EXT1" property="ext1" jdbcType="VARCHAR" />
+    <result column="EXT2" property="ext2" jdbcType="VARCHAR" />
+    <result column="EXT3" property="ext3" jdbcType="VARCHAR" />
+    <result column="EXT4" property="ext4" jdbcType="VARCHAR" />
+    <result column="EXT5" property="ext5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Book_Id, Cust_Id, Acct_Id, Acct_Type, Cont_Id, Busi_Type, Eff_Date, Exp_Date, Book_Type, 
+    Book_Name, Goods_Type, Book_State, Region_Id, BIll_Rule, Orig_Type, Orig_Id, Note, 
+    Create_Date, Service_Id, Total_Val, Cumu_Val, Bala_Val, Ver_, EXT1, EXT2, EXT3, EXT4, 
+    EXT5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.DataBookaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_data_booka
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_data_booka
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tc_data_booka
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.DataBookaExample" >
+    delete from tc_data_booka
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+    insert into tc_data_booka (Book_Id, Cust_Id, Acct_Id, 
+      Acct_Type, Cont_Id, Busi_Type, 
+      Eff_Date, Exp_Date, Book_Type, 
+      Book_Name, Goods_Type, Book_State, 
+      Region_Id, BIll_Rule, Orig_Type, 
+      Orig_Id, Note, Create_Date, 
+      Service_Id, Total_Val, Cumu_Val, 
+      Bala_Val, Ver_, EXT1, 
+      EXT2, EXT3, EXT4, EXT5
+      )
+    values (#{bookId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{acctId,jdbcType=VARCHAR}, 
+      #{acctType,jdbcType=INTEGER}, #{contId,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, 
+      #{effDate,jdbcType=TIMESTAMP}, #{expDate,jdbcType=TIMESTAMP}, #{bookType,jdbcType=INTEGER}, 
+      #{bookName,jdbcType=VARCHAR}, #{goodsType,jdbcType=INTEGER}, #{bookState,jdbcType=SMALLINT}, 
+      #{regionId,jdbcType=INTEGER}, #{billRule,jdbcType=VARCHAR}, #{origType,jdbcType=INTEGER}, 
+      #{origId,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{serviceId,jdbcType=VARCHAR}, #{totalVal,jdbcType=BIGINT}, #{cumuVal,jdbcType=BIGINT}, 
+      #{balaVal,jdbcType=BIGINT}, #{ver,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}, 
+      #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+    insert into tc_data_booka
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        Book_Id,
+      </if>
+      <if test="custId != null" >
+        Cust_Id,
+      </if>
+      <if test="acctId != null" >
+        Acct_Id,
+      </if>
+      <if test="acctType != null" >
+        Acct_Type,
+      </if>
+      <if test="contId != null" >
+        Cont_Id,
+      </if>
+      <if test="busiType != null" >
+        Busi_Type,
+      </if>
+      <if test="effDate != null" >
+        Eff_Date,
+      </if>
+      <if test="expDate != null" >
+        Exp_Date,
+      </if>
+      <if test="bookType != null" >
+        Book_Type,
+      </if>
+      <if test="bookName != null" >
+        Book_Name,
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type,
+      </if>
+      <if test="bookState != null" >
+        Book_State,
+      </if>
+      <if test="regionId != null" >
+        Region_Id,
+      </if>
+      <if test="billRule != null" >
+        BIll_Rule,
+      </if>
+      <if test="origType != null" >
+        Orig_Type,
+      </if>
+      <if test="origId != null" >
+        Orig_Id,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="serviceId != null" >
+        Service_Id,
+      </if>
+      <if test="totalVal != null" >
+        Total_Val,
+      </if>
+      <if test="cumuVal != null" >
+        Cumu_Val,
+      </if>
+      <if test="balaVal != null" >
+        Bala_Val,
+      </if>
+      <if test="ver != null" >
+        Ver_,
+      </if>
+      <if test="ext1 != null" >
+        EXT1,
+      </if>
+      <if test="ext2 != null" >
+        EXT2,
+      </if>
+      <if test="ext3 != null" >
+        EXT3,
+      </if>
+      <if test="ext4 != null" >
+        EXT4,
+      </if>
+      <if test="ext5 != null" >
+        EXT5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctType != null" >
+        #{acctType,jdbcType=INTEGER},
+      </if>
+      <if test="contId != null" >
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null" >
+        #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookType != null" >
+        #{bookType,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="bookState != null" >
+        #{bookState,jdbcType=SMALLINT},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="billRule != null" >
+        #{billRule,jdbcType=VARCHAR},
+      </if>
+      <if test="origType != null" >
+        #{origType,jdbcType=INTEGER},
+      </if>
+      <if test="origId != null" >
+        #{origId,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceId != null" >
+        #{serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalVal != null" >
+        #{totalVal,jdbcType=BIGINT},
+      </if>
+      <if test="cumuVal != null" >
+        #{cumuVal,jdbcType=BIGINT},
+      </if>
+      <if test="balaVal != null" >
+        #{balaVal,jdbcType=BIGINT},
+      </if>
+      <if test="ver != null" >
+        #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.DataBookaExample" resultType="java.lang.Integer" >
+    select count(*) from tc_data_booka
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_data_booka
+    <set >
+      <if test="record.bookId != null" >
+        Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctType != null" >
+        Acct_Type = #{record.acctType,jdbcType=INTEGER},
+      </if>
+      <if test="record.contId != null" >
+        Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiType != null" >
+        Busi_Type = #{record.busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effDate != null" >
+        Eff_Date = #{record.effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expDate != null" >
+        Exp_Date = #{record.expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bookType != null" >
+        Book_Type = #{record.bookType,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookName != null" >
+        Book_Name = #{record.bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsType != null" >
+        Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookState != null" >
+        Book_State = #{record.bookState,jdbcType=SMALLINT},
+      </if>
+      <if test="record.regionId != null" >
+        Region_Id = #{record.regionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.billRule != null" >
+        BIll_Rule = #{record.billRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origType != null" >
+        Orig_Type = #{record.origType,jdbcType=INTEGER},
+      </if>
+      <if test="record.origId != null" >
+        Orig_Id = #{record.origId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serviceId != null" >
+        Service_Id = #{record.serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalVal != null" >
+        Total_Val = #{record.totalVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.cumuVal != null" >
+        Cumu_Val = #{record.cumuVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.balaVal != null" >
+        Bala_Val = #{record.balaVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.ver != null" >
+        Ver_ = #{record.ver,jdbcType=INTEGER},
+      </if>
+      <if test="record.ext1 != null" >
+        EXT1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        EXT2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        EXT3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext4 != null" >
+        EXT4 = #{record.ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext5 != null" >
+        EXT5 = #{record.ext5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_data_booka
+    set Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      Acct_Type = #{record.acctType,jdbcType=INTEGER},
+      Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      Busi_Type = #{record.busiType,jdbcType=VARCHAR},
+      Eff_Date = #{record.effDate,jdbcType=TIMESTAMP},
+      Exp_Date = #{record.expDate,jdbcType=TIMESTAMP},
+      Book_Type = #{record.bookType,jdbcType=INTEGER},
+      Book_Name = #{record.bookName,jdbcType=VARCHAR},
+      Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      Book_State = #{record.bookState,jdbcType=SMALLINT},
+      Region_Id = #{record.regionId,jdbcType=INTEGER},
+      BIll_Rule = #{record.billRule,jdbcType=VARCHAR},
+      Orig_Type = #{record.origType,jdbcType=INTEGER},
+      Orig_Id = #{record.origId,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      Service_Id = #{record.serviceId,jdbcType=VARCHAR},
+      Total_Val = #{record.totalVal,jdbcType=BIGINT},
+      Cumu_Val = #{record.cumuVal,jdbcType=BIGINT},
+      Bala_Val = #{record.balaVal,jdbcType=BIGINT},
+      Ver_ = #{record.ver,jdbcType=INTEGER},
+      EXT1 = #{record.ext1,jdbcType=VARCHAR},
+      EXT2 = #{record.ext2,jdbcType=VARCHAR},
+      EXT3 = #{record.ext3,jdbcType=VARCHAR},
+      EXT4 = #{record.ext4,jdbcType=VARCHAR},
+      EXT5 = #{record.ext5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+    update tc_data_booka
+    <set >
+      <if test="custId != null" >
+        Cust_Id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        Acct_Id = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctType != null" >
+        Acct_Type = #{acctType,jdbcType=INTEGER},
+      </if>
+      <if test="contId != null" >
+        Cont_Id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null" >
+        Busi_Type = #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        Eff_Date = #{effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expDate != null" >
+        Exp_Date = #{expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookType != null" >
+        Book_Type = #{bookType,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        Book_Name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type = #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="bookState != null" >
+        Book_State = #{bookState,jdbcType=SMALLINT},
+      </if>
+      <if test="regionId != null" >
+        Region_Id = #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="billRule != null" >
+        BIll_Rule = #{billRule,jdbcType=VARCHAR},
+      </if>
+      <if test="origType != null" >
+        Orig_Type = #{origType,jdbcType=INTEGER},
+      </if>
+      <if test="origId != null" >
+        Orig_Id = #{origId,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceId != null" >
+        Service_Id = #{serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalVal != null" >
+        Total_Val = #{totalVal,jdbcType=BIGINT},
+      </if>
+      <if test="cumuVal != null" >
+        Cumu_Val = #{cumuVal,jdbcType=BIGINT},
+      </if>
+      <if test="balaVal != null" >
+        Bala_Val = #{balaVal,jdbcType=BIGINT},
+      </if>
+      <if test="ver != null" >
+        Ver_ = #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        EXT1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        EXT2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        EXT3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        EXT4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        EXT5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+    update tc_data_booka
+    set Cust_Id = #{custId,jdbcType=VARCHAR},
+      Acct_Id = #{acctId,jdbcType=VARCHAR},
+      Acct_Type = #{acctType,jdbcType=INTEGER},
+      Cont_Id = #{contId,jdbcType=VARCHAR},
+      Busi_Type = #{busiType,jdbcType=VARCHAR},
+      Eff_Date = #{effDate,jdbcType=TIMESTAMP},
+      Exp_Date = #{expDate,jdbcType=TIMESTAMP},
+      Book_Type = #{bookType,jdbcType=INTEGER},
+      Book_Name = #{bookName,jdbcType=VARCHAR},
+      Goods_Type = #{goodsType,jdbcType=INTEGER},
+      Book_State = #{bookState,jdbcType=SMALLINT},
+      Region_Id = #{regionId,jdbcType=INTEGER},
+      BIll_Rule = #{billRule,jdbcType=VARCHAR},
+      Orig_Type = #{origType,jdbcType=INTEGER},
+      Orig_Id = #{origId,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      Service_Id = #{serviceId,jdbcType=VARCHAR},
+      Total_Val = #{totalVal,jdbcType=BIGINT},
+      Cumu_Val = #{cumuVal,jdbcType=BIGINT},
+      Bala_Val = #{balaVal,jdbcType=BIGINT},
+      Ver_ = #{ver,jdbcType=INTEGER},
+      EXT1 = #{ext1,jdbcType=VARCHAR},
+      EXT2 = #{ext2,jdbcType=VARCHAR},
+      EXT3 = #{ext3,jdbcType=VARCHAR},
+      EXT4 = #{ext4,jdbcType=VARCHAR},
+      EXT5 = #{ext5,jdbcType=VARCHAR}
+    where Book_Id = #{bookId,jdbcType=VARCHAR}
+  </update>
+</mapper>

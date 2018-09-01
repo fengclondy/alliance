@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Resources" >
+    <id column="Source_Id" property="sourceId" jdbcType="INTEGER" />
+    <result column="Parent_Id" property="parentId" jdbcType="INTEGER" />
+    <result column="Menu_Name" property="menuName" jdbcType="VARCHAR" />
+    <result column="Menu_Icon" property="menuIcon" jdbcType="VARCHAR" />
+    <result column="Sour_Name" property="sourName" jdbcType="VARCHAR" />
+    <result column="Sour_Desc" property="sourDesc" jdbcType="VARCHAR" />
+    <result column="Sour_Type" property="sourType" jdbcType="INTEGER" />
+    <result column="Show_Seq" property="showSeq" jdbcType="INTEGER" />
+    <result column="Method_Name" property="methodName" jdbcType="VARCHAR" />
+    <result column="Sour_Url" property="sourUrl" jdbcType="VARCHAR" />
+    <result column="System_Code" property="systemCode" jdbcType="VARCHAR" />
+    <result column="Model_Code" property="modelCode" jdbcType="VARCHAR" />
+    <result column="Is_Authen" property="isAuthen" jdbcType="SMALLINT" />
+    <result column="Access_Authc" property="accessAuthc" jdbcType="VARCHAR" />
+    <result column="Access_Role" property="accessRole" jdbcType="VARCHAR" />
+    <result column="Access_Perm" property="accessPerm" jdbcType="VARCHAR" />
+    <result column="Access_Interval" property="accessInterval" jdbcType="INTEGER" />
+    <result column="Access_Freque" property="accessFreque" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Modi_Date" property="modiDate" jdbcType="TIMESTAMP" />
+    <result column="Host_Groups" property="hostGroups" jdbcType="VARCHAR" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Source_Id, Parent_Id, Menu_Name, Menu_Icon, Sour_Name, Sour_Desc, Sour_Type, Show_Seq, 
+    Method_Name, Sour_Url, System_Code, Model_Code, Is_Authen, Access_Authc, Access_Role, 
+    Access_Perm, Access_Interval, Access_Freque, `State`, Create_Date, Modi_Date, Host_Groups, 
+    Ext1, Ext2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ResourcesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_resources
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_resources
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ResourcesExample" >
+    delete from tb_resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Resources" >
+    insert into tb_resources (Source_Id, Parent_Id, Menu_Name, 
+      Menu_Icon, Sour_Name, Sour_Desc, 
+      Sour_Type, Show_Seq, Method_Name, 
+      Sour_Url, System_Code, Model_Code, 
+      Is_Authen, Access_Authc, Access_Role, 
+      Access_Perm, Access_Interval, Access_Freque, 
+      `State`, Create_Date, Modi_Date, 
+      Host_Groups, Ext1, Ext2
+      )
+    values (#{sourceId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuIcon,jdbcType=VARCHAR}, #{sourName,jdbcType=VARCHAR}, #{sourDesc,jdbcType=VARCHAR}, 
+      #{sourType,jdbcType=INTEGER}, #{showSeq,jdbcType=INTEGER}, #{methodName,jdbcType=VARCHAR}, 
+      #{sourUrl,jdbcType=VARCHAR}, #{systemCode,jdbcType=VARCHAR}, #{modelCode,jdbcType=VARCHAR}, 
+      #{isAuthen,jdbcType=SMALLINT}, #{accessAuthc,jdbcType=VARCHAR}, #{accessRole,jdbcType=VARCHAR}, 
+      #{accessPerm,jdbcType=VARCHAR}, #{accessInterval,jdbcType=INTEGER}, #{accessFreque,jdbcType=VARCHAR}, 
+      #{state,jdbcType=SMALLINT}, #{createDate,jdbcType=TIMESTAMP}, #{modiDate,jdbcType=TIMESTAMP}, 
+      #{hostGroups,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Resources" >
+    insert into tb_resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sourceId != null" >
+        Source_Id,
+      </if>
+      <if test="parentId != null" >
+        Parent_Id,
+      </if>
+      <if test="menuName != null" >
+        Menu_Name,
+      </if>
+      <if test="menuIcon != null" >
+        Menu_Icon,
+      </if>
+      <if test="sourName != null" >
+        Sour_Name,
+      </if>
+      <if test="sourDesc != null" >
+        Sour_Desc,
+      </if>
+      <if test="sourType != null" >
+        Sour_Type,
+      </if>
+      <if test="showSeq != null" >
+        Show_Seq,
+      </if>
+      <if test="methodName != null" >
+        Method_Name,
+      </if>
+      <if test="sourUrl != null" >
+        Sour_Url,
+      </if>
+      <if test="systemCode != null" >
+        System_Code,
+      </if>
+      <if test="modelCode != null" >
+        Model_Code,
+      </if>
+      <if test="isAuthen != null" >
+        Is_Authen,
+      </if>
+      <if test="accessAuthc != null" >
+        Access_Authc,
+      </if>
+      <if test="accessRole != null" >
+        Access_Role,
+      </if>
+      <if test="accessPerm != null" >
+        Access_Perm,
+      </if>
+      <if test="accessInterval != null" >
+        Access_Interval,
+      </if>
+      <if test="accessFreque != null" >
+        Access_Freque,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="modiDate != null" >
+        Modi_Date,
+      </if>
+      <if test="hostGroups != null" >
+        Host_Groups,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sourName != null" >
+        #{sourName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourDesc != null" >
+        #{sourDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sourType != null" >
+        #{sourType,jdbcType=INTEGER},
+      </if>
+      <if test="showSeq != null" >
+        #{showSeq,jdbcType=INTEGER},
+      </if>
+      <if test="methodName != null" >
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourUrl != null" >
+        #{sourUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="systemCode != null" >
+        #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuthen != null" >
+        #{isAuthen,jdbcType=SMALLINT},
+      </if>
+      <if test="accessAuthc != null" >
+        #{accessAuthc,jdbcType=VARCHAR},
+      </if>
+      <if test="accessRole != null" >
+        #{accessRole,jdbcType=VARCHAR},
+      </if>
+      <if test="accessPerm != null" >
+        #{accessPerm,jdbcType=VARCHAR},
+      </if>
+      <if test="accessInterval != null" >
+        #{accessInterval,jdbcType=INTEGER},
+      </if>
+      <if test="accessFreque != null" >
+        #{accessFreque,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiDate != null" >
+        #{modiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hostGroups != null" >
+        #{hostGroups,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ResourcesExample" resultType="java.lang.Integer" >
+    select count(*) from tb_resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_resources
+    <set >
+      <if test="record.sourceId != null" >
+        Source_Id = #{record.sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        Parent_Id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuName != null" >
+        Menu_Name = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuIcon != null" >
+        Menu_Icon = #{record.menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourName != null" >
+        Sour_Name = #{record.sourName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourDesc != null" >
+        Sour_Desc = #{record.sourDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourType != null" >
+        Sour_Type = #{record.sourType,jdbcType=INTEGER},
+      </if>
+      <if test="record.showSeq != null" >
+        Show_Seq = #{record.showSeq,jdbcType=INTEGER},
+      </if>
+      <if test="record.methodName != null" >
+        Method_Name = #{record.methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourUrl != null" >
+        Sour_Url = #{record.sourUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemCode != null" >
+        System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelCode != null" >
+        Model_Code = #{record.modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAuthen != null" >
+        Is_Authen = #{record.isAuthen,jdbcType=SMALLINT},
+      </if>
+      <if test="record.accessAuthc != null" >
+        Access_Authc = #{record.accessAuthc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessRole != null" >
+        Access_Role = #{record.accessRole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessPerm != null" >
+        Access_Perm = #{record.accessPerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessInterval != null" >
+        Access_Interval = #{record.accessInterval,jdbcType=INTEGER},
+      </if>
+      <if test="record.accessFreque != null" >
+        Access_Freque = #{record.accessFreque,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createDate != null" >
+        Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modiDate != null" >
+        Modi_Date = #{record.modiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.hostGroups != null" >
+        Host_Groups = #{record.hostGroups,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_resources
+    set Source_Id = #{record.sourceId,jdbcType=INTEGER},
+      Parent_Id = #{record.parentId,jdbcType=INTEGER},
+      Menu_Name = #{record.menuName,jdbcType=VARCHAR},
+      Menu_Icon = #{record.menuIcon,jdbcType=VARCHAR},
+      Sour_Name = #{record.sourName,jdbcType=VARCHAR},
+      Sour_Desc = #{record.sourDesc,jdbcType=VARCHAR},
+      Sour_Type = #{record.sourType,jdbcType=INTEGER},
+      Show_Seq = #{record.showSeq,jdbcType=INTEGER},
+      Method_Name = #{record.methodName,jdbcType=VARCHAR},
+      Sour_Url = #{record.sourUrl,jdbcType=VARCHAR},
+      System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      Model_Code = #{record.modelCode,jdbcType=VARCHAR},
+      Is_Authen = #{record.isAuthen,jdbcType=SMALLINT},
+      Access_Authc = #{record.accessAuthc,jdbcType=VARCHAR},
+      Access_Role = #{record.accessRole,jdbcType=VARCHAR},
+      Access_Perm = #{record.accessPerm,jdbcType=VARCHAR},
+      Access_Interval = #{record.accessInterval,jdbcType=INTEGER},
+      Access_Freque = #{record.accessFreque,jdbcType=VARCHAR},
+      `State` = #{record.state,jdbcType=SMALLINT},
+      Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      Modi_Date = #{record.modiDate,jdbcType=TIMESTAMP},
+      Host_Groups = #{record.hostGroups,jdbcType=VARCHAR},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Resources" >
+    update tb_resources
+    <set >
+      <if test="parentId != null" >
+        Parent_Id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        Menu_Name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        Menu_Icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sourName != null" >
+        Sour_Name = #{sourName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourDesc != null" >
+        Sour_Desc = #{sourDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sourType != null" >
+        Sour_Type = #{sourType,jdbcType=INTEGER},
+      </if>
+      <if test="showSeq != null" >
+        Show_Seq = #{showSeq,jdbcType=INTEGER},
+      </if>
+      <if test="methodName != null" >
+        Method_Name = #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourUrl != null" >
+        Sour_Url = #{sourUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="systemCode != null" >
+        System_Code = #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        Model_Code = #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuthen != null" >
+        Is_Authen = #{isAuthen,jdbcType=SMALLINT},
+      </if>
+      <if test="accessAuthc != null" >
+        Access_Authc = #{accessAuthc,jdbcType=VARCHAR},
+      </if>
+      <if test="accessRole != null" >
+        Access_Role = #{accessRole,jdbcType=VARCHAR},
+      </if>
+      <if test="accessPerm != null" >
+        Access_Perm = #{accessPerm,jdbcType=VARCHAR},
+      </if>
+      <if test="accessInterval != null" >
+        Access_Interval = #{accessInterval,jdbcType=INTEGER},
+      </if>
+      <if test="accessFreque != null" >
+        Access_Freque = #{accessFreque,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiDate != null" >
+        Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hostGroups != null" >
+        Host_Groups = #{hostGroups,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Resources" >
+    update tb_resources
+    set Parent_Id = #{parentId,jdbcType=INTEGER},
+      Menu_Name = #{menuName,jdbcType=VARCHAR},
+      Menu_Icon = #{menuIcon,jdbcType=VARCHAR},
+      Sour_Name = #{sourName,jdbcType=VARCHAR},
+      Sour_Desc = #{sourDesc,jdbcType=VARCHAR},
+      Sour_Type = #{sourType,jdbcType=INTEGER},
+      Show_Seq = #{showSeq,jdbcType=INTEGER},
+      Method_Name = #{methodName,jdbcType=VARCHAR},
+      Sour_Url = #{sourUrl,jdbcType=VARCHAR},
+      System_Code = #{systemCode,jdbcType=VARCHAR},
+      Model_Code = #{modelCode,jdbcType=VARCHAR},
+      Is_Authen = #{isAuthen,jdbcType=SMALLINT},
+      Access_Authc = #{accessAuthc,jdbcType=VARCHAR},
+      Access_Role = #{accessRole,jdbcType=VARCHAR},
+      Access_Perm = #{accessPerm,jdbcType=VARCHAR},
+      Access_Interval = #{accessInterval,jdbcType=INTEGER},
+      Access_Freque = #{accessFreque,jdbcType=VARCHAR},
+      `State` = #{state,jdbcType=SMALLINT},
+      Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+      Host_Groups = #{hostGroups,jdbcType=VARCHAR},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR}
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </update>
+</mapper>

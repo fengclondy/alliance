@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.EnablerHostExtMapper" >
+  
+  
+ <insert id="insertHostIP" parameterType="java.util.List">
+ 	insert into tc_enabler_host(Apply_Id,Host_IP) values
+ 	 <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.applyId,jdbcType=BIGINT}
+        ,#{item.hostIp,jdbcType=VARCHAR})
+    </foreach>
+ 
+ </insert>
+  
+</mapper>

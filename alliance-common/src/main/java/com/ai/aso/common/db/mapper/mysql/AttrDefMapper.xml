@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.base.param.db.dao.AttrDefMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.base.param.db.model.AttrDef" >
+    <id column="Attr_Id" property="attrId" jdbcType="INTEGER" />
+    <result column="Attr_Pkg_Code" property="attrPkgCode" jdbcType="VARCHAR" />
+    <result column="Attr_Code" property="attrCode" jdbcType="VARCHAR" />
+    <result column="Attr_Name" property="attrName" jdbcType="VARCHAR" />
+    <result column="Attr_Desc" property="attrDesc" jdbcType="VARCHAR" />
+    <result column="Attr_Seq" property="attrSeq" jdbcType="SMALLINT" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Attr_Id, Attr_Pkg_Code, Attr_Code, Attr_Name, Attr_Desc, Attr_Seq, `State`
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.base.param.db.model.AttrDefExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ta_attr_def
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ta_attr_def
+    where Attr_Id = #{attrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ta_attr_def
+    where Attr_Id = #{attrId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.base.param.db.model.AttrDefExample" >
+    delete from ta_attr_def
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+    insert into ta_attr_def (Attr_Id, Attr_Pkg_Code, Attr_Code, 
+      Attr_Name, Attr_Desc, Attr_Seq, 
+      `State`)
+    values (#{attrId,jdbcType=INTEGER}, #{attrPkgCode,jdbcType=VARCHAR}, #{attrCode,jdbcType=VARCHAR}, 
+      #{attrName,jdbcType=VARCHAR}, #{attrDesc,jdbcType=VARCHAR}, #{attrSeq,jdbcType=SMALLINT}, 
+      #{state,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+    insert into ta_attr_def
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attrId != null" >
+        Attr_Id,
+      </if>
+      <if test="attrPkgCode != null" >
+        Attr_Pkg_Code,
+      </if>
+      <if test="attrCode != null" >
+        Attr_Code,
+      </if>
+      <if test="attrName != null" >
+        Attr_Name,
+      </if>
+      <if test="attrDesc != null" >
+        Attr_Desc,
+      </if>
+      <if test="attrSeq != null" >
+        Attr_Seq,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attrId != null" >
+        #{attrId,jdbcType=INTEGER},
+      </if>
+      <if test="attrPkgCode != null" >
+        #{attrPkgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="attrCode != null" >
+        #{attrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="attrName != null" >
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrDesc != null" >
+        #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="attrSeq != null" >
+        #{attrSeq,jdbcType=SMALLINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.base.param.db.model.AttrDefExample" resultType="java.lang.Integer" >
+    select count(*) from ta_attr_def
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ta_attr_def
+    <set >
+      <if test="record.attrId != null" >
+        Attr_Id = #{record.attrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.attrPkgCode != null" >
+        Attr_Pkg_Code = #{record.attrPkgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrCode != null" >
+        Attr_Code = #{record.attrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrName != null" >
+        Attr_Name = #{record.attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrDesc != null" >
+        Attr_Desc = #{record.attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrSeq != null" >
+        Attr_Seq = #{record.attrSeq,jdbcType=SMALLINT},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ta_attr_def
+    set Attr_Id = #{record.attrId,jdbcType=INTEGER},
+      Attr_Pkg_Code = #{record.attrPkgCode,jdbcType=VARCHAR},
+      Attr_Code = #{record.attrCode,jdbcType=VARCHAR},
+      Attr_Name = #{record.attrName,jdbcType=VARCHAR},
+      Attr_Desc = #{record.attrDesc,jdbcType=VARCHAR},
+      Attr_Seq = #{record.attrSeq,jdbcType=SMALLINT},
+      `State` = #{record.state,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+    update ta_attr_def
+    <set >
+      <if test="attrPkgCode != null" >
+        Attr_Pkg_Code = #{attrPkgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="attrCode != null" >
+        Attr_Code = #{attrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="attrName != null" >
+        Attr_Name = #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrDesc != null" >
+        Attr_Desc = #{attrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="attrSeq != null" >
+        Attr_Seq = #{attrSeq,jdbcType=SMALLINT},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where Attr_Id = #{attrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+    update ta_attr_def
+    set Attr_Pkg_Code = #{attrPkgCode,jdbcType=VARCHAR},
+      Attr_Code = #{attrCode,jdbcType=VARCHAR},
+      Attr_Name = #{attrName,jdbcType=VARCHAR},
+      Attr_Desc = #{attrDesc,jdbcType=VARCHAR},
+      Attr_Seq = #{attrSeq,jdbcType=SMALLINT},
+      `State` = #{state,jdbcType=SMALLINT}
+    where Attr_Id = #{attrId,jdbcType=INTEGER}
+  </update>
+</mapper>

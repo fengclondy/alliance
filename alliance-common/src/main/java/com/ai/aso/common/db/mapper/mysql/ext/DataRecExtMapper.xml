@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.DataRecExtMapper">
+    <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataRec">
+        <id column="Rec_No" property="recNo" jdbcType="VARCHAR"/>
+        <result column="Batch_Code" property="batchCode" jdbcType="BIGINT"/>
+        <result column="Rec_Class" property="recClass" jdbcType="SMALLINT"/>
+        <result column="Rec_Mode" property="recMode" jdbcType="INTEGER"/>
+        <result column="Cont_Id" property="contId" jdbcType="VARCHAR"/>
+        <result column="Cust_Id" property="custId" jdbcType="VARCHAR"/>
+        <result column="User_Nbr" property="userNbr" jdbcType="VARCHAR"/>
+        <result column="Busi_Mode" property="busiMode" jdbcType="INTEGER"/>
+        <result column="Goods_Id" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="Goods_Type" property="goodsType" jdbcType="INTEGER"/>
+        <result column="Goods_Name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="Data_Val" property="dataVal" jdbcType="BIGINT"/>
+        <result column="Total_Fee" property="totalFee" jdbcType="BIGINT"/>
+        <result column="Off_fee" property="offFee" jdbcType="BIGINT"/>
+        <result column="Discount" property="discount" jdbcType="INTEGER"/>
+        <result column="Bill_Fee" property="billFee" jdbcType="BIGINT"/>
+        <result column="Remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="State" property="state" jdbcType="SMALLINT"/>
+        <result column="Begin_Date" property="beginDate" jdbcType="TIMESTAMP"/>
+        <result column="End_Date" property="endDate" jdbcType="TIMESTAMP"/>
+        <result column="Err_Mesg" property="errMesg" jdbcType="VARCHAR"/>
+        <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="Deal_Count" property="dealCount" jdbcType="INTEGER"/>
+        <result column="Redo_Flag" property="redoFlag" jdbcType="INTEGER"/>
+        <result column="Oper_Id" property="operId" jdbcType="BIGINT"/>
+        <result column="Oper_Name" property="operName" jdbcType="VARCHAR"/>
+        <result column="Oper_Comm" property="operComm" jdbcType="VARCHAR"/>
+        <result column="Bill_Rule" property="billRule" jdbcType="INTEGER"/>
+        <result column="Bill_Serial" property="billSerial" jdbcType="VARCHAR"/>
+        <result column="Result_Mesg" property="resultMesg" jdbcType="VARCHAR"/>
+        <result column="Offer_Id" property="offerId" jdbcType="VARCHAR"/>
+        <result column="Serv_Id" property="servId" jdbcType="VARCHAR"/>
+        <result column="Offer_Inst" property="offerInst" jdbcType="VARCHAR"/>
+        <result column="Trd_Rec" property="trdRec" jdbcType="VARCHAR"/>
+        <result column="Cost_Region" property="costRegion" jdbcType="INTEGER"/>
+        <result column="Cost_Center" property="costCenter" jdbcType="VARCHAR"/>
+        <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR"/>
+        <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR"/>
+        <result column="Bill_State" property="billState" jdbcType="INTEGER"/>
+        <result column="Ver_" property="ver" jdbcType="INTEGER"/>
+        <result column="Ext1" property="ext1" jdbcType="VARCHAR"/>
+        <result column="Ext2" property="ext2" jdbcType="VARCHAR"/>
+        <result column="Ext3" property="ext3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cust_Id, User_Nbr, Busi_Mode, Goods_Id, 
+    Goods_Type, Goods_Name, Data_Val, Total_Fee, Off_fee, Discount, Bill_Fee, Remarks, 
+    `State`, Begin_Date, End_Date, Err_Mesg, Create_Date, Deal_Count, Redo_Flag, Oper_Id, 
+    Oper_Name, Oper_Comm, Bill_Rule, Bill_Serial, Result_Mesg, Offer_Id, Serv_Id, Offer_Inst, 
+    Trd_Rec, Cost_Region, Cost_Center, Bill_Batch, Bill_Month, Bill_State, Ver_, Ext1, 
+    Ext2, Ext3
+  </sql>
+    <update id="updateBillMonth" parameterType="map">
+        update tc_data_rec d, tc_cust_bill c
+        set d.Bill_Month = #{billMonth},
+        d.Bill_State = #{billState}
+        where d.Bill_Batch = c.Bill_Batch
+        and d.Cust_Id = c.Cust_Id
+        and c.Bill_Id in
+        (
+        <foreach collection="billId" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+    </update>
+    <update id="updateBillMonthByCust" parameterType="map">
+        update tc_data_rec d,tc_cust_bill c
+        set d.Bill_Month = #{billMonth},
+        d.Bill_State = #{billState}
+        where  d.Cont_Id = c.Cont_Id
+        AND c.Cont_Id=#{contId}
+        and c.Bill_Batch in
+        (
+        <foreach collection="billBatch" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+    </update>
+
+    <update id="dataRecUpdateState">
+	update tc_data_rec t set t.`state` = #{state} where t.rec_no = #{rec_no}
+  </update>
+
+    <update id="crmResultUpdate" parameterType="com.ai.aso.biz.bo.DataRecBo">
+	update tc_data_rec t 
+	
+	set t.`state` = #{state} , t.bill_serial = #{billSerial},
+	t.result_code = #{resultCode}, t.result_mesg = #{resultMesg},
+	t.begin_date = #{beginDate},t.cost_region =#{costRegion},t.serv_id =#{servId},
+	t.end_date = #{endDate},t.err_mesg = #{errMesg}
+	
+	where t.rec_no = #{recNo}
+  </update>
+
+    <update id="updateVer" parameterType="com.ai.aso.biz.bo.DataRecBo">
+	update tc_data_rec t 
+	
+	set t.ver_ = t.ver_+1
+	
+	where t.rec_no = #{recNo} and t.ver_ = #{ver}
+  </update>
+
+    <insert id="batchInsert">
+        insert into tc_data_rec (Rec_No, Batch_Code, Rec_Class,
+        Rec_Mode, Cont_Id, Cust_Id,
+        User_Nbr, Busi_Mode, Goods_Id,
+        Goods_Type, Goods_Name, Data_Val,
+        Total_Fee, Off_fee, Discount,
+        Bill_Fee, Remarks, `State`,
+        Begin_Date, End_Date, Err_Mesg,
+        Create_Date, Deal_Count, Redo_Flag,
+        Oper_Id, Oper_Name, Oper_Comm,
+        Bill_Rule, Bill_Serial, Result_Mesg,
+        Offer_Id, Serv_Id, Offer_Inst,
+        Trd_Rec, Cost_Region, Cost_Center,
+        Bill_Batch, Bill_Month, Bill_State,
+        Ver_, Ext1, Ext2, Ext3,Data_Type,Region_Id,Result_Code,Trd_Saler,Trd_Activity,Cont_No)
+        values
+        <foreach collection="list" item="o" index="index" separator=",">
+            (#{o.recNo,jdbcType=VARCHAR}, #{o.batchCode,jdbcType=BIGINT}, #{o.recClass,jdbcType=SMALLINT},
+            #{o.recMode,jdbcType=INTEGER}, #{o.contId,jdbcType=VARCHAR}, #{o.custId,jdbcType=VARCHAR},
+            #{o.userNbr,jdbcType=VARCHAR}, #{o.busiMode,jdbcType=INTEGER}, #{o.goodsId,jdbcType=VARCHAR},
+            #{o.goodsType,jdbcType=INTEGER}, #{o.goodsName,jdbcType=VARCHAR}, #{o.dataVal,jdbcType=BIGINT},
+            #{o.totalFee,jdbcType=BIGINT}, #{o.offFee,jdbcType=BIGINT}, #{o.discount,jdbcType=INTEGER},
+            #{o.billFee,jdbcType=BIGINT}, #{o.remarks,jdbcType=VARCHAR}, #{o.state,jdbcType=SMALLINT},
+            #{o.beginDate,jdbcType=TIMESTAMP}, #{o.endDate,jdbcType=TIMESTAMP}, #{o.errMesg,jdbcType=VARCHAR},
+            #{o.createDate,jdbcType=TIMESTAMP}, #{o.dealCount,jdbcType=INTEGER}, #{o.redoFlag,jdbcType=INTEGER},
+            #{o.operId,jdbcType=BIGINT}, #{o.operName,jdbcType=VARCHAR}, #{o.operComm,jdbcType=VARCHAR},
+            #{o.billRule,jdbcType=INTEGER}, #{o.billSerial,jdbcType=VARCHAR}, #{o.resultMesg,jdbcType=VARCHAR},
+            #{o.offerId,jdbcType=VARCHAR}, #{o.servId,jdbcType=VARCHAR}, #{o.offerInst,jdbcType=VARCHAR},
+            #{o.trdRec,jdbcType=VARCHAR}, #{o.costRegion,jdbcType=INTEGER}, #{o.costCenter,jdbcType=VARCHAR},
+            #{o.billBatch,jdbcType=VARCHAR}, #{o.billMonth,jdbcType=VARCHAR}, #{o.billState,jdbcType=INTEGER},
+            #{o.ver,jdbcType=INTEGER}, #{o.ext1,jdbcType=VARCHAR}, #{o.ext2,jdbcType=VARCHAR},
+            #{o.ext3,jdbcType=VARCHAR},
+            #{o.dataType,jdbcType=INTEGER},#{o.regionId,jdbcType=INTEGER},#{o.resultCode,jdbcType=VARCHAR},
+            #{o.trdSaler,jdbcType=VARCHAR},#{o.trdActivity,jdbcType=VARCHAR},#{o.contNo,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <select id="getDataCustGroupByCust">
+        select Cust_Id from tc_data_rec where Bill_State=100 and Cust_Id not in(
+        <foreach collection="custIds" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+
+
+        ) group by custId;
+    </select>
+    <select id="getRemaining" resultType="java.lang.Long">
+  	SELECT SUM(amount)-(IF(b.Cumu_Val IS NULL,0,b.Cumu_Val))
+
+	FROM tc_contract_book a
+
+	left join tc_data_booka b on a.cont_id = b.cont_id 
+
+	where a.book_type in (200,300) and a.state=100 and a.cont_id = #{contId}
+  </select>
+
+    <select id="getBalance" resultType="java.lang.Long">
+  	SELECT a.Total_Val-(IF(a.Cumu_Val IS NULL,0,a.Cumu_Val))
+
+	FROM tc_data_booka a
+
+	where a.cont_id = #{contId}
+  </select>
+    <select id="getUseFee" resultType="java.lang.Long">
+  	SELECT a.Bala_Val
+
+	FROM tc_data_booka a
+
+	where a.cont_id = #{contId}
+  </select>
+</mapper>

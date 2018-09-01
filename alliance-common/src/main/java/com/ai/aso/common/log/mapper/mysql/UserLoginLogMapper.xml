@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.common.log.dao.UserLoginLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.log.model.UserLoginLog" >
+    <id column="Id_" property="id" jdbcType="BIGINT" />
+    <result column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
+    <result column="Username" property="username" jdbcType="VARCHAR" />
+    <result column="Nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="Operation" property="operation" jdbcType="VARCHAR" />
+    <result column="Login_Date" property="loginDate" jdbcType="TIMESTAMP" />
+    <result column="Login_IP" property="loginIp" jdbcType="VARCHAR" />
+    <result column="System_Code" property="systemCode" jdbcType="VARCHAR" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id_, Acct_Id, Username, Nickname, `Operation`, Login_Date, Login_IP, System_Code, 
+    Remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.log.model.UserLoginLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tl_user_login_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tl_user_login_log
+    where Id_ = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tl_user_login_log
+    where Id_ = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.log.model.UserLoginLogExample" >
+    delete from tl_user_login_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
+    insert into tl_user_login_log (Id_, Acct_Id, Username, 
+      Nickname, `Operation`, Login_Date, 
+      Login_IP, System_Code, Remarks
+      )
+    values (#{id,jdbcType=BIGINT}, #{acctId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, #{loginDate,jdbcType=TIMESTAMP}, 
+      #{loginIp,jdbcType=VARCHAR}, #{systemCode,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
+    insert into tl_user_login_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id_,
+      </if>
+      <if test="acctId != null" >
+        Acct_Id,
+      </if>
+      <if test="username != null" >
+        Username,
+      </if>
+      <if test="nickname != null" >
+        Nickname,
+      </if>
+      <if test="operation != null" >
+        `Operation`,
+      </if>
+      <if test="loginDate != null" >
+        Login_Date,
+      </if>
+      <if test="loginIp != null" >
+        Login_IP,
+      </if>
+      <if test="systemCode != null" >
+        System_Code,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDate != null" >
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="systemCode != null" >
+        #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.common.log.model.UserLoginLogExample" resultType="java.lang.Integer" >
+    select count(*) from tl_user_login_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tl_user_login_log
+    <set >
+      <if test="record.id != null" >
+        Id_ = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctId != null" >
+        Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        Username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        Nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operation != null" >
+        `Operation` = #{record.operation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginDate != null" >
+        Login_Date = #{record.loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginIp != null" >
+        Login_IP = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemCode != null" >
+        System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tl_user_login_log
+    set Id_ = #{record.id,jdbcType=BIGINT},
+      Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      Username = #{record.username,jdbcType=VARCHAR},
+      Nickname = #{record.nickname,jdbcType=VARCHAR},
+      `Operation` = #{record.operation,jdbcType=VARCHAR},
+      Login_Date = #{record.loginDate,jdbcType=TIMESTAMP},
+      Login_IP = #{record.loginIp,jdbcType=VARCHAR},
+      System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      Remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
+    update tl_user_login_log
+    <set >
+      <if test="acctId != null" >
+        Acct_Id = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        Username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        Nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        `Operation` = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDate != null" >
+        Login_Date = #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null" >
+        Login_IP = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="systemCode != null" >
+        System_Code = #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id_ = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
+    update tl_user_login_log
+    set Acct_Id = #{acctId,jdbcType=VARCHAR},
+      Username = #{username,jdbcType=VARCHAR},
+      Nickname = #{nickname,jdbcType=VARCHAR},
+      `Operation` = #{operation,jdbcType=VARCHAR},
+      Login_Date = #{loginDate,jdbcType=TIMESTAMP},
+      Login_IP = #{loginIp,jdbcType=VARCHAR},
+      System_Code = #{systemCode,jdbcType=VARCHAR},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where Id_ = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

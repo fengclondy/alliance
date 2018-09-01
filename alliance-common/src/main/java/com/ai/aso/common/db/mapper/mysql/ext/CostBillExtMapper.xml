@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.CostBillExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CostBill" >
+    <id column="Cost_Id" property="costId" jdbcType="BIGINT" />
+    <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Cust_Name" property="custName" jdbcType="VARCHAR" />
+    <result column="Region_Id" property="regionId" jdbcType="INTEGER" />
+    <result column="Region_Name" property="regionName" jdbcType="VARCHAR" />
+    <result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+    <result column="Used_Data" property="usedData" jdbcType="BIGINT" />
+    <result column="Exp_Data" property="expData" jdbcType="BIGINT" />
+    <result column="Bill_Fee" property="billFee" jdbcType="BIGINT" />
+    <result column="Total_Fee" property="totalFee" jdbcType="BIGINT" />
+    <result column="Off_Fee" property="offFee" jdbcType="BIGINT" />
+    <result column="Discount" property="discount" jdbcType="INTEGER" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="Is_Invcd" property="isInvcd" jdbcType="INTEGER" />
+    <result column="Beg_Date" property="begDate" jdbcType="TIMESTAMP" />
+    <result column="End_Date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Oper_Date" property="operDate" jdbcType="TIMESTAMP" />
+    <result column="Operator" property="operator" jdbcType="VARCHAR" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Cost_Id, Bill_Month, Cust_Id, Cust_Name, Region_Id, Region_Name, Cont_Id, Used_Data, 
+    Exp_Data, Bill_Fee, Total_Fee, Off_Fee, Discount, `State`, Is_Invcd, Beg_Date, End_Date, 
+    Create_Date, Oper_Date, `Operator`, Ext1, Ext2, Ext3
+  </sql>
+  <sql id="sum_Column_List">
+		Cost_Id, Bill_Month , Actu_Month , Region_Id ,
+		Region_Name,Cont_Id,Cust_Id,
+		Used_Data, Exp_Data , sum(Bill_Fee)as Bill_Fee,sum(Total_Fee) as
+		Total_Fee,Off_Fee,Discount ,
+		`State`,Is_Invcd ,Beg_Date , End_Date ,Create_Date ,Oper_Date ,
+		`Operator` 
+	</sql>
+  <insert id="batchInsert" parameterType="java.util.List">
+  	insert into tc_cost_bill
+    (Cost_Id, Bill_Month, Cust_Id, 
+      Cust_Name, Region_Id, Region_Name, 
+      Cont_Id, Used_Data, Exp_Data, 
+      Bill_Fee, Total_Fee, Off_Fee, 
+      Discount, `State`, Is_Invcd, 
+      Beg_Date, End_Date, Create_Date, 
+      Oper_Date, `Operator`, Ext1, 
+      Ext2, Ext3)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >  
+      (#{item.costId,jdbcType=BIGINT}, #{item.billMonth,jdbcType=VARCHAR}, #{item.custId,jdbcType=VARCHAR}, 
+      #{item.custName,jdbcType=VARCHAR}, #{item.regionId,jdbcType=INTEGER}, #{item.regionName,jdbcType=VARCHAR}, 
+      #{item.contId,jdbcType=VARCHAR}, #{item.usedData,jdbcType=BIGINT}, #{item.expData,jdbcType=BIGINT}, 
+      #{item.billFee,jdbcType=BIGINT}, #{item.totalFee,jdbcType=BIGINT}, #{item.offFee,jdbcType=BIGINT}, 
+      #{item.discount,jdbcType=INTEGER}, #{item.state,jdbcType=INTEGER}, #{item.isInvcd,jdbcType=INTEGER}, 
+      #{item.begDate,jdbcType=TIMESTAMP}, #{item.endDate,jdbcType=TIMESTAMP}, #{item.createDate,jdbcType=TIMESTAMP}, 
+      #{item.operDate,jdbcType=TIMESTAMP}, #{item.operator,jdbcType=VARCHAR}, #{item.ext1,jdbcType=VARCHAR}, 
+      #{item.ext2,jdbcType=VARCHAR}, #{item.ext3,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <select id="queryCostBill" resultMap="BaseResultMap" parameterType="java.lang.String">
+
+		select 
+		<include refid="sum_Column_List" />
+ 		from
+		tc_cost_bill 
+		WHERE State=100
+		and Bill_Fee>0 and Ext1='200' and Cust_Id=#{custId}
+
+	</select>
+</mapper>

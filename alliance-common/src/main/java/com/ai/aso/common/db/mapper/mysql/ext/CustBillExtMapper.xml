@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.CustBillExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CustBill" >
+    <id column="Bill_Id" property="billId" jdbcType="BIGINT" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Cust_Name" property="custName" jdbcType="VARCHAR" />
+    <result column="Region_Id" property="regionId" jdbcType="INTEGER" />
+    <result column="Region_Name" property="regionName" jdbcType="VARCHAR" />
+    <result column="Bill_Desc" property="billDesc" jdbcType="VARCHAR" />
+    <result column="Data_Val" property="dataVal" jdbcType="BIGINT" />
+    <result column="Amount" property="amount" jdbcType="BIGINT" />
+    <result column="Owe_Fee" property="oweFee" jdbcType="BIGINT" />
+    <result column="Discount" property="discount" jdbcType="INTEGER" />
+    <result column="Off_Fee" property="offFee" jdbcType="BIGINT" />
+    <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR" />
+    <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
+    <result column="Bill_State" property="billState" jdbcType="INTEGER" />
+    <result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+    <result column="Pay_Type" property="payType" jdbcType="SMALLINT" />
+    <result column="Payment_Id" property="paymentId" jdbcType="VARCHAR" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Confirm_Date" property="confirmDate" jdbcType="TIMESTAMP" />
+    <result column="Bill_Date" property="billDate" jdbcType="TIMESTAMP" />
+    <result column="Beg_Date" property="begDate" jdbcType="TIMESTAMP" />
+    <result column="End_Date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Bill_Id, Cust_Id, Cust_Name, Region_Id, Region_Name, Bill_Desc, Data_Val, Amount, 
+    Owe_Fee, Discount, Off_Fee, Bill_Batch, Bill_Month, Bill_State, Cont_Id, Pay_Type, 
+    Payment_Id, Create_Date, Confirm_Date, Bill_Date, Beg_Date, End_Date, Ext1, Ext2, 
+    Ext3
+  </sql>
+  <sql id="Base_Column_List2" >
+    Bill_Id, Cust_Id, Cust_Name, Region_Id, Region_Name, Bill_Desc, sum(Data_Val) as Data_Val, 
+    sum(Amount) as Amount, sum(Owe_Fee) as Owe_Fee, sum(Off_Fee) as Off_Fee,
+    Discount, Bill_Batch, Bill_Month, Bill_State, Cont_Id, Pay_Type, 
+    Payment_Id, Create_Date, Confirm_Date, Bill_Date, Beg_Date, End_Date, Ext1, Ext2, 
+    Ext3
+  </sql>
+  
+  <select id="selectNewbillBatch" resultType="java.lang.String">
+  	select max(Bill_Batch) from tc_cust_bill
+  </select>
+  
+  <insert id="batchInsert" parameterType="java.util.List">
+  	insert into tc_cust_bill (Bill_Id, Cust_Id, Cust_Name, 
+      Region_Id, Region_Name, Bill_Desc, 
+      Data_Val, Amount, Owe_Fee, 
+      Discount, Off_Fee, Bill_Batch, 
+      Bill_Month, Bill_State, Cont_Id, 
+      Pay_Type, Payment_Id, Create_Date, 
+      Confirm_Date, Bill_Date, Beg_Date, 
+      End_Date, Ext1, Ext2, 
+      Ext3)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >  
+      (#{item.billId,jdbcType=BIGINT}, #{item.custId,jdbcType=VARCHAR}, #{item.custName,jdbcType=VARCHAR}, 
+      #{item.regionId,jdbcType=INTEGER}, #{item.regionName,jdbcType=VARCHAR}, #{item.billDesc,jdbcType=VARCHAR}, 
+      #{item.dataVal,jdbcType=BIGINT}, #{item.amount,jdbcType=BIGINT}, #{item.oweFee,jdbcType=BIGINT}, 
+      #{item.discount,jdbcType=INTEGER}, #{item.offFee,jdbcType=BIGINT}, #{item.billBatch,jdbcType=VARCHAR}, 
+      #{item.billMonth,jdbcType=VARCHAR}, #{item.billState,jdbcType=INTEGER}, #{item.contId,jdbcType=VARCHAR}, 
+      #{item.payType,jdbcType=SMALLINT}, #{item.paymentId,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, 
+      #{item.confirmDate,jdbcType=TIMESTAMP}, #{item.billDate,jdbcType=TIMESTAMP}, #{item.begDate,jdbcType=TIMESTAMP}, 
+      #{item.endDate,jdbcType=TIMESTAMP}, #{item.ext1,jdbcType=VARCHAR}, #{item.ext2,jdbcType=VARCHAR}, 
+      #{item.ext3,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <select id="selectCustBillGroupCust" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT
+		 <include refid="Base_Column_List2" />
+  	 FROM
+  	tc_cust_bill
+  	 WHERE
+  	Bill_Id IN
+		 <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+		 	#{item}
+		 </foreach>
+		GROUP BY Cust_Id
+  </select>
+  <select id="selectCustBillByCust" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT
+		 <include refid="Base_Column_List2" />
+  	 FROM
+  	tc_cust_bill
+  	 WHERE
+      Cont_Id=#{contId}
+     AND Bill_Batch IN
+		 <foreach collection="billBatch" item="item" index="index" open="(" separator="," close=")">
+		 	#{item}
+		 </foreach>
+  </select>
+  <update id="updateBillMonth" parameterType="map">
+  	update tc_cust_bill 
+  	 set Bill_Month = #{custBill.billMonth},
+  	 		 Bill_State = #{custBill.billState},
+  	 		 Bill_Date = #{custBill.billDate}
+  	where Bill_Id in 
+  	(
+		 <foreach collection="billId" item="item" index="index" separator=",">
+		 	#{item}
+		 </foreach>
+		) 
+  </update>
+  <update id="updateBillMonthByCust" parameterType="map">
+  	update tc_cust_bill
+  	 set Bill_Month = #{custBill.billMonth},
+  	 		 Bill_State = #{custBill.billState},
+  	 		 Bill_Date = #{custBill.billDate}
+      where  Cont_Id=#{contId}
+      AND Bill_Batch IN
+      <foreach collection="billBatch" item="item" index="index" open="(" separator="," close=")">
+          #{item}
+      </foreach>
+  </update>
+  <select id="selectTotalVal" resultType="java.lang.String">
+  	select sum(Amount) from tc_cust_bill t where Cust_Id=#{custId} and Bill_State=300
+  </select>
+</mapper>

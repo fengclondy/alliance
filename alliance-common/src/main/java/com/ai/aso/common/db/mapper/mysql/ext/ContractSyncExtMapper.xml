@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.ContractExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.fps.webService.model.ContractSync" >
+    <id column="transaction_id" property="transaction_id" jdbcType="VARCHAR" />
+    <result column="contract_unit_id" property="contract_unit_id" jdbcType="VARCHAR" />
+    <result column="contacts_b" property="contacts_b" jdbcType="VARCHAR" />
+    <result column="contact_number_b" property="contact_number_b" jdbcType="VARCHAR" />
+    <result column="customer_name_a" property="customer_name_a" jdbcType="VARCHAR" />
+    <result column="certificate_a" property="certificate_a" jdbcType="VARCHAR" />
+    <result column="contacts_a" property="contacts_a" jdbcType="BIGINT" />
+    <result column="contact_number_a" property="contact_number_a" jdbcType="VARCHAR" />
+    <result column="contract_name" property="contract_name" jdbcType="SMALLINT" />
+    <result column="contract_amount" property="contract_amount" jdbcType="BIGINT" />
+    <result column="begin_date" property="begin_date" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="end_date" jdbcType="TIMESTAMP" />
+    <result column="share_ratio" property="share_ratio" jdbcType="INTEGER" />
+    <result column="contract_appendix" property="contract_appendix" jdbcType="TIMESTAMP" />
+
+  </resultMap>
+
+  <select id="queryNoSyncContract" resultMap="BaseResultMap" >
+    select t.Cont_Id transaction_id, u.User_Id contract_unit_id,
+	u.User_Name contacts_b,u.Phone contact_number_b,c.Cust_Name customer_name_a,
+c.Cert_Nbr certificate_a,c.User_Name contacts_a,c.User_Mobile contact_number_a,
+t.Cont_No contract_name,t.Cont_Value contract_amount,t.Eff_Date begin_date,
+t.Exp_Date end_date,c.Ext1 share_ratio,t.Cont_Copy contract_appendix
+    from tc_contract t,tb_user u,tc_cust c
+    where t.Region_Id = u.Region_Id and t.cust_id = c.cust_id
+    and u.state = '1'
+    and t.Cont_Id not in (select Cont_No from tc_contract_synchronize)
+  </select>
+
+
+</mapper>

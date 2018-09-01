@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.PaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Payment" >
+    <id column="Payment_Id" property="paymentId" jdbcType="VARCHAR" />
+    <result column="Pay_Mode" property="payMode" jdbcType="INTEGER" />
+    <result column="Cost_Type" property="costType" jdbcType="INTEGER" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Object_Type" property="objectType" jdbcType="INTEGER" />
+    <result column="Object_Id" property="objectId" jdbcType="VARCHAR" />
+    <result column="Amount" property="amount" jdbcType="BIGINT" />
+    <result column="Apply_Date" property="applyDate" jdbcType="TIMESTAMP" />
+    <result column="Pay_Date" property="payDate" jdbcType="TIMESTAMP" />
+    <result column="Pay_State" property="payState" jdbcType="INTEGER" />
+    <result column="Pay_Cert" property="payCert" jdbcType="VARCHAR" />
+    <result column="Bill_Code" property="billCode" jdbcType="VARCHAR" />
+    <result column="Bill_ServId" property="billServid" jdbcType="VARCHAR" />
+    <result column="Bill_Acct" property="billAcct" jdbcType="VARCHAR" />
+    <result column="Pay_No" property="payNo" jdbcType="VARCHAR" />
+    <result column="Pay_ReqId" property="payReqid" jdbcType="VARCHAR" />
+    <result column="Pay_ResId" property="payResid" jdbcType="VARCHAR" />
+    <result column="Operator" property="operator" jdbcType="VARCHAR" />
+    <result column="Auditor" property="auditor" jdbcType="VARCHAR" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Payment_Id, Pay_Mode, Cost_Type, Cust_Id, Object_Type, Object_Id, Amount, Apply_Date, 
+    Pay_Date, Pay_State, Pay_Cert, Bill_Code, Bill_ServId, Bill_Acct, Pay_No, Pay_ReqId, 
+    Pay_ResId, `Operator`, Auditor, Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.PaymentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_payment
+    where Payment_Id = #{paymentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tc_payment
+    where Payment_Id = #{paymentId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.PaymentExample" >
+    delete from tc_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Payment" >
+    insert into tc_payment (Payment_Id, Pay_Mode, Cost_Type, 
+      Cust_Id, Object_Type, Object_Id, 
+      Amount, Apply_Date, Pay_Date, 
+      Pay_State, Pay_Cert, Bill_Code, 
+      Bill_ServId, Bill_Acct, Pay_No, 
+      Pay_ReqId, Pay_ResId, `Operator`, 
+      Auditor, Ext1, Ext2, 
+      Ext3)
+    values (#{paymentId,jdbcType=VARCHAR}, #{payMode,jdbcType=INTEGER}, #{costType,jdbcType=INTEGER}, 
+      #{custId,jdbcType=VARCHAR}, #{objectType,jdbcType=INTEGER}, #{objectId,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=BIGINT}, #{applyDate,jdbcType=TIMESTAMP}, #{payDate,jdbcType=TIMESTAMP}, 
+      #{payState,jdbcType=INTEGER}, #{payCert,jdbcType=VARCHAR}, #{billCode,jdbcType=VARCHAR}, 
+      #{billServid,jdbcType=VARCHAR}, #{billAcct,jdbcType=VARCHAR}, #{payNo,jdbcType=VARCHAR}, 
+      #{payReqid,jdbcType=VARCHAR}, #{payResid,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{auditor,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Payment" >
+    insert into tc_payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paymentId != null" >
+        Payment_Id,
+      </if>
+      <if test="payMode != null" >
+        Pay_Mode,
+      </if>
+      <if test="costType != null" >
+        Cost_Type,
+      </if>
+      <if test="custId != null" >
+        Cust_Id,
+      </if>
+      <if test="objectType != null" >
+        Object_Type,
+      </if>
+      <if test="objectId != null" >
+        Object_Id,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="applyDate != null" >
+        Apply_Date,
+      </if>
+      <if test="payDate != null" >
+        Pay_Date,
+      </if>
+      <if test="payState != null" >
+        Pay_State,
+      </if>
+      <if test="payCert != null" >
+        Pay_Cert,
+      </if>
+      <if test="billCode != null" >
+        Bill_Code,
+      </if>
+      <if test="billServid != null" >
+        Bill_ServId,
+      </if>
+      <if test="billAcct != null" >
+        Bill_Acct,
+      </if>
+      <if test="payNo != null" >
+        Pay_No,
+      </if>
+      <if test="payReqid != null" >
+        Pay_ReqId,
+      </if>
+      <if test="payResid != null" >
+        Pay_ResId,
+      </if>
+      <if test="operator != null" >
+        `Operator`,
+      </if>
+      <if test="auditor != null" >
+        Auditor,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="payMode != null" >
+        #{payMode,jdbcType=INTEGER},
+      </if>
+      <if test="costType != null" >
+        #{costType,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null" >
+        #{objectType,jdbcType=INTEGER},
+      </if>
+      <if test="objectId != null" >
+        #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDate != null" >
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payState != null" >
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="payCert != null" >
+        #{payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="billCode != null" >
+        #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="billServid != null" >
+        #{billServid,jdbcType=VARCHAR},
+      </if>
+      <if test="billAcct != null" >
+        #{billAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null" >
+        #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payReqid != null" >
+        #{payReqid,jdbcType=VARCHAR},
+      </if>
+      <if test="payResid != null" >
+        #{payResid,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.PaymentExample" resultType="java.lang.Integer" >
+    select count(*) from tc_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_payment
+    <set >
+      <if test="record.paymentId != null" >
+        Payment_Id = #{record.paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payMode != null" >
+        Pay_Mode = #{record.payMode,jdbcType=INTEGER},
+      </if>
+      <if test="record.costType != null" >
+        Cost_Type = #{record.costType,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null" >
+        Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectType != null" >
+        Object_Type = #{record.objectType,jdbcType=INTEGER},
+      </if>
+      <if test="record.objectId != null" >
+        Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        Amount = #{record.amount,jdbcType=BIGINT},
+      </if>
+      <if test="record.applyDate != null" >
+        Apply_Date = #{record.applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payDate != null" >
+        Pay_Date = #{record.payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payState != null" >
+        Pay_State = #{record.payState,jdbcType=INTEGER},
+      </if>
+      <if test="record.payCert != null" >
+        Pay_Cert = #{record.payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billCode != null" >
+        Bill_Code = #{record.billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billServid != null" >
+        Bill_ServId = #{record.billServid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billAcct != null" >
+        Bill_Acct = #{record.billAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payNo != null" >
+        Pay_No = #{record.payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payReqid != null" >
+        Pay_ReqId = #{record.payReqid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payResid != null" >
+        Pay_ResId = #{record.payResid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        `Operator` = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null" >
+        Auditor = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_payment
+    set Payment_Id = #{record.paymentId,jdbcType=VARCHAR},
+      Pay_Mode = #{record.payMode,jdbcType=INTEGER},
+      Cost_Type = #{record.costType,jdbcType=INTEGER},
+      Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      Object_Type = #{record.objectType,jdbcType=INTEGER},
+      Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      Amount = #{record.amount,jdbcType=BIGINT},
+      Apply_Date = #{record.applyDate,jdbcType=TIMESTAMP},
+      Pay_Date = #{record.payDate,jdbcType=TIMESTAMP},
+      Pay_State = #{record.payState,jdbcType=INTEGER},
+      Pay_Cert = #{record.payCert,jdbcType=VARCHAR},
+      Bill_Code = #{record.billCode,jdbcType=VARCHAR},
+      Bill_ServId = #{record.billServid,jdbcType=VARCHAR},
+      Bill_Acct = #{record.billAcct,jdbcType=VARCHAR},
+      Pay_No = #{record.payNo,jdbcType=VARCHAR},
+      Pay_ReqId = #{record.payReqid,jdbcType=VARCHAR},
+      Pay_ResId = #{record.payResid,jdbcType=VARCHAR},
+      `Operator` = #{record.operator,jdbcType=VARCHAR},
+      Auditor = #{record.auditor,jdbcType=VARCHAR},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Payment" >
+    update tc_payment
+    <set >
+      <if test="payMode != null" >
+        Pay_Mode = #{payMode,jdbcType=INTEGER},
+      </if>
+      <if test="costType != null" >
+        Cost_Type = #{costType,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null" >
+        Cust_Id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null" >
+        Object_Type = #{objectType,jdbcType=INTEGER},
+      </if>
+      <if test="objectId != null" >
+        Object_Id = #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="applyDate != null" >
+        Apply_Date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDate != null" >
+        Pay_Date = #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payState != null" >
+        Pay_State = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="payCert != null" >
+        Pay_Cert = #{payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="billCode != null" >
+        Bill_Code = #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="billServid != null" >
+        Bill_ServId = #{billServid,jdbcType=VARCHAR},
+      </if>
+      <if test="billAcct != null" >
+        Bill_Acct = #{billAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null" >
+        Pay_No = #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payReqid != null" >
+        Pay_ReqId = #{payReqid,jdbcType=VARCHAR},
+      </if>
+      <if test="payResid != null" >
+        Pay_ResId = #{payResid,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        `Operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        Auditor = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Payment_Id = #{paymentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Payment" >
+    update tc_payment
+    set Pay_Mode = #{payMode,jdbcType=INTEGER},
+      Cost_Type = #{costType,jdbcType=INTEGER},
+      Cust_Id = #{custId,jdbcType=VARCHAR},
+      Object_Type = #{objectType,jdbcType=INTEGER},
+      Object_Id = #{objectId,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=BIGINT},
+      Apply_Date = #{applyDate,jdbcType=TIMESTAMP},
+      Pay_Date = #{payDate,jdbcType=TIMESTAMP},
+      Pay_State = #{payState,jdbcType=INTEGER},
+      Pay_Cert = #{payCert,jdbcType=VARCHAR},
+      Bill_Code = #{billCode,jdbcType=VARCHAR},
+      Bill_ServId = #{billServid,jdbcType=VARCHAR},
+      Bill_Acct = #{billAcct,jdbcType=VARCHAR},
+      Pay_No = #{payNo,jdbcType=VARCHAR},
+      Pay_ReqId = #{payReqid,jdbcType=VARCHAR},
+      Pay_ResId = #{payResid,jdbcType=VARCHAR},
+      `Operator` = #{operator,jdbcType=VARCHAR},
+      Auditor = #{auditor,jdbcType=VARCHAR},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Payment_Id = #{paymentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

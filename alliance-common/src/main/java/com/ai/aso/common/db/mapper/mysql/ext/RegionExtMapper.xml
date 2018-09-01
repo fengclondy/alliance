@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.RegionExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Region" >
+    <id column="Region_Id" property="regionId" jdbcType="INTEGER" />
+    <result column="P_Region_Id" property="pRegionId" jdbcType="INTEGER" />
+    <result column="Region_Name" property="regionName" jdbcType="VARCHAR" />
+    <result column="Abbr_Name" property="abbrName" jdbcType="VARCHAR" />
+    <result column="Region_Level" property="regionLevel" jdbcType="SMALLINT" />
+    <result column="Seq_Id" property="seqId" jdbcType="INTEGER" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+    <result column="Region_Code" property="regionCode" jdbcType="VARCHAR" />
+    <result column="Crm_Region_Code" property="crmRegionCode" jdbcType="VARCHAR" />
+    <result column="Bill_Region_Code" property="billRegionCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Region_Id, P_Region_Id, Region_Name, Abbr_Name, Region_Level, Seq_Id, `State`, Region_Code, 
+    Crm_Region_Code, Bill_Region_Code
+  </sql>
+  <select id="selectRegionId" resultType="java.lang.Integer">
+  	select Region_Id from tb_region where State = 1
+  </select>
+</mapper>

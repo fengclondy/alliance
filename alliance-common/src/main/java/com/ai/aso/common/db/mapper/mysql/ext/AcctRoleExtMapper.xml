@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.AcctRoleExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.AcctRole" >
+    <id column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
+    <id column="Role_Id" property="roleId" jdbcType="INTEGER" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List" >
+    Acct_Id, Role_Id
+  </sql>
+  
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into tb_acct_role (Acct_Id, Role_Id)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.acctId,jdbcType=VARCHAR}
+        ,#{item.roleId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+</mapper>

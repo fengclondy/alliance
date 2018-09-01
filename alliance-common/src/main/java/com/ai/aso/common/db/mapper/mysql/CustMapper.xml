@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.CustMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Cust" >
+    <id column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Origin_Cust_Id" property="originCustId" jdbcType="VARCHAR" />
+    <result column="Cust_Ext_Id" property="custExtId" jdbcType="BIGINT" />
+    <result column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
+    <result column="Cust_Type" property="custType" jdbcType="SMALLINT" />
+    <result column="Cust_Name" property="custName" jdbcType="VARCHAR" />
+    <result column="Cust_Name_Py" property="custNamePy" jdbcType="VARCHAR" />
+    <result column="Short_Name" property="shortName" jdbcType="VARCHAR" />
+    <result column="Cert_Type" property="certType" jdbcType="SMALLINT" />
+    <result column="Cert_Nbr" property="certNbr" jdbcType="VARCHAR" />
+    <result column="Region_Id" property="regionId" jdbcType="VARCHAR" />
+    <result column="Cust_Addr" property="custAddr" jdbcType="VARCHAR" />
+    <result column="User_Name" property="userName" jdbcType="VARCHAR" />
+    <result column="User_Mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="User_Email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="User_Phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="Salsman" property="salsman" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+    <result column="Valid_Flag" property="validFlag" jdbcType="SMALLINT" />
+    <result column="Oper_Flag" property="operFlag" jdbcType="SMALLINT" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Modi_Date" property="modiDate" jdbcType="TIMESTAMP" />
+    <result column="Crm_User_Code" property="crmUserCode" jdbcType="VARCHAR" />
+    <result column="Crm_Cust_SN" property="crmCustSn" jdbcType="VARCHAR" />
+    <result column="Crm_Acct_Sn" property="crmAcctSn" jdbcType="VARCHAR" />
+    <result column="Crm_User_Sn" property="crmUserSn" jdbcType="VARCHAR" />
+    <result column="Agent_Level" property="agentLevel" jdbcType="INTEGER" />
+    <result column="Manager_Id" property="managerId" jdbcType="VARCHAR" />
+    <result column="Vip_Level" property="vipLevel" jdbcType="SMALLINT" />
+    <result column="Snap_Flag" property="snapFlag" jdbcType="SMALLINT" />
+    <result column="Snap_Ver" property="snapVer" jdbcType="SMALLINT" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Cust_Id, Origin_Cust_Id, Cust_Ext_Id, Acct_Id, Cust_Type, Cust_Name, Cust_Name_Py, 
+    Short_Name, Cert_Type, Cert_Nbr, Region_Id, Cust_Addr, User_Name, User_Mobile, User_Email, 
+    User_Phone, Salsman, `State`, Valid_Flag, Oper_Flag, Create_Date, Modi_Date, Crm_User_Code, 
+    Crm_Cust_SN, Crm_Acct_Sn, Crm_User_Sn, Agent_Level, Manager_Id, Vip_Level, Snap_Flag, 
+    Snap_Ver, Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CustExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_cust
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cust
+    where Cust_Id = #{custId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tc_cust
+    where Cust_Id = #{custId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CustExample" >
+    delete from tc_cust
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Cust" >
+    insert into tc_cust (Cust_Id, Origin_Cust_Id, Cust_Ext_Id, 
+      Acct_Id, Cust_Type, Cust_Name, 
+      Cust_Name_Py, Short_Name, Cert_Type, 
+      Cert_Nbr, Region_Id, Cust_Addr, 
+      User_Name, User_Mobile, User_Email, 
+      User_Phone, Salsman, `State`, 
+      Valid_Flag, Oper_Flag, Create_Date, 
+      Modi_Date, Crm_User_Code, Crm_Cust_SN, 
+      Crm_Acct_Sn, Crm_User_Sn, Agent_Level, 
+      Manager_Id, Vip_Level, Snap_Flag, 
+      Snap_Ver, Ext1, Ext2, 
+      Ext3)
+    values (#{custId,jdbcType=VARCHAR}, #{originCustId,jdbcType=VARCHAR}, #{custExtId,jdbcType=BIGINT}, 
+      #{acctId,jdbcType=VARCHAR}, #{custType,jdbcType=SMALLINT}, #{custName,jdbcType=VARCHAR}, 
+      #{custNamePy,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, #{certType,jdbcType=SMALLINT}, 
+      #{certNbr,jdbcType=VARCHAR}, #{regionId,jdbcType=VARCHAR}, #{custAddr,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{salsman,jdbcType=VARCHAR}, #{state,jdbcType=SMALLINT}, 
+      #{validFlag,jdbcType=SMALLINT}, #{operFlag,jdbcType=SMALLINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modiDate,jdbcType=TIMESTAMP}, #{crmUserCode,jdbcType=VARCHAR}, #{crmCustSn,jdbcType=VARCHAR}, 
+      #{crmAcctSn,jdbcType=VARCHAR}, #{crmUserSn,jdbcType=VARCHAR}, #{agentLevel,jdbcType=INTEGER}, 
+      #{managerId,jdbcType=VARCHAR}, #{vipLevel,jdbcType=SMALLINT}, #{snapFlag,jdbcType=SMALLINT}, 
+      #{snapVer,jdbcType=SMALLINT}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Cust" >
+    insert into tc_cust
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        Cust_Id,
+      </if>
+      <if test="originCustId != null" >
+        Origin_Cust_Id,
+      </if>
+      <if test="custExtId != null" >
+        Cust_Ext_Id,
+      </if>
+      <if test="acctId != null" >
+        Acct_Id,
+      </if>
+      <if test="custType != null" >
+        Cust_Type,
+      </if>
+      <if test="custName != null" >
+        Cust_Name,
+      </if>
+      <if test="custNamePy != null" >
+        Cust_Name_Py,
+      </if>
+      <if test="shortName != null" >
+        Short_Name,
+      </if>
+      <if test="certType != null" >
+        Cert_Type,
+      </if>
+      <if test="certNbr != null" >
+        Cert_Nbr,
+      </if>
+      <if test="regionId != null" >
+        Region_Id,
+      </if>
+      <if test="custAddr != null" >
+        Cust_Addr,
+      </if>
+      <if test="userName != null" >
+        User_Name,
+      </if>
+      <if test="userMobile != null" >
+        User_Mobile,
+      </if>
+      <if test="userEmail != null" >
+        User_Email,
+      </if>
+      <if test="userPhone != null" >
+        User_Phone,
+      </if>
+      <if test="salsman != null" >
+        Salsman,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="validFlag != null" >
+        Valid_Flag,
+      </if>
+      <if test="operFlag != null" >
+        Oper_Flag,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="modiDate != null" >
+        Modi_Date,
+      </if>
+      <if test="crmUserCode != null" >
+        Crm_User_Code,
+      </if>
+      <if test="crmCustSn != null" >
+        Crm_Cust_SN,
+      </if>
+      <if test="crmAcctSn != null" >
+        Crm_Acct_Sn,
+      </if>
+      <if test="crmUserSn != null" >
+        Crm_User_Sn,
+      </if>
+      <if test="agentLevel != null" >
+        Agent_Level,
+      </if>
+      <if test="managerId != null" >
+        Manager_Id,
+      </if>
+      <if test="vipLevel != null" >
+        Vip_Level,
+      </if>
+      <if test="snapFlag != null" >
+        Snap_Flag,
+      </if>
+      <if test="snapVer != null" >
+        Snap_Ver,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="originCustId != null" >
+        #{originCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="custExtId != null" >
+        #{custExtId,jdbcType=BIGINT},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custType != null" >
+        #{custType,jdbcType=SMALLINT},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custNamePy != null" >
+        #{custNamePy,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=SMALLINT},
+      </if>
+      <if test="certNbr != null" >
+        #{certNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null" >
+        #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="salsman != null" >
+        #{salsman,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="validFlag != null" >
+        #{validFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="operFlag != null" >
+        #{operFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiDate != null" >
+        #{modiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crmUserCode != null" >
+        #{crmUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="crmCustSn != null" >
+        #{crmCustSn,jdbcType=VARCHAR},
+      </if>
+      <if test="crmAcctSn != null" >
+        #{crmAcctSn,jdbcType=VARCHAR},
+      </if>
+      <if test="crmUserSn != null" >
+        #{crmUserSn,jdbcType=VARCHAR},
+      </if>
+      <if test="agentLevel != null" >
+        #{agentLevel,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="vipLevel != null" >
+        #{vipLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="snapFlag != null" >
+        #{snapFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="snapVer != null" >
+        #{snapVer,jdbcType=SMALLINT},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CustExample" resultType="java.lang.Integer" >
+    select count(*) from tc_cust
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_cust
+    <set >
+      <if test="record.custId != null" >
+        Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCustId != null" >
+        Origin_Cust_Id = #{record.originCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custExtId != null" >
+        Cust_Ext_Id = #{record.custExtId,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctId != null" >
+        Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custType != null" >
+        Cust_Type = #{record.custType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.custName != null" >
+        Cust_Name = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custNamePy != null" >
+        Cust_Name_Py = #{record.custNamePy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName != null" >
+        Short_Name = #{record.shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null" >
+        Cert_Type = #{record.certType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.certNbr != null" >
+        Cert_Nbr = #{record.certNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionId != null" >
+        Region_Id = #{record.regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custAddr != null" >
+        Cust_Addr = #{record.custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        User_Name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null" >
+        User_Mobile = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        User_Email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null" >
+        User_Phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salsman != null" >
+        Salsman = #{record.salsman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.validFlag != null" >
+        Valid_Flag = #{record.validFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.operFlag != null" >
+        Oper_Flag = #{record.operFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createDate != null" >
+        Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modiDate != null" >
+        Modi_Date = #{record.modiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.crmUserCode != null" >
+        Crm_User_Code = #{record.crmUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crmCustSn != null" >
+        Crm_Cust_SN = #{record.crmCustSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crmAcctSn != null" >
+        Crm_Acct_Sn = #{record.crmAcctSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crmUserSn != null" >
+        Crm_User_Sn = #{record.crmUserSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentLevel != null" >
+        Agent_Level = #{record.agentLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.managerId != null" >
+        Manager_Id = #{record.managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipLevel != null" >
+        Vip_Level = #{record.vipLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="record.snapFlag != null" >
+        Snap_Flag = #{record.snapFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.snapVer != null" >
+        Snap_Ver = #{record.snapVer,jdbcType=SMALLINT},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_cust
+    set Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      Origin_Cust_Id = #{record.originCustId,jdbcType=VARCHAR},
+      Cust_Ext_Id = #{record.custExtId,jdbcType=BIGINT},
+      Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      Cust_Type = #{record.custType,jdbcType=SMALLINT},
+      Cust_Name = #{record.custName,jdbcType=VARCHAR},
+      Cust_Name_Py = #{record.custNamePy,jdbcType=VARCHAR},
+      Short_Name = #{record.shortName,jdbcType=VARCHAR},
+      Cert_Type = #{record.certType,jdbcType=SMALLINT},
+      Cert_Nbr = #{record.certNbr,jdbcType=VARCHAR},
+      Region_Id = #{record.regionId,jdbcType=VARCHAR},
+      Cust_Addr = #{record.custAddr,jdbcType=VARCHAR},
+      User_Name = #{record.userName,jdbcType=VARCHAR},
+      User_Mobile = #{record.userMobile,jdbcType=VARCHAR},
+      User_Email = #{record.userEmail,jdbcType=VARCHAR},
+      User_Phone = #{record.userPhone,jdbcType=VARCHAR},
+      Salsman = #{record.salsman,jdbcType=VARCHAR},
+      `State` = #{record.state,jdbcType=SMALLINT},
+      Valid_Flag = #{record.validFlag,jdbcType=SMALLINT},
+      Oper_Flag = #{record.operFlag,jdbcType=SMALLINT},
+      Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      Modi_Date = #{record.modiDate,jdbcType=TIMESTAMP},
+      Crm_User_Code = #{record.crmUserCode,jdbcType=VARCHAR},
+      Crm_Cust_SN = #{record.crmCustSn,jdbcType=VARCHAR},
+      Crm_Acct_Sn = #{record.crmAcctSn,jdbcType=VARCHAR},
+      Crm_User_Sn = #{record.crmUserSn,jdbcType=VARCHAR},
+      Agent_Level = #{record.agentLevel,jdbcType=INTEGER},
+      Manager_Id = #{record.managerId,jdbcType=VARCHAR},
+      Vip_Level = #{record.vipLevel,jdbcType=SMALLINT},
+      Snap_Flag = #{record.snapFlag,jdbcType=SMALLINT},
+      Snap_Ver = #{record.snapVer,jdbcType=SMALLINT},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Cust" >
+    update tc_cust
+    <set >
+      <if test="originCustId != null" >
+        Origin_Cust_Id = #{originCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="custExtId != null" >
+        Cust_Ext_Id = #{custExtId,jdbcType=BIGINT},
+      </if>
+      <if test="acctId != null" >
+        Acct_Id = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custType != null" >
+        Cust_Type = #{custType,jdbcType=SMALLINT},
+      </if>
+      <if test="custName != null" >
+        Cust_Name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custNamePy != null" >
+        Cust_Name_Py = #{custNamePy,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        Short_Name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        Cert_Type = #{certType,jdbcType=SMALLINT},
+      </if>
+      <if test="certNbr != null" >
+        Cert_Nbr = #{certNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        Region_Id = #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null" >
+        Cust_Addr = #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        User_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        User_Mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        User_Email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        User_Phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="salsman != null" >
+        Salsman = #{salsman,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="validFlag != null" >
+        Valid_Flag = #{validFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="operFlag != null" >
+        Oper_Flag = #{operFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiDate != null" >
+        Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crmUserCode != null" >
+        Crm_User_Code = #{crmUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="crmCustSn != null" >
+        Crm_Cust_SN = #{crmCustSn,jdbcType=VARCHAR},
+      </if>
+      <if test="crmAcctSn != null" >
+        Crm_Acct_Sn = #{crmAcctSn,jdbcType=VARCHAR},
+      </if>
+      <if test="crmUserSn != null" >
+        Crm_User_Sn = #{crmUserSn,jdbcType=VARCHAR},
+      </if>
+      <if test="agentLevel != null" >
+        Agent_Level = #{agentLevel,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null" >
+        Manager_Id = #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="vipLevel != null" >
+        Vip_Level = #{vipLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="snapFlag != null" >
+        Snap_Flag = #{snapFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="snapVer != null" >
+        Snap_Ver = #{snapVer,jdbcType=SMALLINT},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Cust_Id = #{custId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Cust" >
+    update tc_cust
+    set Origin_Cust_Id = #{originCustId,jdbcType=VARCHAR},
+      Cust_Ext_Id = #{custExtId,jdbcType=BIGINT},
+      Acct_Id = #{acctId,jdbcType=VARCHAR},
+      Cust_Type = #{custType,jdbcType=SMALLINT},
+      Cust_Name = #{custName,jdbcType=VARCHAR},
+      Cust_Name_Py = #{custNamePy,jdbcType=VARCHAR},
+      Short_Name = #{shortName,jdbcType=VARCHAR},
+      Cert_Type = #{certType,jdbcType=SMALLINT},
+      Cert_Nbr = #{certNbr,jdbcType=VARCHAR},
+      Region_Id = #{regionId,jdbcType=VARCHAR},
+      Cust_Addr = #{custAddr,jdbcType=VARCHAR},
+      User_Name = #{userName,jdbcType=VARCHAR},
+      User_Mobile = #{userMobile,jdbcType=VARCHAR},
+      User_Email = #{userEmail,jdbcType=VARCHAR},
+      User_Phone = #{userPhone,jdbcType=VARCHAR},
+      Salsman = #{salsman,jdbcType=VARCHAR},
+      `State` = #{state,jdbcType=SMALLINT},
+      Valid_Flag = #{validFlag,jdbcType=SMALLINT},
+      Oper_Flag = #{operFlag,jdbcType=SMALLINT},
+      Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+      Crm_User_Code = #{crmUserCode,jdbcType=VARCHAR},
+      Crm_Cust_SN = #{crmCustSn,jdbcType=VARCHAR},
+      Crm_Acct_Sn = #{crmAcctSn,jdbcType=VARCHAR},
+      Crm_User_Sn = #{crmUserSn,jdbcType=VARCHAR},
+      Agent_Level = #{agentLevel,jdbcType=INTEGER},
+      Manager_Id = #{managerId,jdbcType=VARCHAR},
+      Vip_Level = #{vipLevel,jdbcType=SMALLINT},
+      Snap_Flag = #{snapFlag,jdbcType=SMALLINT},
+      Snap_Ver = #{snapVer,jdbcType=SMALLINT},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Cust_Id = #{custId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.webService.db.dao.QuickCostBillBoMapper">
+	<resultMap id="BaseResultMap" type="com.ai.aso.biz.webService.model.CostBillBo">
+
+		<id column="Cost_Id" property="costId" jdbcType="BIGINT" />
+		<result column="Bill_Months" property="billMonth" jdbcType="VARCHAR" />
+		<result column="Actu_Months" property="actuMonth" jdbcType="VARCHAR" />
+		<result column="Cust_Ids" property="custId" jdbcType="VARCHAR" />
+		<result column="Cust_Names" property="custName" jdbcType="VARCHAR" />
+		<result column="Region_Ids" property="regionId" jdbcType="INTEGER" />
+		<result column="Region_Names" property="regionName" jdbcType="VARCHAR" />
+		<result column="Cont_Ids" property="contId" jdbcType="VARCHAR" />
+		<result column="Used_Datas" property="usedData" jdbcType="BIGINT" />
+		<result column="Exp_Datas" property="expData" jdbcType="BIGINT" />
+		<result column="Bill_Fees" property="billFee" jdbcType="BIGINT" />
+		<result column="Total_Fees" property="totalFee" jdbcType="BIGINT" />
+		<result column="Off_Fees" property="offFee" jdbcType="BIGINT" />
+		<result column="Discounts" property="discount" jdbcType="INTEGER" />
+		<result column="States" property="state" jdbcType="INTEGER" />
+		<result column="Is_Invcds" property="isInvcd" jdbcType="INTEGER" />
+		<result column="Beg_Dates" property="begDate" jdbcType="TIMESTAMP" />
+		<result column="End_Dates" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="Create_Dates" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="Oper_Dates" property="operDate" jdbcType="TIMESTAMP" />
+		<result column="Operators" property="operator" jdbcType="VARCHAR" />
+		<result column="Ext1s" property="ext1" jdbcType="VARCHAR" />
+		<result column="Ext2s" property="ext2" jdbcType="VARCHAR" />
+		<result column="Ext3s" property="ext3" jdbcType="VARCHAR" />
+		<collection property="costBillItems" ofType="com.ai.aso.biz.db.model.CostBillItem">
+			<id column="Cost_Item_Id" property="costItemId" jdbcType="BIGINT" />
+			<result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
+			<result column="Actu_Month" property="actuMonth" jdbcType="VARCHAR" />
+			<result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+			<result column="Cust_Name" property="custName" jdbcType="VARCHAR" />
+			<result column="Region_Id" property="regionId" jdbcType="INTEGER" />
+			<result column="Region_Name" property="regionName" jdbcType="VARCHAR" />
+			<result column="Busi_Mode" property="busiMode" jdbcType="INTEGER" />
+			<result column="Pay_Type" property="payType" jdbcType="SMALLINT" />
+			<result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+			<result column="Used_Data" property="usedData" jdbcType="BIGINT" />
+			<result column="Exp_Data" property="expData" jdbcType="BIGINT" />
+			<result column="Bill_Fee" property="billFee" jdbcType="BIGINT" />
+			<result column="Total_Fee" property="totalFee" jdbcType="BIGINT" />
+			<result column="Off_Fee" property="offFee" jdbcType="BIGINT" />
+			<result column="Income" property="income" jdbcType="BIGINT" />
+			<result column="Discount" property="discount" jdbcType="INTEGER" />
+			<result column="Cost_Region" property="costRegion" jdbcType="INTEGER" />
+			<result column="Cost_Center" property="costCenter" jdbcType="VARCHAR" />
+			<result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+			<result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+			<result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+			<result column="Cost_Rate" property="costRate" jdbcType="INTEGER" />
+			<result column="Cost_Region_Name" property="costRegionName"
+				jdbcType="INTEGER" />
+			<result column="Cost_Fee" property="costFee" jdbcType="BIGINT" />
+		</collection>
+	</resultMap>
+	<!-- c.Cost_Item_Id, c.Bill_Month, c.Actu_Month, c.Cust_Id, c.Cust_Name, 
+		c.Region_Id, c.Region_Name, c.Busi_Mode, c.Pay_Type, c.Cont_Id, c.Used_Data, 
+		c.Exp_Data, c.Bill_Fee, c.Total_Fee, c.Off_Fee, c.Income, c.Discount, c.Cost_Region, 
+		c.Cost_Center -->
+	<sql id="Base_Column_List">
+		r.Cost_Id, r.Bill_Month as Bill_Months , r.Actu_Month AS
+		Actu_Months, r.Region_Id as Region_Ids,
+		r.Region_Name as Region_Names,
+		r.Cont_Id as Cont_Ids,r.Cust_Id as cust_Ids,
+		r.Used_Data AS Used_Datas, r.Exp_Data as
+		Exp_Datas, r.Bill_Fee as Bill_Fees, r.Total_Fee as
+		Total_Fees,r.Off_Fee AS Off_Fees,r.Discount AS Discounts,
+		r.`State` as States,r.Is_Invcd as Is_Invcds, r.Beg_Date as Beg_Dates, r.End_Date as
+		End_Dates,r.Create_Date as Create_Dates, r.Oper_Date as Oper_Dates,
+		r.`Operator` as Operators,c.Ext1 as Ext1s, c.Ext2 as Ext2s, c.Ext3 as Ext3s,
+		c.Cost_Item_Id, c.Cust_Id, c.Cust_Name, c.Region_Id,c.Region_Name,
+		c.Busi_Mode, c.Pay_Type, c.Cont_Id, c.Used_Data,
+		c.Exp_Data, c.Bill_Fee,c.Total_Fee, c.Off_Fee,c.Income, c.Discount,
+		c.Cost_Region, c.Cost_Center, c.Ext1, c.Ext2, c.Ext3,c.Cost_Rate,
+		c.Cost_Region_Name, c.Cost_Fee
+	</sql>
+	
+	
+	<select id="queryCostBillBo" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tc_cost_bill r
+		left join tc_cost_bill_item c on
+		r.Cust_Id=c.Cust_Id AND
+		r.Bill_Month=c.Bill_Month
+		WHERE r.State=#{state}
+		and c.Income>0 and r.Ext1='100'
+	</select>
+
+	
+
+</mapper>

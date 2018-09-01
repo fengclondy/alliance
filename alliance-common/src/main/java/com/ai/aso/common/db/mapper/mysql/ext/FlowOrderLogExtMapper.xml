@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.FlowOrderLogExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.FlowOrderLog" >
+    <id column="request_no" jdbcType="VARCHAR" property="requestNo" />
+    <result column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <result column="phone_id" jdbcType="VARCHAR" property="phoneId" />
+    <result column="offer_id" jdbcType="VARCHAR" property="offerId" />
+    <result column="discount" jdbcType="VARCHAR" property="discount" />
+    <result column="request_data" jdbcType="VARCHAR" property="requestData" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="result_code" jdbcType="VARCHAR" property="resultCode" />
+    <result column="result_date" jdbcType="TIMESTAMP" property="resultDate" />
+    <result column="back_code" jdbcType="VARCHAR" property="backCode" />
+    <result column="back_desc" jdbcType="VARCHAR" property="backDesc" />
+    <result column="back_date" jdbcType="TIMESTAMP" property="backDate" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    request_no, cont_id, phone_id, offer_id, discount, request_data, state, create_date,
+    result_code, result_date, back_code, back_desc, back_date
+  </sql>
+  <select id="queryOutTime" resultMap="BaseResultMap"  >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tc_flow_order_log
+    where state='1'
+    and TO_SECONDS(NOW())-TO_SECONDS(create_date)>5
+
+  </select>
+
+</mapper>

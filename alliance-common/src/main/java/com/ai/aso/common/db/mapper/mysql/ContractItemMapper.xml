@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ContractItemMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.ContractItem" >
+    <id column="Item_Id" property="itemId" jdbcType="BIGINT" />
+    <result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+    <result column="Goods_Id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="Goods_Name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="Goods_Type" property="goodsType" jdbcType="INTEGER" />
+    <result column="Data_Type" property="dataType" jdbcType="INTEGER" />
+    <result column="Goods_Specs" property="goodsSpecs" jdbcType="BIGINT" />
+    <result column="Number" property="number" jdbcType="INTEGER" />
+    <result column="Unit_Price" property="unitPrice" jdbcType="INTEGER" />
+    <result column="Off_Rate" property="offRate" jdbcType="INTEGER" />
+    <result column="Payable_Fee" property="payableFee" jdbcType="BIGINT" />
+    <result column="Discount_Fee" property="discountFee" jdbcType="BIGINT" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Item_Id, Cont_Id, Goods_Id, Goods_Name, Goods_Type, Data_Type, Goods_Specs, `Number`, 
+    Unit_Price, Off_Rate, Payable_Fee, Discount_Fee, Note, Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ContractItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_contract_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_contract_item
+    where Item_Id = #{itemId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tc_contract_item
+    where Item_Id = #{itemId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ContractItemExample" >
+    delete from tc_contract_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.ContractItem" >
+    insert into tc_contract_item (Item_Id, Cont_Id, Goods_Id, 
+      Goods_Name, Goods_Type, Data_Type, 
+      Goods_Specs, `Number`, Unit_Price, 
+      Off_Rate, Payable_Fee, Discount_Fee, 
+      Note, Ext1, Ext2, Ext3
+      )
+    values (#{itemId,jdbcType=BIGINT}, #{contId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsType,jdbcType=INTEGER}, #{dataType,jdbcType=INTEGER}, 
+      #{goodsSpecs,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, #{unitPrice,jdbcType=INTEGER}, 
+      #{offRate,jdbcType=INTEGER}, #{payableFee,jdbcType=BIGINT}, #{discountFee,jdbcType=BIGINT}, 
+      #{note,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.ContractItem" >
+    insert into tc_contract_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        Item_Id,
+      </if>
+      <if test="contId != null" >
+        Cont_Id,
+      </if>
+      <if test="goodsId != null" >
+        Goods_Id,
+      </if>
+      <if test="goodsName != null" >
+        Goods_Name,
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type,
+      </if>
+      <if test="dataType != null" >
+        Data_Type,
+      </if>
+      <if test="goodsSpecs != null" >
+        Goods_Specs,
+      </if>
+      <if test="number != null" >
+        `Number`,
+      </if>
+      <if test="unitPrice != null" >
+        Unit_Price,
+      </if>
+      <if test="offRate != null" >
+        Off_Rate,
+      </if>
+      <if test="payableFee != null" >
+        Payable_Fee,
+      </if>
+      <if test="discountFee != null" >
+        Discount_Fee,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="contId != null" >
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSpecs != null" >
+        #{goodsSpecs,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="offRate != null" >
+        #{offRate,jdbcType=INTEGER},
+      </if>
+      <if test="payableFee != null" >
+        #{payableFee,jdbcType=BIGINT},
+      </if>
+      <if test="discountFee != null" >
+        #{discountFee,jdbcType=BIGINT},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ContractItemExample" resultType="java.lang.Integer" >
+    select count(*) from tc_contract_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_contract_item
+    <set >
+      <if test="record.itemId != null" >
+        Item_Id = #{record.itemId,jdbcType=BIGINT},
+      </if>
+      <if test="record.contId != null" >
+        Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_Id = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null" >
+        Goods_Name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsType != null" >
+        Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataType != null" >
+        Data_Type = #{record.dataType,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsSpecs != null" >
+        Goods_Specs = #{record.goodsSpecs,jdbcType=BIGINT},
+      </if>
+      <if test="record.number != null" >
+        `Number` = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitPrice != null" >
+        Unit_Price = #{record.unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.offRate != null" >
+        Off_Rate = #{record.offRate,jdbcType=INTEGER},
+      </if>
+      <if test="record.payableFee != null" >
+        Payable_Fee = #{record.payableFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.discountFee != null" >
+        Discount_Fee = #{record.discountFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_contract_item
+    set Item_Id = #{record.itemId,jdbcType=BIGINT},
+      Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      Goods_Id = #{record.goodsId,jdbcType=VARCHAR},
+      Goods_Name = #{record.goodsName,jdbcType=VARCHAR},
+      Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      Data_Type = #{record.dataType,jdbcType=INTEGER},
+      Goods_Specs = #{record.goodsSpecs,jdbcType=BIGINT},
+      `Number` = #{record.number,jdbcType=INTEGER},
+      Unit_Price = #{record.unitPrice,jdbcType=INTEGER},
+      Off_Rate = #{record.offRate,jdbcType=INTEGER},
+      Payable_Fee = #{record.payableFee,jdbcType=BIGINT},
+      Discount_Fee = #{record.discountFee,jdbcType=BIGINT},
+      Note = #{record.note,jdbcType=VARCHAR},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.ContractItem" >
+    update tc_contract_item
+    <set >
+      <if test="contId != null" >
+        Cont_Id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        Goods_Id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        Goods_Name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type = #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="dataType != null" >
+        Data_Type = #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSpecs != null" >
+        Goods_Specs = #{goodsSpecs,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        `Number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        Unit_Price = #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="offRate != null" >
+        Off_Rate = #{offRate,jdbcType=INTEGER},
+      </if>
+      <if test="payableFee != null" >
+        Payable_Fee = #{payableFee,jdbcType=BIGINT},
+      </if>
+      <if test="discountFee != null" >
+        Discount_Fee = #{discountFee,jdbcType=BIGINT},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Item_Id = #{itemId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.ContractItem" >
+    update tc_contract_item
+    set Cont_Id = #{contId,jdbcType=VARCHAR},
+      Goods_Id = #{goodsId,jdbcType=VARCHAR},
+      Goods_Name = #{goodsName,jdbcType=VARCHAR},
+      Goods_Type = #{goodsType,jdbcType=INTEGER},
+      Data_Type = #{dataType,jdbcType=INTEGER},
+      Goods_Specs = #{goodsSpecs,jdbcType=BIGINT},
+      `Number` = #{number,jdbcType=INTEGER},
+      Unit_Price = #{unitPrice,jdbcType=INTEGER},
+      Off_Rate = #{offRate,jdbcType=INTEGER},
+      Payable_Fee = #{payableFee,jdbcType=BIGINT},
+      Discount_Fee = #{discountFee,jdbcType=BIGINT},
+      Note = #{note,jdbcType=VARCHAR},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Item_Id = #{itemId,jdbcType=BIGINT}
+  </update>
+</mapper>

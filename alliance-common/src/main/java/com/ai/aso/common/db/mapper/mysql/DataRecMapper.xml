@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.DataRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataRec" >
+    <id column="Rec_No" property="recNo" jdbcType="VARCHAR" />
+    <result column="Batch_Code" property="batchCode" jdbcType="VARCHAR" />
+    <result column="Rec_Class" property="recClass" jdbcType="SMALLINT" />
+    <result column="Rec_Mode" property="recMode" jdbcType="INTEGER" />
+    <result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="User_Nbr" property="userNbr" jdbcType="VARCHAR" />
+    <result column="Busi_Mode" property="busiMode" jdbcType="INTEGER" />
+    <result column="Goods_Id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="Goods_Type" property="goodsType" jdbcType="INTEGER" />
+    <result column="Goods_Name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="Data_Val" property="dataVal" jdbcType="BIGINT" />
+    <result column="Total_Fee" property="totalFee" jdbcType="BIGINT" />
+    <result column="Off_fee" property="offFee" jdbcType="BIGINT" />
+    <result column="Discount" property="discount" jdbcType="INTEGER" />
+    <result column="Bill_Fee" property="billFee" jdbcType="BIGINT" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+    <result column="Begin_Date" property="beginDate" jdbcType="TIMESTAMP" />
+    <result column="End_Date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="Err_Mesg" property="errMesg" jdbcType="VARCHAR" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Deal_Count" property="dealCount" jdbcType="INTEGER" />
+    <result column="Redo_Flag" property="redoFlag" jdbcType="INTEGER" />
+    <result column="Oper_Id" property="operId" jdbcType="BIGINT" />
+    <result column="Oper_Name" property="operName" jdbcType="VARCHAR" />
+    <result column="Oper_Comm" property="operComm" jdbcType="VARCHAR" />
+    <result column="Bill_Rule" property="billRule" jdbcType="INTEGER" />
+    <result column="Bill_Serial" property="billSerial" jdbcType="VARCHAR" />
+    <result column="Result_Mesg" property="resultMesg" jdbcType="VARCHAR" />
+    <result column="Offer_Id" property="offerId" jdbcType="VARCHAR" />
+    <result column="Serv_Id" property="servId" jdbcType="VARCHAR" />
+    <result column="Offer_Inst" property="offerInst" jdbcType="VARCHAR" />
+    <result column="Trd_Rec" property="trdRec" jdbcType="VARCHAR" />
+    <result column="Cost_Region" property="costRegion" jdbcType="INTEGER" />
+    <result column="Cost_Center" property="costCenter" jdbcType="VARCHAR" />
+    <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR" />
+    <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
+    <result column="Bill_State" property="billState" jdbcType="INTEGER" />
+    <result column="Ver_" property="ver" jdbcType="INTEGER" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="Data_Type" property="dataType" jdbcType="INTEGER" />
+    <result column="Region_Id" property="regionId" jdbcType="INTEGER" />
+    <result column="Result_Code" property="resultCode" jdbcType="VARCHAR" />
+    <result column="Trd_Saler" property="trdSaler" jdbcType="VARCHAR" />
+    <result column="Trd_Activity" property="trdActivity" jdbcType="VARCHAR" />
+    <result column="Cont_No" property="contNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cust_Id, User_Nbr, Busi_Mode, Goods_Id, 
+    Goods_Type, Goods_Name, Data_Val, Total_Fee, Off_fee, Discount, Bill_Fee, Remarks, 
+    `State`, Begin_Date, End_Date, Err_Mesg, Create_Date, Deal_Count, Redo_Flag, Oper_Id, 
+    Oper_Name, Oper_Comm, Bill_Rule, Bill_Serial, Result_Mesg, Offer_Id, Serv_Id, Offer_Inst, 
+    Trd_Rec, Cost_Region, Cost_Center, Bill_Batch, Bill_Month, Bill_State, Ver_, Ext1, 
+    Ext2, Ext3, Data_Type, Region_Id, Result_Code, Trd_Saler, Trd_Activity, Cont_No
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.DataRecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_data_rec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_data_rec
+    where Rec_No = #{recNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tc_data_rec
+    where Rec_No = #{recNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.DataRecExample" >
+    delete from tc_data_rec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.DataRec" >
+    insert into tc_data_rec (Rec_No, Batch_Code, Rec_Class, 
+      Rec_Mode, Cont_Id, Cust_Id, 
+      User_Nbr, Busi_Mode, Goods_Id, 
+      Goods_Type, Goods_Name, Data_Val, 
+      Total_Fee, Off_fee, Discount, 
+      Bill_Fee, Remarks, `State`, 
+      Begin_Date, End_Date, Err_Mesg, 
+      Create_Date, Deal_Count, Redo_Flag, 
+      Oper_Id, Oper_Name, Oper_Comm, 
+      Bill_Rule, Bill_Serial, Result_Mesg, 
+      Offer_Id, Serv_Id, Offer_Inst, 
+      Trd_Rec, Cost_Region, Cost_Center, 
+      Bill_Batch, Bill_Month, Bill_State, 
+      Ver_, Ext1, Ext2, Ext3, 
+      Data_Type, Region_Id, Result_Code, 
+      Trd_Saler, Trd_Activity, Cont_No
+      )
+    values (#{recNo,jdbcType=VARCHAR}, #{batchCode,jdbcType=VARCHAR}, #{recClass,jdbcType=SMALLINT}, 
+      #{recMode,jdbcType=INTEGER}, #{contId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{userNbr,jdbcType=VARCHAR}, #{busiMode,jdbcType=INTEGER}, #{goodsId,jdbcType=VARCHAR}, 
+      #{goodsType,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{dataVal,jdbcType=BIGINT}, 
+      #{totalFee,jdbcType=BIGINT}, #{offFee,jdbcType=BIGINT}, #{discount,jdbcType=INTEGER}, 
+      #{billFee,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{state,jdbcType=SMALLINT}, 
+      #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{errMesg,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{dealCount,jdbcType=INTEGER}, #{redoFlag,jdbcType=INTEGER}, 
+      #{operId,jdbcType=BIGINT}, #{operName,jdbcType=VARCHAR}, #{operComm,jdbcType=VARCHAR}, 
+      #{billRule,jdbcType=INTEGER}, #{billSerial,jdbcType=VARCHAR}, #{resultMesg,jdbcType=VARCHAR}, 
+      #{offerId,jdbcType=VARCHAR}, #{servId,jdbcType=VARCHAR}, #{offerInst,jdbcType=VARCHAR}, 
+      #{trdRec,jdbcType=VARCHAR}, #{costRegion,jdbcType=INTEGER}, #{costCenter,jdbcType=VARCHAR}, 
+      #{billBatch,jdbcType=VARCHAR}, #{billMonth,jdbcType=VARCHAR}, #{billState,jdbcType=INTEGER}, 
+      #{ver,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, 
+      #{dataType,jdbcType=INTEGER}, #{regionId,jdbcType=INTEGER}, #{resultCode,jdbcType=VARCHAR}, 
+      #{trdSaler,jdbcType=VARCHAR}, #{trdActivity,jdbcType=VARCHAR}, #{contNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.DataRec" >
+    insert into tc_data_rec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recNo != null" >
+        Rec_No,
+      </if>
+      <if test="batchCode != null" >
+        Batch_Code,
+      </if>
+      <if test="recClass != null" >
+        Rec_Class,
+      </if>
+      <if test="recMode != null" >
+        Rec_Mode,
+      </if>
+      <if test="contId != null" >
+        Cont_Id,
+      </if>
+      <if test="custId != null" >
+        Cust_Id,
+      </if>
+      <if test="userNbr != null" >
+        User_Nbr,
+      </if>
+      <if test="busiMode != null" >
+        Busi_Mode,
+      </if>
+      <if test="goodsId != null" >
+        Goods_Id,
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type,
+      </if>
+      <if test="goodsName != null" >
+        Goods_Name,
+      </if>
+      <if test="dataVal != null" >
+        Data_Val,
+      </if>
+      <if test="totalFee != null" >
+        Total_Fee,
+      </if>
+      <if test="offFee != null" >
+        Off_fee,
+      </if>
+      <if test="discount != null" >
+        Discount,
+      </if>
+      <if test="billFee != null" >
+        Bill_Fee,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="beginDate != null" >
+        Begin_Date,
+      </if>
+      <if test="endDate != null" >
+        End_Date,
+      </if>
+      <if test="errMesg != null" >
+        Err_Mesg,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="dealCount != null" >
+        Deal_Count,
+      </if>
+      <if test="redoFlag != null" >
+        Redo_Flag,
+      </if>
+      <if test="operId != null" >
+        Oper_Id,
+      </if>
+      <if test="operName != null" >
+        Oper_Name,
+      </if>
+      <if test="operComm != null" >
+        Oper_Comm,
+      </if>
+      <if test="billRule != null" >
+        Bill_Rule,
+      </if>
+      <if test="billSerial != null" >
+        Bill_Serial,
+      </if>
+      <if test="resultMesg != null" >
+        Result_Mesg,
+      </if>
+      <if test="offerId != null" >
+        Offer_Id,
+      </if>
+      <if test="servId != null" >
+        Serv_Id,
+      </if>
+      <if test="offerInst != null" >
+        Offer_Inst,
+      </if>
+      <if test="trdRec != null" >
+        Trd_Rec,
+      </if>
+      <if test="costRegion != null" >
+        Cost_Region,
+      </if>
+      <if test="costCenter != null" >
+        Cost_Center,
+      </if>
+      <if test="billBatch != null" >
+        Bill_Batch,
+      </if>
+      <if test="billMonth != null" >
+        Bill_Month,
+      </if>
+      <if test="billState != null" >
+        Bill_State,
+      </if>
+      <if test="ver != null" >
+        Ver_,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+      <if test="dataType != null" >
+        Data_Type,
+      </if>
+      <if test="regionId != null" >
+        Region_Id,
+      </if>
+      <if test="resultCode != null" >
+        Result_Code,
+      </if>
+      <if test="trdSaler != null" >
+        Trd_Saler,
+      </if>
+      <if test="trdActivity != null" >
+        Trd_Activity,
+      </if>
+      <if test="contNo != null" >
+        Cont_No,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recNo != null" >
+        #{recNo,jdbcType=VARCHAR},
+      </if>
+      <if test="batchCode != null" >
+        #{batchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recClass != null" >
+        #{recClass,jdbcType=SMALLINT},
+      </if>
+      <if test="recMode != null" >
+        #{recMode,jdbcType=INTEGER},
+      </if>
+      <if test="contId != null" >
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="userNbr != null" >
+        #{userNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="busiMode != null" >
+        #{busiMode,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataVal != null" >
+        #{dataVal,jdbcType=BIGINT},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="offFee != null" >
+        #{offFee,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="billFee != null" >
+        #{billFee,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="beginDate != null" >
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errMesg != null" >
+        #{errMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealCount != null" >
+        #{dealCount,jdbcType=INTEGER},
+      </if>
+      <if test="redoFlag != null" >
+        #{redoFlag,jdbcType=INTEGER},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=BIGINT},
+      </if>
+      <if test="operName != null" >
+        #{operName,jdbcType=VARCHAR},
+      </if>
+      <if test="operComm != null" >
+        #{operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="billRule != null" >
+        #{billRule,jdbcType=INTEGER},
+      </if>
+      <if test="billSerial != null" >
+        #{billSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="resultMesg != null" >
+        #{resultMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="offerId != null" >
+        #{offerId,jdbcType=VARCHAR},
+      </if>
+      <if test="servId != null" >
+        #{servId,jdbcType=VARCHAR},
+      </if>
+      <if test="offerInst != null" >
+        #{offerInst,jdbcType=VARCHAR},
+      </if>
+      <if test="trdRec != null" >
+        #{trdRec,jdbcType=VARCHAR},
+      </if>
+      <if test="costRegion != null" >
+        #{costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="costCenter != null" >
+        #{costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="billBatch != null" >
+        #{billBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="billMonth != null" >
+        #{billMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="billState != null" >
+        #{billState,jdbcType=INTEGER},
+      </if>
+      <if test="ver != null" >
+        #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="resultCode != null" >
+        #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trdSaler != null" >
+        #{trdSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="trdActivity != null" >
+        #{trdActivity,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null" >
+        #{contNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.DataRecExample" resultType="java.lang.Integer" >
+    select count(*) from tc_data_rec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_data_rec
+    <set >
+      <if test="record.recNo != null" >
+        Rec_No = #{record.recNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchCode != null" >
+        Batch_Code = #{record.batchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recClass != null" >
+        Rec_Class = #{record.recClass,jdbcType=SMALLINT},
+      </if>
+      <if test="record.recMode != null" >
+        Rec_Mode = #{record.recMode,jdbcType=INTEGER},
+      </if>
+      <if test="record.contId != null" >
+        Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNbr != null" >
+        User_Nbr = #{record.userNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiMode != null" >
+        Busi_Mode = #{record.busiMode,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_Id = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsType != null" >
+        Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsName != null" >
+        Goods_Name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataVal != null" >
+        Data_Val = #{record.dataVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalFee != null" >
+        Total_Fee = #{record.totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.offFee != null" >
+        Off_fee = #{record.offFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.discount != null" >
+        Discount = #{record.discount,jdbcType=INTEGER},
+      </if>
+      <if test="record.billFee != null" >
+        Bill_Fee = #{record.billFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.beginDate != null" >
+        Begin_Date = #{record.beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        End_Date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.errMesg != null" >
+        Err_Mesg = #{record.errMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dealCount != null" >
+        Deal_Count = #{record.dealCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.redoFlag != null" >
+        Redo_Flag = #{record.redoFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.operId != null" >
+        Oper_Id = #{record.operId,jdbcType=BIGINT},
+      </if>
+      <if test="record.operName != null" >
+        Oper_Name = #{record.operName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operComm != null" >
+        Oper_Comm = #{record.operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billRule != null" >
+        Bill_Rule = #{record.billRule,jdbcType=INTEGER},
+      </if>
+      <if test="record.billSerial != null" >
+        Bill_Serial = #{record.billSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultMesg != null" >
+        Result_Mesg = #{record.resultMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerId != null" >
+        Offer_Id = #{record.offerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servId != null" >
+        Serv_Id = #{record.servId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerInst != null" >
+        Offer_Inst = #{record.offerInst,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trdRec != null" >
+        Trd_Rec = #{record.trdRec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costRegion != null" >
+        Cost_Region = #{record.costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="record.costCenter != null" >
+        Cost_Center = #{record.costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billBatch != null" >
+        Bill_Batch = #{record.billBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billMonth != null" >
+        Bill_Month = #{record.billMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billState != null" >
+        Bill_State = #{record.billState,jdbcType=INTEGER},
+      </if>
+      <if test="record.ver != null" >
+        Ver_ = #{record.ver,jdbcType=INTEGER},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataType != null" >
+        Data_Type = #{record.dataType,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionId != null" >
+        Region_Id = #{record.regionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.resultCode != null" >
+        Result_Code = #{record.resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trdSaler != null" >
+        Trd_Saler = #{record.trdSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trdActivity != null" >
+        Trd_Activity = #{record.trdActivity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contNo != null" >
+        Cont_No = #{record.contNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_data_rec
+    set Rec_No = #{record.recNo,jdbcType=VARCHAR},
+      Batch_Code = #{record.batchCode,jdbcType=VARCHAR},
+      Rec_Class = #{record.recClass,jdbcType=SMALLINT},
+      Rec_Mode = #{record.recMode,jdbcType=INTEGER},
+      Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      User_Nbr = #{record.userNbr,jdbcType=VARCHAR},
+      Busi_Mode = #{record.busiMode,jdbcType=INTEGER},
+      Goods_Id = #{record.goodsId,jdbcType=VARCHAR},
+      Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      Goods_Name = #{record.goodsName,jdbcType=VARCHAR},
+      Data_Val = #{record.dataVal,jdbcType=BIGINT},
+      Total_Fee = #{record.totalFee,jdbcType=BIGINT},
+      Off_fee = #{record.offFee,jdbcType=BIGINT},
+      Discount = #{record.discount,jdbcType=INTEGER},
+      Bill_Fee = #{record.billFee,jdbcType=BIGINT},
+      Remarks = #{record.remarks,jdbcType=VARCHAR},
+      `State` = #{record.state,jdbcType=SMALLINT},
+      Begin_Date = #{record.beginDate,jdbcType=TIMESTAMP},
+      End_Date = #{record.endDate,jdbcType=TIMESTAMP},
+      Err_Mesg = #{record.errMesg,jdbcType=VARCHAR},
+      Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      Deal_Count = #{record.dealCount,jdbcType=INTEGER},
+      Redo_Flag = #{record.redoFlag,jdbcType=INTEGER},
+      Oper_Id = #{record.operId,jdbcType=BIGINT},
+      Oper_Name = #{record.operName,jdbcType=VARCHAR},
+      Oper_Comm = #{record.operComm,jdbcType=VARCHAR},
+      Bill_Rule = #{record.billRule,jdbcType=INTEGER},
+      Bill_Serial = #{record.billSerial,jdbcType=VARCHAR},
+      Result_Mesg = #{record.resultMesg,jdbcType=VARCHAR},
+      Offer_Id = #{record.offerId,jdbcType=VARCHAR},
+      Serv_Id = #{record.servId,jdbcType=VARCHAR},
+      Offer_Inst = #{record.offerInst,jdbcType=VARCHAR},
+      Trd_Rec = #{record.trdRec,jdbcType=VARCHAR},
+      Cost_Region = #{record.costRegion,jdbcType=INTEGER},
+      Cost_Center = #{record.costCenter,jdbcType=VARCHAR},
+      Bill_Batch = #{record.billBatch,jdbcType=VARCHAR},
+      Bill_Month = #{record.billMonth,jdbcType=VARCHAR},
+      Bill_State = #{record.billState,jdbcType=INTEGER},
+      Ver_ = #{record.ver,jdbcType=INTEGER},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      Data_Type = #{record.dataType,jdbcType=INTEGER},
+      Region_Id = #{record.regionId,jdbcType=INTEGER},
+      Result_Code = #{record.resultCode,jdbcType=VARCHAR},
+      Trd_Saler = #{record.trdSaler,jdbcType=VARCHAR},
+      Trd_Activity = #{record.trdActivity,jdbcType=VARCHAR},
+      Cont_No = #{record.contNo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.DataRec" >
+    update tc_data_rec
+    <set >
+      <if test="batchCode != null" >
+        Batch_Code = #{batchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recClass != null" >
+        Rec_Class = #{recClass,jdbcType=SMALLINT},
+      </if>
+      <if test="recMode != null" >
+        Rec_Mode = #{recMode,jdbcType=INTEGER},
+      </if>
+      <if test="contId != null" >
+        Cont_Id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        Cust_Id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="userNbr != null" >
+        User_Nbr = #{userNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="busiMode != null" >
+        Busi_Mode = #{busiMode,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        Goods_Id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type = #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        Goods_Name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataVal != null" >
+        Data_Val = #{dataVal,jdbcType=BIGINT},
+      </if>
+      <if test="totalFee != null" >
+        Total_Fee = #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="offFee != null" >
+        Off_fee = #{offFee,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        Discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="billFee != null" >
+        Bill_Fee = #{billFee,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="beginDate != null" >
+        Begin_Date = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        End_Date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errMesg != null" >
+        Err_Mesg = #{errMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealCount != null" >
+        Deal_Count = #{dealCount,jdbcType=INTEGER},
+      </if>
+      <if test="redoFlag != null" >
+        Redo_Flag = #{redoFlag,jdbcType=INTEGER},
+      </if>
+      <if test="operId != null" >
+        Oper_Id = #{operId,jdbcType=BIGINT},
+      </if>
+      <if test="operName != null" >
+        Oper_Name = #{operName,jdbcType=VARCHAR},
+      </if>
+      <if test="operComm != null" >
+        Oper_Comm = #{operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="billRule != null" >
+        Bill_Rule = #{billRule,jdbcType=INTEGER},
+      </if>
+      <if test="billSerial != null" >
+        Bill_Serial = #{billSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="resultMesg != null" >
+        Result_Mesg = #{resultMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="offerId != null" >
+        Offer_Id = #{offerId,jdbcType=VARCHAR},
+      </if>
+      <if test="servId != null" >
+        Serv_Id = #{servId,jdbcType=VARCHAR},
+      </if>
+      <if test="offerInst != null" >
+        Offer_Inst = #{offerInst,jdbcType=VARCHAR},
+      </if>
+      <if test="trdRec != null" >
+        Trd_Rec = #{trdRec,jdbcType=VARCHAR},
+      </if>
+      <if test="costRegion != null" >
+        Cost_Region = #{costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="costCenter != null" >
+        Cost_Center = #{costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="billBatch != null" >
+        Bill_Batch = #{billBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="billMonth != null" >
+        Bill_Month = #{billMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="billState != null" >
+        Bill_State = #{billState,jdbcType=INTEGER},
+      </if>
+      <if test="ver != null" >
+        Ver_ = #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        Data_Type = #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="regionId != null" >
+        Region_Id = #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="resultCode != null" >
+        Result_Code = #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trdSaler != null" >
+        Trd_Saler = #{trdSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="trdActivity != null" >
+        Trd_Activity = #{trdActivity,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null" >
+        Cont_No = #{contNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Rec_No = #{recNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.DataRec" >
+    update tc_data_rec
+    set Batch_Code = #{batchCode,jdbcType=VARCHAR},
+      Rec_Class = #{recClass,jdbcType=SMALLINT},
+      Rec_Mode = #{recMode,jdbcType=INTEGER},
+      Cont_Id = #{contId,jdbcType=VARCHAR},
+      Cust_Id = #{custId,jdbcType=VARCHAR},
+      User_Nbr = #{userNbr,jdbcType=VARCHAR},
+      Busi_Mode = #{busiMode,jdbcType=INTEGER},
+      Goods_Id = #{goodsId,jdbcType=VARCHAR},
+      Goods_Type = #{goodsType,jdbcType=INTEGER},
+      Goods_Name = #{goodsName,jdbcType=VARCHAR},
+      Data_Val = #{dataVal,jdbcType=BIGINT},
+      Total_Fee = #{totalFee,jdbcType=BIGINT},
+      Off_fee = #{offFee,jdbcType=BIGINT},
+      Discount = #{discount,jdbcType=INTEGER},
+      Bill_Fee = #{billFee,jdbcType=BIGINT},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      `State` = #{state,jdbcType=SMALLINT},
+      Begin_Date = #{beginDate,jdbcType=TIMESTAMP},
+      End_Date = #{endDate,jdbcType=TIMESTAMP},
+      Err_Mesg = #{errMesg,jdbcType=VARCHAR},
+      Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      Deal_Count = #{dealCount,jdbcType=INTEGER},
+      Redo_Flag = #{redoFlag,jdbcType=INTEGER},
+      Oper_Id = #{operId,jdbcType=BIGINT},
+      Oper_Name = #{operName,jdbcType=VARCHAR},
+      Oper_Comm = #{operComm,jdbcType=VARCHAR},
+      Bill_Rule = #{billRule,jdbcType=INTEGER},
+      Bill_Serial = #{billSerial,jdbcType=VARCHAR},
+      Result_Mesg = #{resultMesg,jdbcType=VARCHAR},
+      Offer_Id = #{offerId,jdbcType=VARCHAR},
+      Serv_Id = #{servId,jdbcType=VARCHAR},
+      Offer_Inst = #{offerInst,jdbcType=VARCHAR},
+      Trd_Rec = #{trdRec,jdbcType=VARCHAR},
+      Cost_Region = #{costRegion,jdbcType=INTEGER},
+      Cost_Center = #{costCenter,jdbcType=VARCHAR},
+      Bill_Batch = #{billBatch,jdbcType=VARCHAR},
+      Bill_Month = #{billMonth,jdbcType=VARCHAR},
+      Bill_State = #{billState,jdbcType=INTEGER},
+      Ver_ = #{ver,jdbcType=INTEGER},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR},
+      Data_Type = #{dataType,jdbcType=INTEGER},
+      Region_Id = #{regionId,jdbcType=INTEGER},
+      Result_Code = #{resultCode,jdbcType=VARCHAR},
+      Trd_Saler = #{trdSaler,jdbcType=VARCHAR},
+      Trd_Activity = #{trdActivity,jdbcType=VARCHAR},
+      Cont_No = #{contNo,jdbcType=VARCHAR}
+    where Rec_No = #{recNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.common.log.dao.UserOperLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.log.model.UserOperLog" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Model_Code" property="modelCode" jdbcType="VARCHAR" />
+    <result column="Model_Name" property="modelName" jdbcType="VARCHAR" />
+    <result column="Oper_Type" property="operType" jdbcType="VARCHAR" />
+    <result column="Oper_Comm" property="operComm" jdbcType="VARCHAR" />
+    <result column="Oper_Params" property="operParams" jdbcType="VARCHAR" />
+    <result column="Oper_Result" property="operResult" jdbcType="VARCHAR" />
+    <result column="Log_Date" property="logDate" jdbcType="TIMESTAMP" />
+    <result column="Log_Level" property="logLevel" jdbcType="SMALLINT" />
+    <result column="Operator" property="operator" jdbcType="VARCHAR" />
+    <result column="Operator_Id" property="operatorId" jdbcType="VARCHAR" />
+    <result column="Oper_Date" property="operDate" jdbcType="TIMESTAMP" />
+    <result column="Oper_IP" property="operIp" jdbcType="VARCHAR" />
+    <result column="System_Code" property="systemCode" jdbcType="VARCHAR" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Model_Code, Model_Name, Oper_Type, Oper_Comm, Oper_Params, Oper_Result, Log_Date, 
+    Log_Level, `Operator`, Operator_Id, Oper_Date, Oper_IP, System_Code, Remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.log.model.UserOperLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tl_user_oper_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tl_user_oper_log
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tl_user_oper_log
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.log.model.UserOperLogExample" >
+    delete from tl_user_oper_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+    insert into tl_user_oper_log (Id, Model_Code, Model_Name, 
+      Oper_Type, Oper_Comm, Oper_Params, 
+      Oper_Result, Log_Date, Log_Level, 
+      `Operator`, Operator_Id, Oper_Date, 
+      Oper_IP, System_Code, Remarks
+      )
+    values (#{id,jdbcType=BIGINT}, #{modelCode,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
+      #{operType,jdbcType=VARCHAR}, #{operComm,jdbcType=VARCHAR}, #{operParams,jdbcType=VARCHAR}, 
+      #{operResult,jdbcType=VARCHAR}, #{logDate,jdbcType=TIMESTAMP}, #{logLevel,jdbcType=SMALLINT}, 
+      #{operator,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, #{operDate,jdbcType=TIMESTAMP}, 
+      #{operIp,jdbcType=VARCHAR}, #{systemCode,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+    insert into tl_user_oper_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="modelCode != null" >
+        Model_Code,
+      </if>
+      <if test="modelName != null" >
+        Model_Name,
+      </if>
+      <if test="operType != null" >
+        Oper_Type,
+      </if>
+      <if test="operComm != null" >
+        Oper_Comm,
+      </if>
+      <if test="operParams != null" >
+        Oper_Params,
+      </if>
+      <if test="operResult != null" >
+        Oper_Result,
+      </if>
+      <if test="logDate != null" >
+        Log_Date,
+      </if>
+      <if test="logLevel != null" >
+        Log_Level,
+      </if>
+      <if test="operator != null" >
+        `Operator`,
+      </if>
+      <if test="operatorId != null" >
+        Operator_Id,
+      </if>
+      <if test="operDate != null" >
+        Oper_Date,
+      </if>
+      <if test="operIp != null" >
+        Oper_IP,
+      </if>
+      <if test="systemCode != null" >
+        System_Code,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="operType != null" >
+        #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="operComm != null" >
+        #{operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="operParams != null" >
+        #{operParams,jdbcType=VARCHAR},
+      </if>
+      <if test="operResult != null" >
+        #{operResult,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        #{logDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logLevel != null" >
+        #{logLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="operDate != null" >
+        #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operIp != null" >
+        #{operIp,jdbcType=VARCHAR},
+      </if>
+      <if test="systemCode != null" >
+        #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.common.log.model.UserOperLogExample" resultType="java.lang.Integer" >
+    select count(*) from tl_user_oper_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tl_user_oper_log
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.modelCode != null" >
+        Model_Code = #{record.modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelName != null" >
+        Model_Name = #{record.modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operType != null" >
+        Oper_Type = #{record.operType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operComm != null" >
+        Oper_Comm = #{record.operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operParams != null" >
+        Oper_Params = #{record.operParams,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operResult != null" >
+        Oper_Result = #{record.operResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logDate != null" >
+        Log_Date = #{record.logDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logLevel != null" >
+        Log_Level = #{record.logLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="record.operator != null" >
+        `Operator` = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorId != null" >
+        Operator_Id = #{record.operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operDate != null" >
+        Oper_Date = #{record.operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operIp != null" >
+        Oper_IP = #{record.operIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemCode != null" >
+        System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tl_user_oper_log
+    set Id = #{record.id,jdbcType=BIGINT},
+      Model_Code = #{record.modelCode,jdbcType=VARCHAR},
+      Model_Name = #{record.modelName,jdbcType=VARCHAR},
+      Oper_Type = #{record.operType,jdbcType=VARCHAR},
+      Oper_Comm = #{record.operComm,jdbcType=VARCHAR},
+      Oper_Params = #{record.operParams,jdbcType=VARCHAR},
+      Oper_Result = #{record.operResult,jdbcType=VARCHAR},
+      Log_Date = #{record.logDate,jdbcType=TIMESTAMP},
+      Log_Level = #{record.logLevel,jdbcType=SMALLINT},
+      `Operator` = #{record.operator,jdbcType=VARCHAR},
+      Operator_Id = #{record.operatorId,jdbcType=VARCHAR},
+      Oper_Date = #{record.operDate,jdbcType=TIMESTAMP},
+      Oper_IP = #{record.operIp,jdbcType=VARCHAR},
+      System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      Remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+    update tl_user_oper_log
+    <set >
+      <if test="modelCode != null" >
+        Model_Code = #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        Model_Name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="operType != null" >
+        Oper_Type = #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="operComm != null" >
+        Oper_Comm = #{operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="operParams != null" >
+        Oper_Params = #{operParams,jdbcType=VARCHAR},
+      </if>
+      <if test="operResult != null" >
+        Oper_Result = #{operResult,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        Log_Date = #{logDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logLevel != null" >
+        Log_Level = #{logLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="operator != null" >
+        `Operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        Operator_Id = #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="operDate != null" >
+        Oper_Date = #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operIp != null" >
+        Oper_IP = #{operIp,jdbcType=VARCHAR},
+      </if>
+      <if test="systemCode != null" >
+        System_Code = #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+    update tl_user_oper_log
+    set Model_Code = #{modelCode,jdbcType=VARCHAR},
+      Model_Name = #{modelName,jdbcType=VARCHAR},
+      Oper_Type = #{operType,jdbcType=VARCHAR},
+      Oper_Comm = #{operComm,jdbcType=VARCHAR},
+      Oper_Params = #{operParams,jdbcType=VARCHAR},
+      Oper_Result = #{operResult,jdbcType=VARCHAR},
+      Log_Date = #{logDate,jdbcType=TIMESTAMP},
+      Log_Level = #{logLevel,jdbcType=SMALLINT},
+      `Operator` = #{operator,jdbcType=VARCHAR},
+      Operator_Id = #{operatorId,jdbcType=VARCHAR},
+      Oper_Date = #{operDate,jdbcType=TIMESTAMP},
+      Oper_IP = #{operIp,jdbcType=VARCHAR},
+      System_Code = #{systemCode,jdbcType=VARCHAR},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

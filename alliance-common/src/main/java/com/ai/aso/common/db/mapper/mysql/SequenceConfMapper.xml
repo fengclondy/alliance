@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.sequence.dao.SequenceConfMapper">
+	<resultMap id="BaseResultMap" type="com.ai.aso.sequence.dao.model.SequenceConf">
+		<id column="Seq_Key" property="seqKey" jdbcType="VARCHAR" />
+		<result column="Current_Val" property="currentVal" jdbcType="BIGINT" />
+		<result column="Increment" property="increment" jdbcType="INTEGER" />
+		<result column="Prefix" property="prefix" jdbcType="VARCHAR" />
+		<result column="Date_Format" property="dateFormat" jdbcType="VARCHAR" />
+		<result column="Random_Len" property="randomLen" jdbcType="SMALLINT" />
+		<result column="Suffix" property="suffix" jdbcType="VARCHAR" />
+		<result column="Ver_" property="ver" jdbcType="INTEGER" />
+		<result column="Number_Len" property="numberLen" jdbcType="INTEGER" />
+	</resultMap>
+
+  <sql id="Base_Column_List" >
+    Seq_Key, Current_Val, `Increment`, `Prefix`, Date_Format, Random_Len, Suffix, Ver_, 
+    Number_Len
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ta_sequence
+    where Seq_Key = #{seqKey,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ta_sequence
+  </select>
+
+  <update id="saveNumberVal" parameterType="com.ai.aso.sequence.dao.model.SequenceConf" >
+    update ta_sequence
+    <set >
+      <if test="currentVal != null" >
+        Current_Val = #{currentVal,jdbcType=BIGINT},
+      </if>
+      <if test="ver != null" >
+        Ver_ = Ver_ + 1,
+      </if>
+    </set>
+    where Seq_Key = #{seqKey,jdbcType=VARCHAR} and Ver_ = #{ver,jdbcType=INTEGER}
+  </update>
+
+</mapper>

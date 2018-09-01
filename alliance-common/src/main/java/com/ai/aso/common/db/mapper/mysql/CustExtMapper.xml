@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.CustExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CustExt" >
+    <id column="Cust_Ext_Id" property="custExtId" jdbcType="BIGINT" />
+    <result column="Company_Name" property="companyName" jdbcType="VARCHAR" />
+    <result column="Company_Type" property="companyType" jdbcType="SMALLINT" />
+    <result column="Legel_Name" property="legelName" jdbcType="VARCHAR" />
+    <result column="Legel_Cert" property="legelCert" jdbcType="VARCHAR" />
+    <result column="Is_Taxpayer" property="isTaxpayer" jdbcType="SMALLINT" />
+    <result column="Certificate" property="certificate" jdbcType="VARCHAR" />
+    <result column="Company_Addr" property="companyAddr" jdbcType="VARCHAR" />
+    <result column="Company_Phone" property="companyPhone" jdbcType="VARCHAR" />
+    <result column="Company_Url" property="companyUrl" jdbcType="VARCHAR" />
+    <result column="Bank_Name" property="bankName" jdbcType="VARCHAR" />
+    <result column="Bank_Code" property="bankCode" jdbcType="VARCHAR" />
+    <result column="Company_Ext01" property="companyExt01" jdbcType="VARCHAR" />
+    <result column="Company_Ext02" property="companyExt02" jdbcType="VARCHAR" />
+    <result column="Company_Ext03" property="companyExt03" jdbcType="VARCHAR" />
+    <result column="Company_Ext04" property="companyExt04" jdbcType="VARCHAR" />
+    <result column="Company_Ext05" property="companyExt05" jdbcType="VARCHAR" />
+    <result column="Company_Ext06" property="companyExt06" jdbcType="VARCHAR" />
+    <result column="Company_Ext07" property="companyExt07" jdbcType="VARCHAR" />
+    <result column="Company_Ext08" property="companyExt08" jdbcType="VARCHAR" />
+    <result column="Company_Ext09" property="companyExt09" jdbcType="VARCHAR" />
+    <result column="Company_Ext10" property="companyExt10" jdbcType="VARCHAR" />
+    <result column="Company_Ext11" property="companyExt11" jdbcType="VARCHAR" />
+    <result column="Company_Ext12" property="companyExt12" jdbcType="VARCHAR" />
+    <result column="Company_Ext13" property="companyExt13" jdbcType="VARCHAR" />
+    <result column="Snap_Flag" property="snapFlag" jdbcType="SMALLINT" />
+    <result column="Snap_Ver" property="snapVer" jdbcType="SMALLINT" />
+    <result column="Company_Ext14" property="companyExt14" jdbcType="VARCHAR" />
+    <result column="Company_Ext15" property="companyExt15" jdbcType="VARCHAR" />
+    <result column="Company_Ext16" property="companyExt16" jdbcType="VARCHAR" />
+    <result column="Company_Ext17" property="companyExt17" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Cust_Ext_Id, Company_Name, Company_Type, Legel_Name, Legel_Cert, Is_Taxpayer, Certificate, 
+    Company_Addr, Company_Phone, Company_Url, Bank_Name, Bank_Code, Company_Ext01, Company_Ext02, 
+    Company_Ext03, Company_Ext04, Company_Ext05, Company_Ext06, Company_Ext07, Company_Ext08, 
+    Company_Ext09, Company_Ext10, Company_Ext11, Company_Ext12, Company_Ext13, Snap_Flag, 
+    Snap_Ver, Company_Ext14, Company_Ext15, Company_Ext16, Company_Ext17
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CustExtExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_cust_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cust_ext
+    where Cust_Ext_Id = #{custExtId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tc_cust_ext
+    where Cust_Ext_Id = #{custExtId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CustExtExample" >
+    delete from tc_cust_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CustExt" >
+    insert into tc_cust_ext (Cust_Ext_Id, Company_Name, Company_Type, 
+      Legel_Name, Legel_Cert, Is_Taxpayer, 
+      Certificate, Company_Addr, Company_Phone, 
+      Company_Url, Bank_Name, Bank_Code, 
+      Company_Ext01, Company_Ext02, Company_Ext03, 
+      Company_Ext04, Company_Ext05, Company_Ext06, 
+      Company_Ext07, Company_Ext08, Company_Ext09, 
+      Company_Ext10, Company_Ext11, Company_Ext12, 
+      Company_Ext13, Snap_Flag, Snap_Ver, 
+      Company_Ext14, Company_Ext15, Company_Ext16, 
+      Company_Ext17)
+    values (#{custExtId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, #{companyType,jdbcType=SMALLINT}, 
+      #{legelName,jdbcType=VARCHAR}, #{legelCert,jdbcType=VARCHAR}, #{isTaxpayer,jdbcType=SMALLINT}, 
+      #{certificate,jdbcType=VARCHAR}, #{companyAddr,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, 
+      #{companyUrl,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR}, 
+      #{companyExt01,jdbcType=VARCHAR}, #{companyExt02,jdbcType=VARCHAR}, #{companyExt03,jdbcType=VARCHAR}, 
+      #{companyExt04,jdbcType=VARCHAR}, #{companyExt05,jdbcType=VARCHAR}, #{companyExt06,jdbcType=VARCHAR}, 
+      #{companyExt07,jdbcType=VARCHAR}, #{companyExt08,jdbcType=VARCHAR}, #{companyExt09,jdbcType=VARCHAR}, 
+      #{companyExt10,jdbcType=VARCHAR}, #{companyExt11,jdbcType=VARCHAR}, #{companyExt12,jdbcType=VARCHAR}, 
+      #{companyExt13,jdbcType=VARCHAR}, #{snapFlag,jdbcType=SMALLINT}, #{snapVer,jdbcType=SMALLINT}, 
+      #{companyExt14,jdbcType=VARCHAR}, #{companyExt15,jdbcType=VARCHAR}, #{companyExt16,jdbcType=VARCHAR}, 
+      #{companyExt17,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CustExt" >
+    insert into tc_cust_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custExtId != null" >
+        Cust_Ext_Id,
+      </if>
+      <if test="companyName != null" >
+        Company_Name,
+      </if>
+      <if test="companyType != null" >
+        Company_Type,
+      </if>
+      <if test="legelName != null" >
+        Legel_Name,
+      </if>
+      <if test="legelCert != null" >
+        Legel_Cert,
+      </if>
+      <if test="isTaxpayer != null" >
+        Is_Taxpayer,
+      </if>
+      <if test="certificate != null" >
+        Certificate,
+      </if>
+      <if test="companyAddr != null" >
+        Company_Addr,
+      </if>
+      <if test="companyPhone != null" >
+        Company_Phone,
+      </if>
+      <if test="companyUrl != null" >
+        Company_Url,
+      </if>
+      <if test="bankName != null" >
+        Bank_Name,
+      </if>
+      <if test="bankCode != null" >
+        Bank_Code,
+      </if>
+      <if test="companyExt01 != null" >
+        Company_Ext01,
+      </if>
+      <if test="companyExt02 != null" >
+        Company_Ext02,
+      </if>
+      <if test="companyExt03 != null" >
+        Company_Ext03,
+      </if>
+      <if test="companyExt04 != null" >
+        Company_Ext04,
+      </if>
+      <if test="companyExt05 != null" >
+        Company_Ext05,
+      </if>
+      <if test="companyExt06 != null" >
+        Company_Ext06,
+      </if>
+      <if test="companyExt07 != null" >
+        Company_Ext07,
+      </if>
+      <if test="companyExt08 != null" >
+        Company_Ext08,
+      </if>
+      <if test="companyExt09 != null" >
+        Company_Ext09,
+      </if>
+      <if test="companyExt10 != null" >
+        Company_Ext10,
+      </if>
+      <if test="companyExt11 != null" >
+        Company_Ext11,
+      </if>
+      <if test="companyExt12 != null" >
+        Company_Ext12,
+      </if>
+      <if test="companyExt13 != null" >
+        Company_Ext13,
+      </if>
+      <if test="snapFlag != null" >
+        Snap_Flag,
+      </if>
+      <if test="snapVer != null" >
+        Snap_Ver,
+      </if>
+      <if test="companyExt14 != null" >
+        Company_Ext14,
+      </if>
+      <if test="companyExt15 != null" >
+        Company_Ext15,
+      </if>
+      <if test="companyExt16 != null" >
+        Company_Ext16,
+      </if>
+      <if test="companyExt17 != null" >
+        Company_Ext17,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custExtId != null" >
+        #{custExtId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        #{companyType,jdbcType=SMALLINT},
+      </if>
+      <if test="legelName != null" >
+        #{legelName,jdbcType=VARCHAR},
+      </if>
+      <if test="legelCert != null" >
+        #{legelCert,jdbcType=VARCHAR},
+      </if>
+      <if test="isTaxpayer != null" >
+        #{isTaxpayer,jdbcType=SMALLINT},
+      </if>
+      <if test="certificate != null" >
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUrl != null" >
+        #{companyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null" >
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt01 != null" >
+        #{companyExt01,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt02 != null" >
+        #{companyExt02,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt03 != null" >
+        #{companyExt03,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt04 != null" >
+        #{companyExt04,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt05 != null" >
+        #{companyExt05,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt06 != null" >
+        #{companyExt06,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt07 != null" >
+        #{companyExt07,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt08 != null" >
+        #{companyExt08,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt09 != null" >
+        #{companyExt09,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt10 != null" >
+        #{companyExt10,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt11 != null" >
+        #{companyExt11,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt12 != null" >
+        #{companyExt12,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt13 != null" >
+        #{companyExt13,jdbcType=VARCHAR},
+      </if>
+      <if test="snapFlag != null" >
+        #{snapFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="snapVer != null" >
+        #{snapVer,jdbcType=SMALLINT},
+      </if>
+      <if test="companyExt14 != null" >
+        #{companyExt14,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt15 != null" >
+        #{companyExt15,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt16 != null" >
+        #{companyExt16,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt17 != null" >
+        #{companyExt17,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CustExtExample" resultType="java.lang.Integer" >
+    select count(*) from tc_cust_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_cust_ext
+    <set >
+      <if test="record.custExtId != null" >
+        Cust_Ext_Id = #{record.custExtId,jdbcType=BIGINT},
+      </if>
+      <if test="record.companyName != null" >
+        Company_Name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyType != null" >
+        Company_Type = #{record.companyType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.legelName != null" >
+        Legel_Name = #{record.legelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legelCert != null" >
+        Legel_Cert = #{record.legelCert,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isTaxpayer != null" >
+        Is_Taxpayer = #{record.isTaxpayer,jdbcType=SMALLINT},
+      </if>
+      <if test="record.certificate != null" >
+        Certificate = #{record.certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddr != null" >
+        Company_Addr = #{record.companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyPhone != null" >
+        Company_Phone = #{record.companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyUrl != null" >
+        Company_Url = #{record.companyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        Bank_Name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCode != null" >
+        Bank_Code = #{record.bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt01 != null" >
+        Company_Ext01 = #{record.companyExt01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt02 != null" >
+        Company_Ext02 = #{record.companyExt02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt03 != null" >
+        Company_Ext03 = #{record.companyExt03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt04 != null" >
+        Company_Ext04 = #{record.companyExt04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt05 != null" >
+        Company_Ext05 = #{record.companyExt05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt06 != null" >
+        Company_Ext06 = #{record.companyExt06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt07 != null" >
+        Company_Ext07 = #{record.companyExt07,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt08 != null" >
+        Company_Ext08 = #{record.companyExt08,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt09 != null" >
+        Company_Ext09 = #{record.companyExt09,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt10 != null" >
+        Company_Ext10 = #{record.companyExt10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt11 != null" >
+        Company_Ext11 = #{record.companyExt11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt12 != null" >
+        Company_Ext12 = #{record.companyExt12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt13 != null" >
+        Company_Ext13 = #{record.companyExt13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.snapFlag != null" >
+        Snap_Flag = #{record.snapFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.snapVer != null" >
+        Snap_Ver = #{record.snapVer,jdbcType=SMALLINT},
+      </if>
+      <if test="record.companyExt14 != null" >
+        Company_Ext14 = #{record.companyExt14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt15 != null" >
+        Company_Ext15 = #{record.companyExt15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt16 != null" >
+        Company_Ext16 = #{record.companyExt16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExt17 != null" >
+        Company_Ext17 = #{record.companyExt17,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_cust_ext
+    set Cust_Ext_Id = #{record.custExtId,jdbcType=BIGINT},
+      Company_Name = #{record.companyName,jdbcType=VARCHAR},
+      Company_Type = #{record.companyType,jdbcType=SMALLINT},
+      Legel_Name = #{record.legelName,jdbcType=VARCHAR},
+      Legel_Cert = #{record.legelCert,jdbcType=VARCHAR},
+      Is_Taxpayer = #{record.isTaxpayer,jdbcType=SMALLINT},
+      Certificate = #{record.certificate,jdbcType=VARCHAR},
+      Company_Addr = #{record.companyAddr,jdbcType=VARCHAR},
+      Company_Phone = #{record.companyPhone,jdbcType=VARCHAR},
+      Company_Url = #{record.companyUrl,jdbcType=VARCHAR},
+      Bank_Name = #{record.bankName,jdbcType=VARCHAR},
+      Bank_Code = #{record.bankCode,jdbcType=VARCHAR},
+      Company_Ext01 = #{record.companyExt01,jdbcType=VARCHAR},
+      Company_Ext02 = #{record.companyExt02,jdbcType=VARCHAR},
+      Company_Ext03 = #{record.companyExt03,jdbcType=VARCHAR},
+      Company_Ext04 = #{record.companyExt04,jdbcType=VARCHAR},
+      Company_Ext05 = #{record.companyExt05,jdbcType=VARCHAR},
+      Company_Ext06 = #{record.companyExt06,jdbcType=VARCHAR},
+      Company_Ext07 = #{record.companyExt07,jdbcType=VARCHAR},
+      Company_Ext08 = #{record.companyExt08,jdbcType=VARCHAR},
+      Company_Ext09 = #{record.companyExt09,jdbcType=VARCHAR},
+      Company_Ext10 = #{record.companyExt10,jdbcType=VARCHAR},
+      Company_Ext11 = #{record.companyExt11,jdbcType=VARCHAR},
+      Company_Ext12 = #{record.companyExt12,jdbcType=VARCHAR},
+      Company_Ext13 = #{record.companyExt13,jdbcType=VARCHAR},
+      Snap_Flag = #{record.snapFlag,jdbcType=SMALLINT},
+      Snap_Ver = #{record.snapVer,jdbcType=SMALLINT},
+      Company_Ext14 = #{record.companyExt14,jdbcType=VARCHAR},
+      Company_Ext15 = #{record.companyExt15,jdbcType=VARCHAR},
+      Company_Ext16 = #{record.companyExt16,jdbcType=VARCHAR},
+      Company_Ext17 = #{record.companyExt17,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CustExt" >
+    update tc_cust_ext
+    <set >
+      <if test="companyName != null" >
+        Company_Name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        Company_Type = #{companyType,jdbcType=SMALLINT},
+      </if>
+      <if test="legelName != null" >
+        Legel_Name = #{legelName,jdbcType=VARCHAR},
+      </if>
+      <if test="legelCert != null" >
+        Legel_Cert = #{legelCert,jdbcType=VARCHAR},
+      </if>
+      <if test="isTaxpayer != null" >
+        Is_Taxpayer = #{isTaxpayer,jdbcType=SMALLINT},
+      </if>
+      <if test="certificate != null" >
+        Certificate = #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        Company_Addr = #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        Company_Phone = #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUrl != null" >
+        Company_Url = #{companyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        Bank_Name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null" >
+        Bank_Code = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt01 != null" >
+        Company_Ext01 = #{companyExt01,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt02 != null" >
+        Company_Ext02 = #{companyExt02,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt03 != null" >
+        Company_Ext03 = #{companyExt03,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt04 != null" >
+        Company_Ext04 = #{companyExt04,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt05 != null" >
+        Company_Ext05 = #{companyExt05,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt06 != null" >
+        Company_Ext06 = #{companyExt06,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt07 != null" >
+        Company_Ext07 = #{companyExt07,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt08 != null" >
+        Company_Ext08 = #{companyExt08,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt09 != null" >
+        Company_Ext09 = #{companyExt09,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt10 != null" >
+        Company_Ext10 = #{companyExt10,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt11 != null" >
+        Company_Ext11 = #{companyExt11,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt12 != null" >
+        Company_Ext12 = #{companyExt12,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt13 != null" >
+        Company_Ext13 = #{companyExt13,jdbcType=VARCHAR},
+      </if>
+      <if test="snapFlag != null" >
+        Snap_Flag = #{snapFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="snapVer != null" >
+        Snap_Ver = #{snapVer,jdbcType=SMALLINT},
+      </if>
+      <if test="companyExt14 != null" >
+        Company_Ext14 = #{companyExt14,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt15 != null" >
+        Company_Ext15 = #{companyExt15,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt16 != null" >
+        Company_Ext16 = #{companyExt16,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExt17 != null" >
+        Company_Ext17 = #{companyExt17,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Cust_Ext_Id = #{custExtId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CustExt" >
+    update tc_cust_ext
+    set Company_Name = #{companyName,jdbcType=VARCHAR},
+      Company_Type = #{companyType,jdbcType=SMALLINT},
+      Legel_Name = #{legelName,jdbcType=VARCHAR},
+      Legel_Cert = #{legelCert,jdbcType=VARCHAR},
+      Is_Taxpayer = #{isTaxpayer,jdbcType=SMALLINT},
+      Certificate = #{certificate,jdbcType=VARCHAR},
+      Company_Addr = #{companyAddr,jdbcType=VARCHAR},
+      Company_Phone = #{companyPhone,jdbcType=VARCHAR},
+      Company_Url = #{companyUrl,jdbcType=VARCHAR},
+      Bank_Name = #{bankName,jdbcType=VARCHAR},
+      Bank_Code = #{bankCode,jdbcType=VARCHAR},
+      Company_Ext01 = #{companyExt01,jdbcType=VARCHAR},
+      Company_Ext02 = #{companyExt02,jdbcType=VARCHAR},
+      Company_Ext03 = #{companyExt03,jdbcType=VARCHAR},
+      Company_Ext04 = #{companyExt04,jdbcType=VARCHAR},
+      Company_Ext05 = #{companyExt05,jdbcType=VARCHAR},
+      Company_Ext06 = #{companyExt06,jdbcType=VARCHAR},
+      Company_Ext07 = #{companyExt07,jdbcType=VARCHAR},
+      Company_Ext08 = #{companyExt08,jdbcType=VARCHAR},
+      Company_Ext09 = #{companyExt09,jdbcType=VARCHAR},
+      Company_Ext10 = #{companyExt10,jdbcType=VARCHAR},
+      Company_Ext11 = #{companyExt11,jdbcType=VARCHAR},
+      Company_Ext12 = #{companyExt12,jdbcType=VARCHAR},
+      Company_Ext13 = #{companyExt13,jdbcType=VARCHAR},
+      Snap_Flag = #{snapFlag,jdbcType=SMALLINT},
+      Snap_Ver = #{snapVer,jdbcType=SMALLINT},
+      Company_Ext14 = #{companyExt14,jdbcType=VARCHAR},
+      Company_Ext15 = #{companyExt15,jdbcType=VARCHAR},
+      Company_Ext16 = #{companyExt16,jdbcType=VARCHAR},
+      Company_Ext17 = #{companyExt17,jdbcType=VARCHAR}
+    where Cust_Ext_Id = #{custExtId,jdbcType=BIGINT}
+  </update>
+</mapper>

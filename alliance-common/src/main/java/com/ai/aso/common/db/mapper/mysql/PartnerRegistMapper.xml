@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.PartnerRegistMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.PartnerRegist" >
+    <id column="Regist_Id" property="registId" jdbcType="VARCHAR" />
+    <result column="Conpany_Name" property="conpanyName" jdbcType="VARCHAR" />
+    <result column="Region_Id" property="regionId" jdbcType="VARCHAR" />
+    <result column="User_Name" property="userName" jdbcType="VARCHAR" />
+    <result column="User_Mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="User_QQ" property="userQq" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Deal_Date" property="dealDate" jdbcType="TIMESTAMP" />
+    <result column="pur_intention" property="purIntention" jdbcType="VARCHAR" />
+    <result column="Amount" property="amount" jdbcType="BIGINT" />
+    <result column="Pay_Cert" property="payCert" jdbcType="VARCHAR" />
+    <result column="Operator" property="operator" jdbcType="VARCHAR" />
+    <result column="Crm_phoneNo" property="crmPhoneNo" jdbcType="VARCHAR" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Regist_Id, Conpany_Name, Region_Id, User_Name, User_Mobile, User_QQ, `State`, Create_Date, 
+    Deal_Date, pur_intention, Amount, Pay_Cert, `Operator`, Crm_phoneNo,Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.PartnerRegistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tx_partner_regist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tx_partner_regist
+    where Regist_Id = #{registId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tx_partner_regist
+    where Regist_Id = #{registId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.PartnerRegistExample" >
+    delete from tx_partner_regist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.PartnerRegist" >
+    insert into tx_partner_regist (Regist_Id, Conpany_Name, Region_Id, 
+      User_Name, User_Mobile, User_QQ, 
+      `State`, Create_Date, Deal_Date, 
+      pur_intention, Amount, Pay_Cert, 
+      `Operator`,Crm_phoneNo, Ext1, Ext2, 
+      Ext3)
+    values (#{registId,jdbcType=VARCHAR}, #{conpanyName,jdbcType=VARCHAR}, #{regionId,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{userQq,jdbcType=VARCHAR}, 
+      #{state,jdbcType=SMALLINT}, #{createDate,jdbcType=TIMESTAMP}, #{dealDate,jdbcType=TIMESTAMP}, 
+      #{purIntention,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, #{payCert,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR},#{crmPhoneNo,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.PartnerRegist" >
+    insert into tx_partner_regist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="registId != null" >
+        Regist_Id,
+      </if>
+      <if test="conpanyName != null" >
+        Conpany_Name,
+      </if>
+      <if test="regionId != null" >
+        Region_Id,
+      </if>
+      <if test="userName != null" >
+        User_Name,
+      </if>
+      <if test="userMobile != null" >
+        User_Mobile,
+      </if>
+      <if test="userQq != null" >
+        User_QQ,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="dealDate != null" >
+        Deal_Date,
+      </if>
+      <if test="purIntention != null" >
+        pur_intention,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="payCert != null" >
+        Pay_Cert,
+      </if>
+      <if test="operator != null" >
+        `Operator`,
+      </if>
+      <if test="crmPhoneNo != null" >
+        `Crm_phoneNo`,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="registId != null" >
+        #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="conpanyName != null" >
+        #{conpanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userQq != null" >
+        #{userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealDate != null" >
+        #{dealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purIntention != null" >
+        #{purIntention,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="payCert != null" >
+        #{payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="crmPhoneNo != null" >
+        #{Crm_phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.PartnerRegistExample" resultType="java.lang.Integer" >
+    select count(*) from tx_partner_regist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tx_partner_regist
+    <set >
+      <if test="record.registId != null" >
+        Regist_Id = #{record.registId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conpanyName != null" >
+        Conpany_Name = #{record.conpanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionId != null" >
+        Region_Id = #{record.regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        User_Name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null" >
+        User_Mobile = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userQq != null" >
+        User_QQ = #{record.userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createDate != null" >
+        Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dealDate != null" >
+        Deal_Date = #{record.dealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.purIntention != null" >
+        pur_intention = #{record.purIntention,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        Amount = #{record.amount,jdbcType=BIGINT},
+      </if>
+      <if test="record.payCert != null" >
+        Pay_Cert = #{record.payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        `Operator` = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crmPhoneNo != null" >
+      Crm_phoneNo = #{record.crmPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tx_partner_regist
+    set Regist_Id = #{record.registId,jdbcType=VARCHAR},
+      Conpany_Name = #{record.conpanyName,jdbcType=VARCHAR},
+      Region_Id = #{record.regionId,jdbcType=VARCHAR},
+      User_Name = #{record.userName,jdbcType=VARCHAR},
+      User_Mobile = #{record.userMobile,jdbcType=VARCHAR},
+      User_QQ = #{record.userQq,jdbcType=VARCHAR},
+      `State` = #{record.state,jdbcType=SMALLINT},
+      Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      Deal_Date = #{record.dealDate,jdbcType=TIMESTAMP},
+      pur_intention = #{record.purIntention,jdbcType=VARCHAR},
+      Amount = #{record.amount,jdbcType=BIGINT},
+      Pay_Cert = #{record.payCert,jdbcType=VARCHAR},
+      `Operator` = #{record.operator,jdbcType=VARCHAR},
+      Crm_phoneNo = #{record.crmPhoneNo,jdbcType=VARCHAR},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.PartnerRegist" >
+    update tx_partner_regist
+    <set >
+      <if test="conpanyName != null" >
+        Conpany_Name = #{conpanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        Region_Id = #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        User_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null" >
+        User_Mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userQq != null" >
+        User_QQ = #{userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealDate != null" >
+        Deal_Date = #{dealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purIntention != null" >
+        pur_intention = #{purIntention,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="payCert != null" >
+        Pay_Cert = #{payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        `Operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="crmPhoneNo != null" >
+       Crm_phoneNo = #{crmPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Regist_Id = #{registId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.PartnerRegist" >
+    update tx_partner_regist
+    set Conpany_Name = #{conpanyName,jdbcType=VARCHAR},
+      Region_Id = #{regionId,jdbcType=VARCHAR},
+      User_Name = #{userName,jdbcType=VARCHAR},
+      User_Mobile = #{userMobile,jdbcType=VARCHAR},
+      User_QQ = #{userQq,jdbcType=VARCHAR},
+      `State` = #{state,jdbcType=SMALLINT},
+      Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      Deal_Date = #{dealDate,jdbcType=TIMESTAMP},
+      pur_intention = #{purIntention,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=BIGINT},
+      Pay_Cert = #{payCert,jdbcType=VARCHAR},
+      `Operator` = #{operator,jdbcType=VARCHAR},
+      Crm_phoneNo = #{crmPhoneNo,jdbcType=VARCHAR},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Regist_Id = #{registId,jdbcType=VARCHAR}
+  </update>
+</mapper>

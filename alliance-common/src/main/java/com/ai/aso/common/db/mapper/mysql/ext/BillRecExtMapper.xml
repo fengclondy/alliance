@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ext.BillRecExtMapper">
+    <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.BillRec">
+        <id column="Bill_Rec_Id" property="billRecId" jdbcType="BIGINT"/>
+        <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR"/>
+        <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR"/>
+        <result column="Source_Type" property="sourceType" jdbcType="INTEGER"/>
+        <result column="Pay_Type" property="payType" jdbcType="SMALLINT"/>
+        <result column="Data_Book_Id" property="dataBookId" jdbcType="VARCHAR"/>
+        <result column="Cap_Book_Id" property="capBookId" jdbcType="VARCHAR"/>
+        <result column="Rec_No" property="recNo" jdbcType="VARCHAR"/>
+        <result column="Batch_Code" property="batchCode" jdbcType="BIGINT"/>
+        <result column="Rec_Class" property="recClass" jdbcType="SMALLINT"/>
+        <result column="Rec_Mode" property="recMode" jdbcType="INTEGER"/>
+        <result column="Cont_Id" property="contId" jdbcType="VARCHAR"/>
+        <result column="Cont_No" property="contNo" jdbcType="VARCHAR"/>
+        <result column="Cust_Id" property="custId" jdbcType="VARCHAR"/>
+        <result column="Cust_Name" property="custName" jdbcType="VARCHAR"/>
+        <result column="Region_Id" property="regionId" jdbcType="INTEGER"/>
+        <result column="Region_Name" property="regionName" jdbcType="VARCHAR"/>
+        <result column="Busi_Mode" property="busiMode" jdbcType="INTEGER"/>
+        <result column="User_Nbr" property="userNbr" jdbcType="VARCHAR"/>
+        <result column="Cost_Region" property="costRegion" jdbcType="INTEGER"/>
+        <result column="Cost_Region_Name" property="costRegionName" jdbcType="VARCHAR"/>
+        <result column="Serv_Id" property="servId" jdbcType="VARCHAR"/>
+        <result column="Bill_Offer_Id" property="billOfferId" jdbcType="VARCHAR"/>
+        <result column="Offer_Inst" property="offerInst" jdbcType="VARCHAR"/>
+        <result column="Goods_Id" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="Goods_Type" property="goodsType" jdbcType="INTEGER"/>
+        <result column="Data_Type" property="dataType" jdbcType="INTEGER"/>
+        <result column="Goods_Name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="Data_Val" property="dataVal" jdbcType="BIGINT"/>
+        <result column="Discount" property="discount" jdbcType="INTEGER"/>
+        <result column="Bill_Fee" property="billFee" jdbcType="BIGINT"/>
+        <result column="Total_Fee" property="totalFee" jdbcType="BIGINT"/>
+        <result column="Off_Fee" property="offFee" jdbcType="BIGINT"/>
+        <result column="Cost_Rate" property="costRate" jdbcType="INTEGER"/>
+        <result column="Cost_Fee" property="costFee" jdbcType="BIGINT"/>
+        <result column="Remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="Rec_State" property="recState" jdbcType="SMALLINT"/>
+        <result column="Sub_Date" property="subDate" jdbcType="TIMESTAMP"/>
+        <result column="Rec_Date" property="recDate" jdbcType="TIMESTAMP"/>
+        <result column="Trd_Rec" property="trdRec" jdbcType="VARCHAR"/>
+        <result column="Trd_Saler" property="trdSaler" jdbcType="VARCHAR"/>
+        <result column="Trd_Activity" property="trdActivity" jdbcType="VARCHAR"/>
+        <result column="Cost_Center" property="costCenter" jdbcType="VARCHAR"/>
+        <result column="State" property="state" jdbcType="INTEGER"/>
+        <result column="Ext1" property="ext1" jdbcType="VARCHAR"/>
+        <result column="Ext2" property="ext2" jdbcType="VARCHAR"/>
+        <result column="Ext3" property="ext3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    Bill_Rec_Id, Bill_Month, Bill_Batch, Source_Type, Pay_Type, Data_Book_Id, Cap_Book_Id, 
+    Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, Cust_Name, Region_Id, 
+    Region_Name, Busi_Mode, User_Nbr, Cost_Region, Cost_Region_Name, Serv_Id, Bill_Offer_Id, 
+    Offer_Inst, Goods_Id, Goods_Type, Data_Type, Goods_Name, Data_Val, Discount, Bill_Fee, 
+    Total_Fee, Off_Fee, Cost_Rate, Cost_Fee, Remarks, Rec_State, Sub_Date, Rec_Date, 
+    Trd_Rec, Trd_Saler, Trd_Activity, Cost_Center, `State`, Ext1, Ext2, Ext3
+  </sql>
+    <sql id="CustGroup_Column_List">
+    Bill_Rec_Id, Bill_Month, Bill_Batch, Source_Type, Pay_Type, Data_Book_Id, Cap_Book_Id, 
+    Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, Cust_Name, Region_Id, 
+    Region_Name, Busi_Mode, User_Nbr, Cost_Region, Cost_Region_Name, Serv_Id, Bill_Offer_Id, 
+    Offer_Inst, Goods_Id, Goods_Type, Data_Type, Goods_Name, sum(Data_Val) as Data_Val, Discount, sum(Bill_Fee) as Bill_Fee, 
+    sum(Total_Fee) as Total_Fee, sum(Off_Fee) as Off_Fee, Cost_Rate, sum(Cost_Fee) as Cost_Fee, Remarks, Rec_State, Sub_Date, Rec_Date, 
+    Trd_Rec, Trd_Saler, Trd_Activity, Cost_Center, `State`, Ext1, Ext2, Ext3
+  </sql>
+    <sql id="Base_Column_List2">
+  	Bill_Rec_Id, Bill_Month, Bill_Batch, Cust_Id, Cust_Name, Busi_Mode, Source_Type, 
+    Cont_Id, Pay_Type, Rec_No, Rec_Class, Rec_Mode, Serv_Id, User_Nbr, Goods_Id, Goods_Name, 
+    Data_Book_Id, Cap_Book_Id, sum(Data_Val) as Data_Val, sum(Bill_Fee) as Bill_Fee, 
+    sum(Total_Fee) as Total_Fee, sum(Off_Fee) as Off_Fee, Discount, Remarks, 
+    Rec_Date, Region_Id, Region_Name, Cost_Region, Cost_Center, Bill_Offer_Id, Ext1, 
+    Ext2, Ext3, Data_Type
+  </sql>
+   <sql id="Base_Column_List_" >
+    Bill_Rec_Id, Bill_Month, Bill_Batch, Source_Type, Pay_Type, Data_Book_Id, Cap_Book_Id, 
+    Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, Cust_Name, Region_Id, 
+    Region_Name, Busi_Mode, User_Nbr, Cost_Region, Cost_Region_Name, Serv_Id, Bill_Offer_Id, 
+    Offer_Inst, Goods_Id, Goods_Type, Data_Type, Goods_Name, Data_Val, Discount, Bill_Fee, 
+    Total_Fee, Off_Fee, Cost_Rate, Cost_Fee, Remarks, Rec_State, Sub_Date, Rec_Date, 
+    Trd_Rec, Trd_Saler, Trd_Activity, Cost_Center, `State`, Ext1, Ext2, Ext3
+  </sql>
+  
+   <select id="selectBillRec" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select
+  		 <include refid="Base_Column_List_" />
+		 from tc_bill_rec
+		<where>
+			<if test="batchCode != null and batchCode != '' "> AND Bill_Month like #{batchCode}</if>
+			<![CDATA[ 
+			AND State=200
+		   ]]>
+		</where>
+		ORDER BY Cust_Id
+  </select>
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into tc_bill_rec (Bill_Rec_Id, Bill_Month, Bill_Batch,
+        Cust_Id, Cust_Name, Busi_Mode,
+        Source_Type, Cont_Id, Pay_Type,
+        Rec_No, Rec_Class, Rec_Mode,
+        Serv_Id, User_Nbr, Goods_Id,
+        Goods_Name, Data_Book_Id, Cap_Book_Id,
+        Data_Val, Bill_Fee, Total_Fee,
+        Off_Fee, Discount, Remarks,
+        Rec_Date, Region_Id, Region_Name,
+        Cost_Region, Cost_Center, Bill_Offer_Id,
+        Ext1, Ext2, Ext3, Data_Type
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.billRecId,jdbcType=BIGINT}, #{item.billMonth,jdbcType=VARCHAR}, #{item.billBatch,jdbcType=VARCHAR},
+            #{item.custId,jdbcType=VARCHAR}, #{item.custName,jdbcType=VARCHAR}, #{item.busiMode,jdbcType=INTEGER},
+            #{item.sourceType,jdbcType=INTEGER}, #{item.contId,jdbcType=VARCHAR}, #{item.payType,jdbcType=SMALLINT},
+            #{item.recNo,jdbcType=VARCHAR}, #{item.recClass,jdbcType=SMALLINT}, #{item.recMode,jdbcType=INTEGER},
+            #{item.servId,jdbcType=VARCHAR}, #{item.userNbr,jdbcType=VARCHAR}, #{item.goodsId,jdbcType=VARCHAR},
+            #{item.goodsName,jdbcType=VARCHAR}, #{item.dataBookId,jdbcType=VARCHAR}, #{item.capBookId,jdbcType=VARCHAR},
+            #{item.dataVal,jdbcType=INTEGER}, #{item.billFee,jdbcType=BIGINT}, #{item.totalFee,jdbcType=BIGINT},
+            #{item.offFee,jdbcType=BIGINT}, #{item.discount,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR},
+            #{item.recDate,jdbcType=TIMESTAMP}, #{item.regionId,jdbcType=INTEGER}, #{item.regionName,jdbcType=VARCHAR},
+            #{item.costRegion,jdbcType=INTEGER}, #{item.costCenter,jdbcType=VARCHAR},
+            #{item.billOfferId,jdbcType=VARCHAR},
+            #{item.ext1,jdbcType=VARCHAR}, #{item.ext2,jdbcType=VARCHAR}, #{item.ext3,jdbcType=VARCHAR},
+            #{item.dataType,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
+    <select id="selectBillRecGroupCust" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="CustGroup_Column_List"/>
+        from tc_bill_rec
+        where Bill_Batch = #{billBatch}
+        group by Cust_Id
+    </select>
+
+    <select id="queryBillRecByCont" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="CustGroup_Column_List"/>
+        from tc_bill_rec
+        where Bill_Batch = #{billBatch} AND Cont_Id=#{contId}
+        group by Cont_Id
+    </select>
+    <select id="selectBillRecGroupRegion" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="CustGroup_Column_List"/>
+        from
+        tc_bill_rec
+        where Bill_Month=#{billMonth}
+        AND Bill_Batch in
+        (
+        <foreach collection="billBatch" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+
+        AND State=100 group by Cost_Region,Cont_Id
+    </select>
+
+    <select id="selectBillRecByCust" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="CustGroup_Column_List"/>
+        from
+        tc_bill_rec
+        where Cont_Id =#{contId}
+        AND Bill_Batch in
+        (
+        <foreach collection="billBatch" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+
+        AND State=100 group by Cost_Region
+    </select>
+
+
+    <update id="updateBillMonth" parameterType="map">
+    update tc_bill_rec b, tc_cust_bill c
+    set b.Bill_Month = #{billMonth}
+    where b.Bill_Batch = c.Bill_Batch
+    and b.Cust_Id = c.Cust_Id
+    and c.Bill_Id in
+    (
+    <foreach collection="billId" item="item" index="index" separator=",">
+        #{item}
+    </foreach>
+    )
+</update>
+
+    <update id="updateBillMonthByCust" parameterType="map">
+        update tc_bill_rec b, tc_cust_bill c
+        set b.Bill_Month = #{billMonth}
+        where  c.Cont_Id =#{contId}
+        and b.Bill_Batch in
+        (
+        <foreach collection="billBatch" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+    </update>
+    <select id="selectNewbillBatch" resultType="java.lang.String">
+  	select max(Bill_Batch) from tc_bill_rec
+  </select>
+</mapper>

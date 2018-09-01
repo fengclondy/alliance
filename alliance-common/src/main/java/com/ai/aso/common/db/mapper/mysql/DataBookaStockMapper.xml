@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.DataBookaStockMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataBookaStock" >
+    <id column="Stock_Id" property="stockId" jdbcType="VARCHAR" />
+    <result column="Book_Id" property="bookId" jdbcType="VARCHAR" />
+    <result column="Goods_Id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="Goods_Name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="Goods_Type" property="goodsType" jdbcType="INTEGER" />
+    <result column="Data_Type" property="dataType" jdbcType="INTEGER" />
+    <result column="Goods_Specs" property="goodsSpecs" jdbcType="BIGINT" />
+    <result column="Number" property="number" jdbcType="BIGINT" />
+    <result column="Unit_Price" property="unitPrice" jdbcType="INTEGER" />
+    <result column="Off_Rate" property="offRate" jdbcType="INTEGER" />
+    <result column="Stock_Val" property="stockVal" jdbcType="BIGINT" />
+    <result column="Used_Val" property="usedVal" jdbcType="BIGINT" />
+    <result column="Bill_Offer_Id" property="billOfferId" jdbcType="VARCHAR" />
+    <result column="Ver_" property="ver" jdbcType="INTEGER" />
+    <result column="EXT1" property="ext1" jdbcType="VARCHAR" />
+    <result column="EXT2" property="ext2" jdbcType="VARCHAR" />
+    <result column="EXT3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Stock_Id, Book_Id, Goods_Id, Goods_Name, Goods_Type, Data_Type, Goods_Specs, `Number`, 
+    Unit_Price, Off_Rate, Stock_Val, Used_Val, Bill_Offer_Id, Ver_, EXT1, EXT2, EXT3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.DataBookaStockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_data_booka_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_data_booka_stock
+    where Stock_Id = #{stockId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tc_data_booka_stock
+    where Stock_Id = #{stockId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.DataBookaStockExample" >
+    delete from tc_data_booka_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.DataBookaStock" >
+    insert into tc_data_booka_stock (Stock_Id, Book_Id, Goods_Id, 
+      Goods_Name, Goods_Type, Data_Type, 
+      Goods_Specs, `Number`, Unit_Price, 
+      Off_Rate, Stock_Val, Used_Val, 
+      Bill_Offer_Id, Ver_, EXT1, 
+      EXT2, EXT3)
+    values (#{stockId,jdbcType=VARCHAR}, #{bookId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsType,jdbcType=INTEGER}, #{dataType,jdbcType=INTEGER}, 
+      #{goodsSpecs,jdbcType=BIGINT}, #{number,jdbcType=BIGINT}, #{unitPrice,jdbcType=INTEGER}, 
+      #{offRate,jdbcType=INTEGER}, #{stockVal,jdbcType=BIGINT}, #{usedVal,jdbcType=BIGINT}, 
+      #{billOfferId,jdbcType=VARCHAR}, #{ver,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}, 
+      #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.DataBookaStock" >
+    insert into tc_data_booka_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        Stock_Id,
+      </if>
+      <if test="bookId != null" >
+        Book_Id,
+      </if>
+      <if test="goodsId != null" >
+        Goods_Id,
+      </if>
+      <if test="goodsName != null" >
+        Goods_Name,
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type,
+      </if>
+      <if test="dataType != null" >
+        Data_Type,
+      </if>
+      <if test="goodsSpecs != null" >
+        Goods_Specs,
+      </if>
+      <if test="number != null" >
+        `Number`,
+      </if>
+      <if test="unitPrice != null" >
+        Unit_Price,
+      </if>
+      <if test="offRate != null" >
+        Off_Rate,
+      </if>
+      <if test="stockVal != null" >
+        Stock_Val,
+      </if>
+      <if test="usedVal != null" >
+        Used_Val,
+      </if>
+      <if test="billOfferId != null" >
+        Bill_Offer_Id,
+      </if>
+      <if test="ver != null" >
+        Ver_,
+      </if>
+      <if test="ext1 != null" >
+        EXT1,
+      </if>
+      <if test="ext2 != null" >
+        EXT2,
+      </if>
+      <if test="ext3 != null" >
+        EXT3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        #{stockId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSpecs != null" >
+        #{goodsSpecs,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=BIGINT},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="offRate != null" >
+        #{offRate,jdbcType=INTEGER},
+      </if>
+      <if test="stockVal != null" >
+        #{stockVal,jdbcType=BIGINT},
+      </if>
+      <if test="usedVal != null" >
+        #{usedVal,jdbcType=BIGINT},
+      </if>
+      <if test="billOfferId != null" >
+        #{billOfferId,jdbcType=VARCHAR},
+      </if>
+      <if test="ver != null" >
+        #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.DataBookaStockExample" resultType="java.lang.Integer" >
+    select count(*) from tc_data_booka_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_data_booka_stock
+    <set >
+      <if test="record.stockId != null" >
+        Stock_Id = #{record.stockId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookId != null" >
+        Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_Id = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null" >
+        Goods_Name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsType != null" >
+        Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataType != null" >
+        Data_Type = #{record.dataType,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsSpecs != null" >
+        Goods_Specs = #{record.goodsSpecs,jdbcType=BIGINT},
+      </if>
+      <if test="record.number != null" >
+        `Number` = #{record.number,jdbcType=BIGINT},
+      </if>
+      <if test="record.unitPrice != null" >
+        Unit_Price = #{record.unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.offRate != null" >
+        Off_Rate = #{record.offRate,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockVal != null" >
+        Stock_Val = #{record.stockVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.usedVal != null" >
+        Used_Val = #{record.usedVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.billOfferId != null" >
+        Bill_Offer_Id = #{record.billOfferId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ver != null" >
+        Ver_ = #{record.ver,jdbcType=INTEGER},
+      </if>
+      <if test="record.ext1 != null" >
+        EXT1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        EXT2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        EXT3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_data_booka_stock
+    set Stock_Id = #{record.stockId,jdbcType=VARCHAR},
+      Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      Goods_Id = #{record.goodsId,jdbcType=VARCHAR},
+      Goods_Name = #{record.goodsName,jdbcType=VARCHAR},
+      Goods_Type = #{record.goodsType,jdbcType=INTEGER},
+      Data_Type = #{record.dataType,jdbcType=INTEGER},
+      Goods_Specs = #{record.goodsSpecs,jdbcType=BIGINT},
+      `Number` = #{record.number,jdbcType=BIGINT},
+      Unit_Price = #{record.unitPrice,jdbcType=INTEGER},
+      Off_Rate = #{record.offRate,jdbcType=INTEGER},
+      Stock_Val = #{record.stockVal,jdbcType=BIGINT},
+      Used_Val = #{record.usedVal,jdbcType=BIGINT},
+      Bill_Offer_Id = #{record.billOfferId,jdbcType=VARCHAR},
+      Ver_ = #{record.ver,jdbcType=INTEGER},
+      EXT1 = #{record.ext1,jdbcType=VARCHAR},
+      EXT2 = #{record.ext2,jdbcType=VARCHAR},
+      EXT3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.DataBookaStock" >
+    update tc_data_booka_stock
+    <set >
+      <if test="bookId != null" >
+        Book_Id = #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        Goods_Id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        Goods_Name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        Goods_Type = #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="dataType != null" >
+        Data_Type = #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSpecs != null" >
+        Goods_Specs = #{goodsSpecs,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        `Number` = #{number,jdbcType=BIGINT},
+      </if>
+      <if test="unitPrice != null" >
+        Unit_Price = #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="offRate != null" >
+        Off_Rate = #{offRate,jdbcType=INTEGER},
+      </if>
+      <if test="stockVal != null" >
+        Stock_Val = #{stockVal,jdbcType=BIGINT},
+      </if>
+      <if test="usedVal != null" >
+        Used_Val = #{usedVal,jdbcType=BIGINT},
+      </if>
+      <if test="billOfferId != null" >
+        Bill_Offer_Id = #{billOfferId,jdbcType=VARCHAR},
+      </if>
+      <if test="ver != null" >
+        Ver_ = #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        EXT1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        EXT2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        EXT3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Stock_Id = #{stockId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.DataBookaStock" >
+    update tc_data_booka_stock
+    set Book_Id = #{bookId,jdbcType=VARCHAR},
+      Goods_Id = #{goodsId,jdbcType=VARCHAR},
+      Goods_Name = #{goodsName,jdbcType=VARCHAR},
+      Goods_Type = #{goodsType,jdbcType=INTEGER},
+      Data_Type = #{dataType,jdbcType=INTEGER},
+      Goods_Specs = #{goodsSpecs,jdbcType=BIGINT},
+      `Number` = #{number,jdbcType=BIGINT},
+      Unit_Price = #{unitPrice,jdbcType=INTEGER},
+      Off_Rate = #{offRate,jdbcType=INTEGER},
+      Stock_Val = #{stockVal,jdbcType=BIGINT},
+      Used_Val = #{usedVal,jdbcType=BIGINT},
+      Bill_Offer_Id = #{billOfferId,jdbcType=VARCHAR},
+      Ver_ = #{ver,jdbcType=INTEGER},
+      EXT1 = #{ext1,jdbcType=VARCHAR},
+      EXT2 = #{ext2,jdbcType=VARCHAR},
+      EXT3 = #{ext3,jdbcType=VARCHAR}
+    where Stock_Id = #{stockId,jdbcType=VARCHAR}
+  </update>
+</mapper>

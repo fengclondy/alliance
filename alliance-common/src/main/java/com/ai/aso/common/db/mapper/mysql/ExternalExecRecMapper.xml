@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ExternalExecRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.ExternalExecRec" >
+    <id column="Exec_Id" property="execId" jdbcType="BIGINT" />
+    <result column="Task_Name" property="taskName" jdbcType="VARCHAR" />
+    <result column="Url" property="url" jdbcType="VARCHAR" />
+    <result column="Method" property="method" jdbcType="VARCHAR" />
+    <result column="Params" property="params" jdbcType="VARCHAR" />
+    <result column="Re_Code" property="reCode" jdbcType="VARCHAR" />
+    <result column="Re_Mesg" property="reMesg" jdbcType="VARCHAR" />
+    <result column="Beg_Time" property="begTime" jdbcType="TIMESTAMP" />
+    <result column="End_Time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="Consume" property="consume" jdbcType="INTEGER" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Exec_Id, Task_Name, Url, `Method`, Params, Re_Code, Re_Mesg, Beg_Time, End_Time, 
+    Consume, Remarks, Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ExternalExecRecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ta_external_exec_rec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ta_external_exec_rec
+    where Exec_Id = #{execId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ta_external_exec_rec
+    where Exec_Id = #{execId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ExternalExecRecExample" >
+    delete from ta_external_exec_rec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+    insert into ta_external_exec_rec (Exec_Id, Task_Name, Url, 
+      `Method`, Params, Re_Code, 
+      Re_Mesg, Beg_Time, End_Time, 
+      Consume, Remarks, Ext1, 
+      Ext2, Ext3)
+    values (#{execId,jdbcType=BIGINT}, #{taskName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{reCode,jdbcType=VARCHAR}, 
+      #{reMesg,jdbcType=VARCHAR}, #{begTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{consume,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, 
+      #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+    insert into ta_external_exec_rec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="execId != null" >
+        Exec_Id,
+      </if>
+      <if test="taskName != null" >
+        Task_Name,
+      </if>
+      <if test="url != null" >
+        Url,
+      </if>
+      <if test="method != null" >
+        `Method`,
+      </if>
+      <if test="params != null" >
+        Params,
+      </if>
+      <if test="reCode != null" >
+        Re_Code,
+      </if>
+      <if test="reMesg != null" >
+        Re_Mesg,
+      </if>
+      <if test="begTime != null" >
+        Beg_Time,
+      </if>
+      <if test="endTime != null" >
+        End_Time,
+      </if>
+      <if test="consume != null" >
+        Consume,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="execId != null" >
+        #{execId,jdbcType=BIGINT},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="reCode != null" >
+        #{reCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reMesg != null" >
+        #{reMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="begTime != null" >
+        #{begTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consume != null" >
+        #{consume,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ExternalExecRecExample" resultType="java.lang.Integer" >
+    select count(*) from ta_external_exec_rec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ta_external_exec_rec
+    <set >
+      <if test="record.execId != null" >
+        Exec_Id = #{record.execId,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskName != null" >
+        Task_Name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        Url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null" >
+        `Method` = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.params != null" >
+        Params = #{record.params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reCode != null" >
+        Re_Code = #{record.reCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reMesg != null" >
+        Re_Mesg = #{record.reMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.begTime != null" >
+        Beg_Time = #{record.begTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        End_Time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consume != null" >
+        Consume = #{record.consume,jdbcType=INTEGER},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ta_external_exec_rec
+    set Exec_Id = #{record.execId,jdbcType=BIGINT},
+      Task_Name = #{record.taskName,jdbcType=VARCHAR},
+      Url = #{record.url,jdbcType=VARCHAR},
+      `Method` = #{record.method,jdbcType=VARCHAR},
+      Params = #{record.params,jdbcType=VARCHAR},
+      Re_Code = #{record.reCode,jdbcType=VARCHAR},
+      Re_Mesg = #{record.reMesg,jdbcType=VARCHAR},
+      Beg_Time = #{record.begTime,jdbcType=TIMESTAMP},
+      End_Time = #{record.endTime,jdbcType=TIMESTAMP},
+      Consume = #{record.consume,jdbcType=INTEGER},
+      Remarks = #{record.remarks,jdbcType=VARCHAR},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+    update ta_external_exec_rec
+    <set >
+      <if test="taskName != null" >
+        Task_Name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        Url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        `Method` = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        Params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="reCode != null" >
+        Re_Code = #{reCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reMesg != null" >
+        Re_Mesg = #{reMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="begTime != null" >
+        Beg_Time = #{begTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        End_Time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consume != null" >
+        Consume = #{consume,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Exec_Id = #{execId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+    update ta_external_exec_rec
+    set Task_Name = #{taskName,jdbcType=VARCHAR},
+      Url = #{url,jdbcType=VARCHAR},
+      `Method` = #{method,jdbcType=VARCHAR},
+      Params = #{params,jdbcType=VARCHAR},
+      Re_Code = #{reCode,jdbcType=VARCHAR},
+      Re_Mesg = #{reMesg,jdbcType=VARCHAR},
+      Beg_Time = #{begTime,jdbcType=TIMESTAMP},
+      End_Time = #{endTime,jdbcType=TIMESTAMP},
+      Consume = #{consume,jdbcType=INTEGER},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Exec_Id = #{execId,jdbcType=BIGINT}
+  </update>
+</mapper>

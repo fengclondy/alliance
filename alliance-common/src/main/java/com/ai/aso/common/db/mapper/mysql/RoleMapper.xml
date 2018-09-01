@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Role" >
+    <id column="Role_Id" property="roleId" jdbcType="INTEGER" />
+    <result column="Role_Name" property="roleName" jdbcType="VARCHAR" />
+    <result column="Role_Desc" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="Role_Type" property="roleType" jdbcType="SMALLINT" />
+    <result column="System_Code" property="systemCode" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Modi_Date" property="modiDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Role_Id, Role_Name, Role_Desc, Role_Type, System_Code, `State`, Create_Date, Modi_Date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.RoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_role
+    where Role_Id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_role
+    where Role_Id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.RoleExample" >
+    delete from tb_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Role" >
+    insert into tb_role (Role_Id, Role_Name, Role_Desc, 
+      Role_Type, System_Code, `State`, 
+      Create_Date, Modi_Date)
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
+      #{roleType,jdbcType=SMALLINT}, #{systemCode,jdbcType=VARCHAR}, #{state,jdbcType=SMALLINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modiDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Role" >
+    insert into tb_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        Role_Id,
+      </if>
+      <if test="roleName != null" >
+        Role_Name,
+      </if>
+      <if test="roleDesc != null" >
+        Role_Desc,
+      </if>
+      <if test="roleType != null" >
+        Role_Type,
+      </if>
+      <if test="systemCode != null" >
+        System_Code,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="modiDate != null" >
+        Modi_Date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        #{roleType,jdbcType=SMALLINT},
+      </if>
+      <if test="systemCode != null" >
+        #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiDate != null" >
+        #{modiDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.RoleExample" resultType="java.lang.Integer" >
+    select count(*) from tb_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_role
+    <set >
+      <if test="record.roleId != null" >
+        Role_Id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleName != null" >
+        Role_Name = #{record.roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleDesc != null" >
+        Role_Desc = #{record.roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleType != null" >
+        Role_Type = #{record.roleType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.systemCode != null" >
+        System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createDate != null" >
+        Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modiDate != null" >
+        Modi_Date = #{record.modiDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_role
+    set Role_Id = #{record.roleId,jdbcType=INTEGER},
+      Role_Name = #{record.roleName,jdbcType=VARCHAR},
+      Role_Desc = #{record.roleDesc,jdbcType=VARCHAR},
+      Role_Type = #{record.roleType,jdbcType=SMALLINT},
+      System_Code = #{record.systemCode,jdbcType=VARCHAR},
+      `State` = #{record.state,jdbcType=SMALLINT},
+      Create_Date = #{record.createDate,jdbcType=TIMESTAMP},
+      Modi_Date = #{record.modiDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Role" >
+    update tb_role
+    <set >
+      <if test="roleName != null" >
+        Role_Name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        Role_Desc = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        Role_Type = #{roleType,jdbcType=SMALLINT},
+      </if>
+      <if test="systemCode != null" >
+        System_Code = #{systemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiDate != null" >
+        Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Role_Id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Role" >
+    update tb_role
+    set Role_Name = #{roleName,jdbcType=VARCHAR},
+      Role_Desc = #{roleDesc,jdbcType=VARCHAR},
+      Role_Type = #{roleType,jdbcType=SMALLINT},
+      System_Code = #{systemCode,jdbcType=VARCHAR},
+      `State` = #{state,jdbcType=SMALLINT},
+      Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      Modi_Date = #{modiDate,jdbcType=TIMESTAMP}
+    where Role_Id = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.EventTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.EventTask" >
+    <id column="Task_Id" property="taskId" jdbcType="BIGINT" />
+    <result column="Task_Group" property="taskGroup" jdbcType="VARCHAR" />
+    <result column="Task_Name" property="taskName" jdbcType="VARCHAR" />
+    <result column="Event_Type" property="eventType" jdbcType="INTEGER" />
+    <result column="Object_Id" property="objectId" jdbcType="VARCHAR" />
+    <result column="Event_Params" property="eventParams" jdbcType="VARCHAR" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="Call_Object" property="callObject" jdbcType="VARCHAR" />
+    <result column="Call_Method" property="callMethod" jdbcType="VARCHAR" />
+    <result column="Call_Params" property="callParams" jdbcType="VARCHAR" />
+    <result column="Re_Code" property="reCode" jdbcType="VARCHAR" />
+    <result column="Re_Mesg" property="reMesg" jdbcType="VARCHAR" />
+    <result column="Redo_Max" property="redoMax" jdbcType="INTEGER" />
+    <result column="Redo_Count" property="redoCount" jdbcType="INTEGER" />
+    <result column="Redo_Interval" property="redoInterval" jdbcType="INTEGER" />
+    <result column="Call_Time" property="callTime" jdbcType="TIMESTAMP" />
+    <result column="Create_Time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="Ver_" property="ver" jdbcType="INTEGER" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Task_Id, Task_Group, Task_Name, Event_Type, Object_Id, Event_Params, Remarks, Call_Object, 
+    Call_Method, Call_Params, Re_Code, Re_Mesg, Redo_Max, Redo_Count, Redo_Interval, 
+    Call_Time, Create_Time, `State`, Ver_, Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.EventTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ta_event_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ta_event_task
+    where Task_Id = #{taskId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ta_event_task
+    where Task_Id = #{taskId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.EventTaskExample" >
+    delete from ta_event_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.EventTask" >
+    insert into ta_event_task (Task_Id, Task_Group, Task_Name, 
+      Event_Type, Object_Id, Event_Params, 
+      Remarks, Call_Object, Call_Method, 
+      Call_Params, Re_Code, Re_Mesg, 
+      Redo_Max, Redo_Count, Redo_Interval, 
+      Call_Time, Create_Time, `State`, 
+      Ver_, Ext1, Ext2, Ext3
+      )
+    values (#{taskId,jdbcType=BIGINT}, #{taskGroup,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, 
+      #{eventType,jdbcType=INTEGER}, #{objectId,jdbcType=VARCHAR}, #{eventParams,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{callObject,jdbcType=VARCHAR}, #{callMethod,jdbcType=VARCHAR}, 
+      #{callParams,jdbcType=VARCHAR}, #{reCode,jdbcType=VARCHAR}, #{reMesg,jdbcType=VARCHAR}, 
+      #{redoMax,jdbcType=INTEGER}, #{redoCount,jdbcType=INTEGER}, #{redoInterval,jdbcType=INTEGER}, 
+      #{callTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
+      #{ver,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.EventTask" >
+    insert into ta_event_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        Task_Id,
+      </if>
+      <if test="taskGroup != null" >
+        Task_Group,
+      </if>
+      <if test="taskName != null" >
+        Task_Name,
+      </if>
+      <if test="eventType != null" >
+        Event_Type,
+      </if>
+      <if test="objectId != null" >
+        Object_Id,
+      </if>
+      <if test="eventParams != null" >
+        Event_Params,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+      <if test="callObject != null" >
+        Call_Object,
+      </if>
+      <if test="callMethod != null" >
+        Call_Method,
+      </if>
+      <if test="callParams != null" >
+        Call_Params,
+      </if>
+      <if test="reCode != null" >
+        Re_Code,
+      </if>
+      <if test="reMesg != null" >
+        Re_Mesg,
+      </if>
+      <if test="redoMax != null" >
+        Redo_Max,
+      </if>
+      <if test="redoCount != null" >
+        Redo_Count,
+      </if>
+      <if test="redoInterval != null" >
+        Redo_Interval,
+      </if>
+      <if test="callTime != null" >
+        Call_Time,
+      </if>
+      <if test="createTime != null" >
+        Create_Time,
+      </if>
+      <if test="state != null" >
+        `State`,
+      </if>
+      <if test="ver != null" >
+        Ver_,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskGroup != null" >
+        #{taskGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="eventType != null" >
+        #{eventType,jdbcType=INTEGER},
+      </if>
+      <if test="objectId != null" >
+        #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="eventParams != null" >
+        #{eventParams,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="callObject != null" >
+        #{callObject,jdbcType=VARCHAR},
+      </if>
+      <if test="callMethod != null" >
+        #{callMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="callParams != null" >
+        #{callParams,jdbcType=VARCHAR},
+      </if>
+      <if test="reCode != null" >
+        #{reCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reMesg != null" >
+        #{reMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="redoMax != null" >
+        #{redoMax,jdbcType=INTEGER},
+      </if>
+      <if test="redoCount != null" >
+        #{redoCount,jdbcType=INTEGER},
+      </if>
+      <if test="redoInterval != null" >
+        #{redoInterval,jdbcType=INTEGER},
+      </if>
+      <if test="callTime != null" >
+        #{callTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ver != null" >
+        #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.EventTaskExample" resultType="java.lang.Integer" >
+    select count(*) from ta_event_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ta_event_task
+    <set >
+      <if test="record.taskId != null" >
+        Task_Id = #{record.taskId,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskGroup != null" >
+        Task_Group = #{record.taskGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskName != null" >
+        Task_Name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventType != null" >
+        Event_Type = #{record.eventType,jdbcType=INTEGER},
+      </if>
+      <if test="record.objectId != null" >
+        Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventParams != null" >
+        Event_Params = #{record.eventParams,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callObject != null" >
+        Call_Object = #{record.callObject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callMethod != null" >
+        Call_Method = #{record.callMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callParams != null" >
+        Call_Params = #{record.callParams,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reCode != null" >
+        Re_Code = #{record.reCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reMesg != null" >
+        Re_Mesg = #{record.reMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redoMax != null" >
+        Redo_Max = #{record.redoMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.redoCount != null" >
+        Redo_Count = #{record.redoCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.redoInterval != null" >
+        Redo_Interval = #{record.redoInterval,jdbcType=INTEGER},
+      </if>
+      <if test="record.callTime != null" >
+        Call_Time = #{record.callTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        Create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        `State` = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.ver != null" >
+        Ver_ = #{record.ver,jdbcType=INTEGER},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ta_event_task
+    set Task_Id = #{record.taskId,jdbcType=BIGINT},
+      Task_Group = #{record.taskGroup,jdbcType=VARCHAR},
+      Task_Name = #{record.taskName,jdbcType=VARCHAR},
+      Event_Type = #{record.eventType,jdbcType=INTEGER},
+      Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      Event_Params = #{record.eventParams,jdbcType=VARCHAR},
+      Remarks = #{record.remarks,jdbcType=VARCHAR},
+      Call_Object = #{record.callObject,jdbcType=VARCHAR},
+      Call_Method = #{record.callMethod,jdbcType=VARCHAR},
+      Call_Params = #{record.callParams,jdbcType=VARCHAR},
+      Re_Code = #{record.reCode,jdbcType=VARCHAR},
+      Re_Mesg = #{record.reMesg,jdbcType=VARCHAR},
+      Redo_Max = #{record.redoMax,jdbcType=INTEGER},
+      Redo_Count = #{record.redoCount,jdbcType=INTEGER},
+      Redo_Interval = #{record.redoInterval,jdbcType=INTEGER},
+      Call_Time = #{record.callTime,jdbcType=TIMESTAMP},
+      Create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      `State` = #{record.state,jdbcType=INTEGER},
+      Ver_ = #{record.ver,jdbcType=INTEGER},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.EventTask" >
+    update ta_event_task
+    <set >
+      <if test="taskGroup != null" >
+        Task_Group = #{taskGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        Task_Name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="eventType != null" >
+        Event_Type = #{eventType,jdbcType=INTEGER},
+      </if>
+      <if test="objectId != null" >
+        Object_Id = #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="eventParams != null" >
+        Event_Params = #{eventParams,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="callObject != null" >
+        Call_Object = #{callObject,jdbcType=VARCHAR},
+      </if>
+      <if test="callMethod != null" >
+        Call_Method = #{callMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="callParams != null" >
+        Call_Params = #{callParams,jdbcType=VARCHAR},
+      </if>
+      <if test="reCode != null" >
+        Re_Code = #{reCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reMesg != null" >
+        Re_Mesg = #{reMesg,jdbcType=VARCHAR},
+      </if>
+      <if test="redoMax != null" >
+        Redo_Max = #{redoMax,jdbcType=INTEGER},
+      </if>
+      <if test="redoCount != null" >
+        Redo_Count = #{redoCount,jdbcType=INTEGER},
+      </if>
+      <if test="redoInterval != null" >
+        Redo_Interval = #{redoInterval,jdbcType=INTEGER},
+      </if>
+      <if test="callTime != null" >
+        Call_Time = #{callTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        Create_Time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        `State` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ver != null" >
+        Ver_ = #{ver,jdbcType=INTEGER},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Task_Id = #{taskId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.EventTask" >
+    update ta_event_task
+    set Task_Group = #{taskGroup,jdbcType=VARCHAR},
+      Task_Name = #{taskName,jdbcType=VARCHAR},
+      Event_Type = #{eventType,jdbcType=INTEGER},
+      Object_Id = #{objectId,jdbcType=VARCHAR},
+      Event_Params = #{eventParams,jdbcType=VARCHAR},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      Call_Object = #{callObject,jdbcType=VARCHAR},
+      Call_Method = #{callMethod,jdbcType=VARCHAR},
+      Call_Params = #{callParams,jdbcType=VARCHAR},
+      Re_Code = #{reCode,jdbcType=VARCHAR},
+      Re_Mesg = #{reMesg,jdbcType=VARCHAR},
+      Redo_Max = #{redoMax,jdbcType=INTEGER},
+      Redo_Count = #{redoCount,jdbcType=INTEGER},
+      Redo_Interval = #{redoInterval,jdbcType=INTEGER},
+      Call_Time = #{callTime,jdbcType=TIMESTAMP},
+      Create_Time = #{createTime,jdbcType=TIMESTAMP},
+      `State` = #{state,jdbcType=INTEGER},
+      Ver_ = #{ver,jdbcType=INTEGER},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Task_Id = #{taskId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.CostBillItemMapperMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CostBillItemMapper" >
+    <id column="Cost_Region" property="costRegion" jdbcType="INTEGER" />
+    <id column="Bill_Item_Id" property="billItemId" jdbcType="VARCHAR" />
+    <result column="Bill_Item_Desc" property="billItemDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Cost_Region, Bill_Item_Id, Bill_Item_Desc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CostBillItemMapperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_cost_bill_item_mapper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_cost_bill_item_mapper
+    where Cost_Region = #{costRegion,jdbcType=INTEGER}
+      and Bill_Item_Id = #{billItemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from tb_cost_bill_item_mapper
+    where Cost_Region = #{costRegion,jdbcType=INTEGER}
+      and Bill_Item_Id = #{billItemId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CostBillItemMapperExample" >
+    delete from tb_cost_bill_item_mapper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CostBillItemMapper" >
+    insert into tb_cost_bill_item_mapper (Cost_Region, Bill_Item_Id, Bill_Item_Desc
+      )
+    values (#{costRegion,jdbcType=INTEGER}, #{billItemId,jdbcType=VARCHAR}, #{billItemDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CostBillItemMapper" >
+    insert into tb_cost_bill_item_mapper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="costRegion != null" >
+        Cost_Region,
+      </if>
+      <if test="billItemId != null" >
+        Bill_Item_Id,
+      </if>
+      <if test="billItemDesc != null" >
+        Bill_Item_Desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="costRegion != null" >
+        #{costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="billItemId != null" >
+        #{billItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="billItemDesc != null" >
+        #{billItemDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CostBillItemMapperExample" resultType="java.lang.Integer" >
+    select count(*) from tb_cost_bill_item_mapper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_cost_bill_item_mapper
+    <set >
+      <if test="record.costRegion != null" >
+        Cost_Region = #{record.costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="record.billItemId != null" >
+        Bill_Item_Id = #{record.billItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billItemDesc != null" >
+        Bill_Item_Desc = #{record.billItemDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_cost_bill_item_mapper
+    set Cost_Region = #{record.costRegion,jdbcType=INTEGER},
+      Bill_Item_Id = #{record.billItemId,jdbcType=VARCHAR},
+      Bill_Item_Desc = #{record.billItemDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CostBillItemMapper" >
+    update tb_cost_bill_item_mapper
+    <set >
+      <if test="billItemDesc != null" >
+        Bill_Item_Desc = #{billItemDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Cost_Region = #{costRegion,jdbcType=INTEGER}
+      and Bill_Item_Id = #{billItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CostBillItemMapper" >
+    update tb_cost_bill_item_mapper
+    set Bill_Item_Desc = #{billItemDesc,jdbcType=VARCHAR}
+    where Cost_Region = #{costRegion,jdbcType=INTEGER}
+      and Bill_Item_Id = #{billItemId,jdbcType=VARCHAR}
+  </update>
+</mapper>

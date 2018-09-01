@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.ContCarryoverRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.ContCarryoverRecord" >
+    <id column="Oper_No" property="operNo" jdbcType="BIGINT" />
+    <result column="CustId" property="custid" jdbcType="VARCHAR" />
+    <result column="CustName" property="custname" jdbcType="VARCHAR" />
+    <result column="Orig_ContId" property="origContid" jdbcType="VARCHAR" />
+    <result column="Target_ContId" property="targetContid" jdbcType="VARCHAR" />
+    <result column="Amount" property="amount" jdbcType="BIGINT" />
+    <result column="Op_Id" property="opId" jdbcType="VARCHAR" />
+    <result column="Op_Name" property="opName" jdbcType="VARCHAR" />
+    <result column="Op_Date" property="opDate" jdbcType="TIMESTAMP" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Oper_No, CustId, CustName, Orig_ContId, Target_ContId, Amount, Op_Id, Op_Name, Op_Date, 
+    Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ContCarryoverRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_cont_carry_over_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cont_carry_over_record
+    where Oper_No = #{operNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tc_cont_carry_over_record
+    where Oper_No = #{operNo,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ContCarryoverRecordExample" >
+    delete from tc_cont_carry_over_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.ContCarryoverRecord" >
+    insert into tc_cont_carry_over_record (Oper_No, CustId, CustName, 
+      Orig_ContId, Target_ContId, Amount, 
+      Op_Id, Op_Name, Op_Date, 
+      Ext1, Ext2, Ext3)
+    values (#{operNo,jdbcType=BIGINT}, #{custid,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, 
+      #{origContid,jdbcType=VARCHAR}, #{targetContid,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, 
+      #{opId,jdbcType=VARCHAR}, #{opName,jdbcType=VARCHAR}, #{opDate,jdbcType=TIMESTAMP}, 
+      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.ContCarryoverRecord" >
+    insert into tc_cont_carry_over_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operNo != null" >
+        Oper_No,
+      </if>
+      <if test="custid != null" >
+        CustId,
+      </if>
+      <if test="custname != null" >
+        CustName,
+      </if>
+      <if test="origContid != null" >
+        Orig_ContId,
+      </if>
+      <if test="targetContid != null" >
+        Target_ContId,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="opId != null" >
+        Op_Id,
+      </if>
+      <if test="opName != null" >
+        Op_Name,
+      </if>
+      <if test="opDate != null" >
+        Op_Date,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operNo != null" >
+        #{operNo,jdbcType=BIGINT},
+      </if>
+      <if test="custid != null" >
+        #{custid,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="origContid != null" >
+        #{origContid,jdbcType=VARCHAR},
+      </if>
+      <if test="targetContid != null" >
+        #{targetContid,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="opName != null" >
+        #{opName,jdbcType=VARCHAR},
+      </if>
+      <if test="opDate != null" >
+        #{opDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ContCarryoverRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tc_cont_carry_over_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_cont_carry_over_record
+    <set >
+      <if test="record.operNo != null" >
+        Oper_No = #{record.operNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.custid != null" >
+        CustId = #{record.custid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custname != null" >
+        CustName = #{record.custname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origContid != null" >
+        Orig_ContId = #{record.origContid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetContid != null" >
+        Target_ContId = #{record.targetContid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        Amount = #{record.amount,jdbcType=BIGINT},
+      </if>
+      <if test="record.opId != null" >
+        Op_Id = #{record.opId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opName != null" >
+        Op_Name = #{record.opName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opDate != null" >
+        Op_Date = #{record.opDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_cont_carry_over_record
+    set Oper_No = #{record.operNo,jdbcType=BIGINT},
+      CustId = #{record.custid,jdbcType=VARCHAR},
+      CustName = #{record.custname,jdbcType=VARCHAR},
+      Orig_ContId = #{record.origContid,jdbcType=VARCHAR},
+      Target_ContId = #{record.targetContid,jdbcType=VARCHAR},
+      Amount = #{record.amount,jdbcType=BIGINT},
+      Op_Id = #{record.opId,jdbcType=VARCHAR},
+      Op_Name = #{record.opName,jdbcType=VARCHAR},
+      Op_Date = #{record.opDate,jdbcType=TIMESTAMP},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.ContCarryoverRecord" >
+    update tc_cont_carry_over_record
+    <set >
+      <if test="custid != null" >
+        CustId = #{custid,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        CustName = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="origContid != null" >
+        Orig_ContId = #{origContid,jdbcType=VARCHAR},
+      </if>
+      <if test="targetContid != null" >
+        Target_ContId = #{targetContid,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        Op_Id = #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="opName != null" >
+        Op_Name = #{opName,jdbcType=VARCHAR},
+      </if>
+      <if test="opDate != null" >
+        Op_Date = #{opDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Oper_No = #{operNo,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.ContCarryoverRecord" >
+    update tc_cont_carry_over_record
+    set CustId = #{custid,jdbcType=VARCHAR},
+      CustName = #{custname,jdbcType=VARCHAR},
+      Orig_ContId = #{origContid,jdbcType=VARCHAR},
+      Target_ContId = #{targetContid,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=BIGINT},
+      Op_Id = #{opId,jdbcType=VARCHAR},
+      Op_Name = #{opName,jdbcType=VARCHAR},
+      Op_Date = #{opDate,jdbcType=TIMESTAMP},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Oper_No = #{operNo,jdbcType=BIGINT}
+  </update>
+</mapper>

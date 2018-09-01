@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.CostBillItemMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CostBillItem" >
+    <id column="Cost_Item_Id" property="costItemId" jdbcType="BIGINT" />
+    <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
+    <result column="Actu_Month" property="actuMonth" jdbcType="VARCHAR" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Cust_Name" property="custName" jdbcType="VARCHAR" />
+    <result column="Region_Id" property="regionId" jdbcType="INTEGER" />
+    <result column="Region_Name" property="regionName" jdbcType="VARCHAR" />
+    <result column="Busi_Mode" property="busiMode" jdbcType="INTEGER" />
+    <result column="Pay_Type" property="payType" jdbcType="SMALLINT" />
+    <result column="Cont_Id" property="contId" jdbcType="VARCHAR" />
+    <result column="Used_Data" property="usedData" jdbcType="BIGINT" />
+    <result column="Exp_Data" property="expData" jdbcType="BIGINT" />
+    <result column="Bill_Fee" property="billFee" jdbcType="BIGINT" />
+    <result column="Total_Fee" property="totalFee" jdbcType="BIGINT" />
+    <result column="Off_Fee" property="offFee" jdbcType="BIGINT" />
+    <result column="Income" property="income" jdbcType="BIGINT" />
+    <result column="Discount" property="discount" jdbcType="INTEGER" />
+    <result column="Cost_Region" property="costRegion" jdbcType="INTEGER" />
+    <result column="Cost_Center" property="costCenter" jdbcType="VARCHAR" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="Cost_Rate" property="costRate" jdbcType="INTEGER" />
+    <result column="Cost_Region_Name" property="costRegionName" jdbcType="INTEGER" />
+    <result column="Cost_Fee" property="costFee" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Cost_Item_Id, Bill_Month, Actu_Month, Cust_Id, Cust_Name, Region_Id, Region_Name, 
+    Busi_Mode, Pay_Type, Cont_Id, Used_Data, Exp_Data, Bill_Fee, Total_Fee, Off_Fee, 
+    Income, Discount, Cost_Region, Cost_Center, Ext1, Ext2, Ext3, Cost_Rate, Cost_Region_Name, 
+    Cost_Fee
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CostBillItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_cost_bill_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cost_bill_item
+    where Cost_Item_Id = #{costItemId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tc_cost_bill_item
+    where Cost_Item_Id = #{costItemId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CostBillItemExample" >
+    delete from tc_cost_bill_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+    insert into tc_cost_bill_item (Cost_Item_Id, Bill_Month, Actu_Month, 
+      Cust_Id, Cust_Name, Region_Id, 
+      Region_Name, Busi_Mode, Pay_Type, 
+      Cont_Id, Used_Data, Exp_Data, 
+      Bill_Fee, Total_Fee, Off_Fee, 
+      Income, Discount, Cost_Region, 
+      Cost_Center, Ext1, Ext2, 
+      Ext3, Cost_Rate, Cost_Region_Name, 
+      Cost_Fee)
+    values (#{costItemId,jdbcType=BIGINT}, #{billMonth,jdbcType=VARCHAR}, #{actuMonth,jdbcType=VARCHAR}, 
+      #{custId,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, #{regionId,jdbcType=INTEGER}, 
+      #{regionName,jdbcType=VARCHAR}, #{busiMode,jdbcType=INTEGER}, #{payType,jdbcType=SMALLINT}, 
+      #{contId,jdbcType=VARCHAR}, #{usedData,jdbcType=BIGINT}, #{expData,jdbcType=BIGINT}, 
+      #{billFee,jdbcType=BIGINT}, #{totalFee,jdbcType=BIGINT}, #{offFee,jdbcType=BIGINT}, 
+      #{income,jdbcType=BIGINT}, #{discount,jdbcType=INTEGER}, #{costRegion,jdbcType=INTEGER}, 
+      #{costCenter,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR}, #{costRate,jdbcType=INTEGER}, #{costRegionName,jdbcType=INTEGER}, 
+      #{costFee,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+    insert into tc_cost_bill_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="costItemId != null" >
+        Cost_Item_Id,
+      </if>
+      <if test="billMonth != null" >
+        Bill_Month,
+      </if>
+      <if test="actuMonth != null" >
+        Actu_Month,
+      </if>
+      <if test="custId != null" >
+        Cust_Id,
+      </if>
+      <if test="custName != null" >
+        Cust_Name,
+      </if>
+      <if test="regionId != null" >
+        Region_Id,
+      </if>
+      <if test="regionName != null" >
+        Region_Name,
+      </if>
+      <if test="busiMode != null" >
+        Busi_Mode,
+      </if>
+      <if test="payType != null" >
+        Pay_Type,
+      </if>
+      <if test="contId != null" >
+        Cont_Id,
+      </if>
+      <if test="usedData != null" >
+        Used_Data,
+      </if>
+      <if test="expData != null" >
+        Exp_Data,
+      </if>
+      <if test="billFee != null" >
+        Bill_Fee,
+      </if>
+      <if test="totalFee != null" >
+        Total_Fee,
+      </if>
+      <if test="offFee != null" >
+        Off_Fee,
+      </if>
+      <if test="income != null" >
+        Income,
+      </if>
+      <if test="discount != null" >
+        Discount,
+      </if>
+      <if test="costRegion != null" >
+        Cost_Region,
+      </if>
+      <if test="costCenter != null" >
+        Cost_Center,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+      <if test="costRate != null" >
+        Cost_Rate,
+      </if>
+      <if test="costRegionName != null" >
+        Cost_Region_Name,
+      </if>
+      <if test="costFee != null" >
+        Cost_Fee,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="costItemId != null" >
+        #{costItemId,jdbcType=BIGINT},
+      </if>
+      <if test="billMonth != null" >
+        #{billMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="actuMonth != null" >
+        #{actuMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="regionName != null" >
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="busiMode != null" >
+        #{busiMode,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=SMALLINT},
+      </if>
+      <if test="contId != null" >
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="usedData != null" >
+        #{usedData,jdbcType=BIGINT},
+      </if>
+      <if test="expData != null" >
+        #{expData,jdbcType=BIGINT},
+      </if>
+      <if test="billFee != null" >
+        #{billFee,jdbcType=BIGINT},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="offFee != null" >
+        #{offFee,jdbcType=BIGINT},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="costRegion != null" >
+        #{costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="costCenter != null" >
+        #{costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="costRate != null" >
+        #{costRate,jdbcType=INTEGER},
+      </if>
+      <if test="costRegionName != null" >
+        #{costRegionName,jdbcType=INTEGER},
+      </if>
+      <if test="costFee != null" >
+        #{costFee,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CostBillItemExample" resultType="java.lang.Integer" >
+    select count(*) from tc_cost_bill_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_cost_bill_item
+    <set >
+      <if test="record.costItemId != null" >
+        Cost_Item_Id = #{record.costItemId,jdbcType=BIGINT},
+      </if>
+      <if test="record.billMonth != null" >
+        Bill_Month = #{record.billMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actuMonth != null" >
+        Actu_Month = #{record.actuMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null" >
+        Cust_Name = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionId != null" >
+        Region_Id = #{record.regionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionName != null" >
+        Region_Name = #{record.regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiMode != null" >
+        Busi_Mode = #{record.busiMode,jdbcType=INTEGER},
+      </if>
+      <if test="record.payType != null" >
+        Pay_Type = #{record.payType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.contId != null" >
+        Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usedData != null" >
+        Used_Data = #{record.usedData,jdbcType=BIGINT},
+      </if>
+      <if test="record.expData != null" >
+        Exp_Data = #{record.expData,jdbcType=BIGINT},
+      </if>
+      <if test="record.billFee != null" >
+        Bill_Fee = #{record.billFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalFee != null" >
+        Total_Fee = #{record.totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.offFee != null" >
+        Off_Fee = #{record.offFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.income != null" >
+        Income = #{record.income,jdbcType=BIGINT},
+      </if>
+      <if test="record.discount != null" >
+        Discount = #{record.discount,jdbcType=INTEGER},
+      </if>
+      <if test="record.costRegion != null" >
+        Cost_Region = #{record.costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="record.costCenter != null" >
+        Cost_Center = #{record.costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costRate != null" >
+        Cost_Rate = #{record.costRate,jdbcType=INTEGER},
+      </if>
+      <if test="record.costRegionName != null" >
+        Cost_Region_Name = #{record.costRegionName,jdbcType=INTEGER},
+      </if>
+      <if test="record.costFee != null" >
+        Cost_Fee = #{record.costFee,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_cost_bill_item
+    set Cost_Item_Id = #{record.costItemId,jdbcType=BIGINT},
+      Bill_Month = #{record.billMonth,jdbcType=VARCHAR},
+      Actu_Month = #{record.actuMonth,jdbcType=VARCHAR},
+      Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      Cust_Name = #{record.custName,jdbcType=VARCHAR},
+      Region_Id = #{record.regionId,jdbcType=INTEGER},
+      Region_Name = #{record.regionName,jdbcType=VARCHAR},
+      Busi_Mode = #{record.busiMode,jdbcType=INTEGER},
+      Pay_Type = #{record.payType,jdbcType=SMALLINT},
+      Cont_Id = #{record.contId,jdbcType=VARCHAR},
+      Used_Data = #{record.usedData,jdbcType=BIGINT},
+      Exp_Data = #{record.expData,jdbcType=BIGINT},
+      Bill_Fee = #{record.billFee,jdbcType=BIGINT},
+      Total_Fee = #{record.totalFee,jdbcType=BIGINT},
+      Off_Fee = #{record.offFee,jdbcType=BIGINT},
+      Income = #{record.income,jdbcType=BIGINT},
+      Discount = #{record.discount,jdbcType=INTEGER},
+      Cost_Region = #{record.costRegion,jdbcType=INTEGER},
+      Cost_Center = #{record.costCenter,jdbcType=VARCHAR},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      Cost_Rate = #{record.costRate,jdbcType=INTEGER},
+      Cost_Region_Name = #{record.costRegionName,jdbcType=INTEGER},
+      Cost_Fee = #{record.costFee,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+    update tc_cost_bill_item
+    <set >
+      <if test="billMonth != null" >
+        Bill_Month = #{billMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="actuMonth != null" >
+        Actu_Month = #{actuMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        Cust_Id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        Cust_Name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        Region_Id = #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="regionName != null" >
+        Region_Name = #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="busiMode != null" >
+        Busi_Mode = #{busiMode,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        Pay_Type = #{payType,jdbcType=SMALLINT},
+      </if>
+      <if test="contId != null" >
+        Cont_Id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="usedData != null" >
+        Used_Data = #{usedData,jdbcType=BIGINT},
+      </if>
+      <if test="expData != null" >
+        Exp_Data = #{expData,jdbcType=BIGINT},
+      </if>
+      <if test="billFee != null" >
+        Bill_Fee = #{billFee,jdbcType=BIGINT},
+      </if>
+      <if test="totalFee != null" >
+        Total_Fee = #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="offFee != null" >
+        Off_Fee = #{offFee,jdbcType=BIGINT},
+      </if>
+      <if test="income != null" >
+        Income = #{income,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        Discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="costRegion != null" >
+        Cost_Region = #{costRegion,jdbcType=INTEGER},
+      </if>
+      <if test="costCenter != null" >
+        Cost_Center = #{costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="costRate != null" >
+        Cost_Rate = #{costRate,jdbcType=INTEGER},
+      </if>
+      <if test="costRegionName != null" >
+        Cost_Region_Name = #{costRegionName,jdbcType=INTEGER},
+      </if>
+      <if test="costFee != null" >
+        Cost_Fee = #{costFee,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Cost_Item_Id = #{costItemId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+    update tc_cost_bill_item
+    set Bill_Month = #{billMonth,jdbcType=VARCHAR},
+      Actu_Month = #{actuMonth,jdbcType=VARCHAR},
+      Cust_Id = #{custId,jdbcType=VARCHAR},
+      Cust_Name = #{custName,jdbcType=VARCHAR},
+      Region_Id = #{regionId,jdbcType=INTEGER},
+      Region_Name = #{regionName,jdbcType=VARCHAR},
+      Busi_Mode = #{busiMode,jdbcType=INTEGER},
+      Pay_Type = #{payType,jdbcType=SMALLINT},
+      Cont_Id = #{contId,jdbcType=VARCHAR},
+      Used_Data = #{usedData,jdbcType=BIGINT},
+      Exp_Data = #{expData,jdbcType=BIGINT},
+      Bill_Fee = #{billFee,jdbcType=BIGINT},
+      Total_Fee = #{totalFee,jdbcType=BIGINT},
+      Off_Fee = #{offFee,jdbcType=BIGINT},
+      Income = #{income,jdbcType=BIGINT},
+      Discount = #{discount,jdbcType=INTEGER},
+      Cost_Region = #{costRegion,jdbcType=INTEGER},
+      Cost_Center = #{costCenter,jdbcType=VARCHAR},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR},
+      Cost_Rate = #{costRate,jdbcType=INTEGER},
+      Cost_Region_Name = #{costRegionName,jdbcType=INTEGER},
+      Cost_Fee = #{costFee,jdbcType=BIGINT}
+    where Cost_Item_Id = #{costItemId,jdbcType=BIGINT}
+  </update>
+</mapper>

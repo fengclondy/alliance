@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.CapitalRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CapitalRecord" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
+    <result column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
+    <result column="Book_Id" property="bookId" jdbcType="VARCHAR" />
+    <result column="Old_Amount" property="oldAmount" jdbcType="BIGINT" />
+    <result column="Cur_Amount" property="curAmount" jdbcType="BIGINT" />
+    <result column="Oper_Amount" property="operAmount" jdbcType="BIGINT" />
+    <result column="Oper_Type" property="operType" jdbcType="SMALLINT" />
+    <result column="Oper_Sub_Type" property="operSubType" jdbcType="INTEGER" />
+    <result column="Oper_Date" property="operDate" jdbcType="TIMESTAMP" />
+    <result column="Object_Id" property="objectId" jdbcType="VARCHAR" />
+    <result column="Oper_Comm" property="operComm" jdbcType="VARCHAR" />
+    <result column="Lock_Val" property="lockVal" jdbcType="BIGINT" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="Ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="Ext3" property="ext3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Cust_Id, Acct_Id, Book_Id, Old_Amount, Cur_Amount, Oper_Amount, Oper_Type, Oper_Sub_Type, 
+    Oper_Date, Object_Id, Oper_Comm, Lock_Val, Ext1, Ext2, Ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CapitalRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_capital_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_capital_record
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tc_capital_record
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CapitalRecordExample" >
+    delete from tc_capital_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CapitalRecord" >
+    insert into tc_capital_record (Id, Cust_Id, Acct_Id, 
+      Book_Id, Old_Amount, Cur_Amount, 
+      Oper_Amount, Oper_Type, Oper_Sub_Type, 
+      Oper_Date, Object_Id, Oper_Comm, 
+      Lock_Val, Ext1, Ext2, 
+      Ext3)
+    values (#{id,jdbcType=BIGINT}, #{custId,jdbcType=VARCHAR}, #{acctId,jdbcType=VARCHAR}, 
+      #{bookId,jdbcType=VARCHAR}, #{oldAmount,jdbcType=BIGINT}, #{curAmount,jdbcType=BIGINT}, 
+      #{operAmount,jdbcType=BIGINT}, #{operType,jdbcType=SMALLINT}, #{operSubType,jdbcType=INTEGER}, 
+      #{operDate,jdbcType=TIMESTAMP}, #{objectId,jdbcType=VARCHAR}, #{operComm,jdbcType=VARCHAR}, 
+      #{lockVal,jdbcType=BIGINT}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CapitalRecord" >
+    insert into tc_capital_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="custId != null" >
+        Cust_Id,
+      </if>
+      <if test="acctId != null" >
+        Acct_Id,
+      </if>
+      <if test="bookId != null" >
+        Book_Id,
+      </if>
+      <if test="oldAmount != null" >
+        Old_Amount,
+      </if>
+      <if test="curAmount != null" >
+        Cur_Amount,
+      </if>
+      <if test="operAmount != null" >
+        Oper_Amount,
+      </if>
+      <if test="operType != null" >
+        Oper_Type,
+      </if>
+      <if test="operSubType != null" >
+        Oper_Sub_Type,
+      </if>
+      <if test="operDate != null" >
+        Oper_Date,
+      </if>
+      <if test="objectId != null" >
+        Object_Id,
+      </if>
+      <if test="operComm != null" >
+        Oper_Comm,
+      </if>
+      <if test="lockVal != null" >
+        Lock_Val,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+      <if test="ext2 != null" >
+        Ext2,
+      </if>
+      <if test="ext3 != null" >
+        Ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="oldAmount != null" >
+        #{oldAmount,jdbcType=BIGINT},
+      </if>
+      <if test="curAmount != null" >
+        #{curAmount,jdbcType=BIGINT},
+      </if>
+      <if test="operAmount != null" >
+        #{operAmount,jdbcType=BIGINT},
+      </if>
+      <if test="operType != null" >
+        #{operType,jdbcType=SMALLINT},
+      </if>
+      <if test="operSubType != null" >
+        #{operSubType,jdbcType=INTEGER},
+      </if>
+      <if test="operDate != null" >
+        #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objectId != null" >
+        #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="operComm != null" >
+        #{operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="lockVal != null" >
+        #{lockVal,jdbcType=BIGINT},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CapitalRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tc_capital_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_capital_record
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.custId != null" >
+        Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookId != null" >
+        Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldAmount != null" >
+        Old_Amount = #{record.oldAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.curAmount != null" >
+        Cur_Amount = #{record.curAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.operAmount != null" >
+        Oper_Amount = #{record.operAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.operType != null" >
+        Oper_Type = #{record.operType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.operSubType != null" >
+        Oper_Sub_Type = #{record.operSubType,jdbcType=INTEGER},
+      </if>
+      <if test="record.operDate != null" >
+        Oper_Date = #{record.operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.objectId != null" >
+        Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operComm != null" >
+        Oper_Comm = #{record.operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockVal != null" >
+        Lock_Val = #{record.lockVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        Ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_capital_record
+    set Id = #{record.id,jdbcType=BIGINT},
+      Cust_Id = #{record.custId,jdbcType=VARCHAR},
+      Acct_Id = #{record.acctId,jdbcType=VARCHAR},
+      Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      Old_Amount = #{record.oldAmount,jdbcType=BIGINT},
+      Cur_Amount = #{record.curAmount,jdbcType=BIGINT},
+      Oper_Amount = #{record.operAmount,jdbcType=BIGINT},
+      Oper_Type = #{record.operType,jdbcType=SMALLINT},
+      Oper_Sub_Type = #{record.operSubType,jdbcType=INTEGER},
+      Oper_Date = #{record.operDate,jdbcType=TIMESTAMP},
+      Object_Id = #{record.objectId,jdbcType=VARCHAR},
+      Oper_Comm = #{record.operComm,jdbcType=VARCHAR},
+      Lock_Val = #{record.lockVal,jdbcType=BIGINT},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      Ext2 = #{record.ext2,jdbcType=VARCHAR},
+      Ext3 = #{record.ext3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CapitalRecord" >
+    update tc_capital_record
+    <set >
+      <if test="custId != null" >
+        Cust_Id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        Acct_Id = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null" >
+        Book_Id = #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="oldAmount != null" >
+        Old_Amount = #{oldAmount,jdbcType=BIGINT},
+      </if>
+      <if test="curAmount != null" >
+        Cur_Amount = #{curAmount,jdbcType=BIGINT},
+      </if>
+      <if test="operAmount != null" >
+        Oper_Amount = #{operAmount,jdbcType=BIGINT},
+      </if>
+      <if test="operType != null" >
+        Oper_Type = #{operType,jdbcType=SMALLINT},
+      </if>
+      <if test="operSubType != null" >
+        Oper_Sub_Type = #{operSubType,jdbcType=INTEGER},
+      </if>
+      <if test="operDate != null" >
+        Oper_Date = #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="objectId != null" >
+        Object_Id = #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="operComm != null" >
+        Oper_Comm = #{operComm,jdbcType=VARCHAR},
+      </if>
+      <if test="lockVal != null" >
+        Lock_Val = #{lockVal,jdbcType=BIGINT},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        Ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        Ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CapitalRecord" >
+    update tc_capital_record
+    set Cust_Id = #{custId,jdbcType=VARCHAR},
+      Acct_Id = #{acctId,jdbcType=VARCHAR},
+      Book_Id = #{bookId,jdbcType=VARCHAR},
+      Old_Amount = #{oldAmount,jdbcType=BIGINT},
+      Cur_Amount = #{curAmount,jdbcType=BIGINT},
+      Oper_Amount = #{operAmount,jdbcType=BIGINT},
+      Oper_Type = #{operType,jdbcType=SMALLINT},
+      Oper_Sub_Type = #{operSubType,jdbcType=INTEGER},
+      Oper_Date = #{operDate,jdbcType=TIMESTAMP},
+      Object_Id = #{objectId,jdbcType=VARCHAR},
+      Oper_Comm = #{operComm,jdbcType=VARCHAR},
+      Lock_Val = #{lockVal,jdbcType=BIGINT},
+      Ext1 = #{ext1,jdbcType=VARCHAR},
+      Ext2 = #{ext2,jdbcType=VARCHAR},
+      Ext3 = #{ext3,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

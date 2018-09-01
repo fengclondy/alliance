@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.aso.biz.db.dao.DataBookaStubMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataBookaStub" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="Book_Id" property="bookId" jdbcType="VARCHAR" />
+    <result column="Rec_No" property="recNo" jdbcType="VARCHAR" />
+    <result column="Back_Type" property="backType" jdbcType="INTEGER" />
+    <result column="Amount" property="amount" jdbcType="BIGINT" />
+    <result column="Back_Date" property="backDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Book_Id, Rec_No, Back_Type, Amount, Back_Date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.DataBookaStubExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tc_data_booka_stub
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_data_booka_stub
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tc_data_booka_stub
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.DataBookaStubExample" >
+    delete from tc_data_booka_stub
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.aso.biz.db.model.DataBookaStub" >
+    insert into tc_data_booka_stub (ID, Book_Id, Rec_No, 
+      Back_Type, Amount, Back_Date
+      )
+    values (#{id,jdbcType=BIGINT}, #{bookId,jdbcType=VARCHAR}, #{recNo,jdbcType=VARCHAR}, 
+      #{backType,jdbcType=INTEGER}, #{amount,jdbcType=BIGINT}, #{backDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.DataBookaStub" >
+    insert into tc_data_booka_stub
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bookId != null" >
+        Book_Id,
+      </if>
+      <if test="recNo != null" >
+        Rec_No,
+      </if>
+      <if test="backType != null" >
+        Back_Type,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="backDate != null" >
+        Back_Date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="recNo != null" >
+        #{recNo,jdbcType=VARCHAR},
+      </if>
+      <if test="backType != null" >
+        #{backType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="backDate != null" >
+        #{backDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.DataBookaStubExample" resultType="java.lang.Integer" >
+    select count(*) from tc_data_booka_stub
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tc_data_booka_stub
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.bookId != null" >
+        Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recNo != null" >
+        Rec_No = #{record.recNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backType != null" >
+        Back_Type = #{record.backType,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        Amount = #{record.amount,jdbcType=BIGINT},
+      </if>
+      <if test="record.backDate != null" >
+        Back_Date = #{record.backDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tc_data_booka_stub
+    set ID = #{record.id,jdbcType=BIGINT},
+      Book_Id = #{record.bookId,jdbcType=VARCHAR},
+      Rec_No = #{record.recNo,jdbcType=VARCHAR},
+      Back_Type = #{record.backType,jdbcType=INTEGER},
+      Amount = #{record.amount,jdbcType=BIGINT},
+      Back_Date = #{record.backDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.DataBookaStub" >
+    update tc_data_booka_stub
+    <set >
+      <if test="bookId != null" >
+        Book_Id = #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="recNo != null" >
+        Rec_No = #{recNo,jdbcType=VARCHAR},
+      </if>
+      <if test="backType != null" >
+        Back_Type = #{backType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="backDate != null" >
+        Back_Date = #{backDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.DataBookaStub" >
+    update tc_data_booka_stub
+    set Book_Id = #{bookId,jdbcType=VARCHAR},
+      Rec_No = #{recNo,jdbcType=VARCHAR},
+      Back_Type = #{backType,jdbcType=INTEGER},
+      Amount = #{amount,jdbcType=BIGINT},
+      Back_Date = #{backDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

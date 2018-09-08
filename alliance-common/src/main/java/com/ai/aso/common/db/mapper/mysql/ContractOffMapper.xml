@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ContractOffMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.ContractOff" >
+<mapper namespace="com.ai.aso.common.db.dao.ContractOffMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.ContractOff" >
     <id column="Cont_Id" property="contId" jdbcType="VARCHAR" />
     <id column="Data_Type" property="dataType" jdbcType="INTEGER" />
     <result column="Off_Rate" property="offRate" jdbcType="INTEGER" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     Cont_Id, Data_Type, Off_Rate
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ContractOffExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.ContractOffExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,19 +93,19 @@
     where Cont_Id = #{contId,jdbcType=VARCHAR}
       and Data_Type = #{dataType,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ContractOffExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.ContractOffExample" >
     delete from tc_contract_off
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.ContractOff" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.ContractOff" >
     insert into tc_contract_off (Cont_Id, Data_Type, Off_Rate
       )
     values (#{contId,jdbcType=VARCHAR}, #{dataType,jdbcType=INTEGER}, #{offRate,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.ContractOff" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.ContractOff" >
     insert into tc_contract_off
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="contId != null" >
@@ -130,7 +130,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ContractOffExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.ContractOffExample" resultType="java.lang.Integer" >
     select count(*) from tc_contract_off
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -162,7 +162,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.ContractOff" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.ContractOff" >
     update tc_contract_off
     <set >
       <if test="offRate != null" >
@@ -172,7 +172,7 @@
     where Cont_Id = #{contId,jdbcType=VARCHAR}
       and Data_Type = #{dataType,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.ContractOff" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.ContractOff" >
     update tc_contract_off
     set Off_Rate = #{offRate,jdbcType=INTEGER}
     where Cont_Id = #{contId,jdbcType=VARCHAR}

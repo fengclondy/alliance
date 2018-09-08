@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.base.param.db.dao.AttrDefMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.base.param.db.model.AttrDef" >
+<mapper namespace="com.ai.aso.common.db.dao.AttrDefMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.AttrDef" >
     <id column="Attr_Id" property="attrId" jdbcType="INTEGER" />
     <result column="Attr_Pkg_Code" property="attrPkgCode" jdbcType="VARCHAR" />
     <result column="Attr_Code" property="attrCode" jdbcType="VARCHAR" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List" >
     Attr_Id, Attr_Pkg_Code, Attr_Code, Attr_Name, Attr_Desc, Attr_Seq, `State`
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.base.param.db.model.AttrDefExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.AttrDefExample" >
     select
     <if test="distinct" >
       distinct
@@ -95,13 +95,13 @@
     delete from ta_attr_def
     where Attr_Id = #{attrId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.base.param.db.model.AttrDefExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.AttrDefExample" >
     delete from ta_attr_def
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.AttrDef" >
     insert into ta_attr_def (Attr_Id, Attr_Pkg_Code, Attr_Code, 
       Attr_Name, Attr_Desc, Attr_Seq, 
       `State`)
@@ -109,7 +109,7 @@
       #{attrName,jdbcType=VARCHAR}, #{attrDesc,jdbcType=VARCHAR}, #{attrSeq,jdbcType=SMALLINT}, 
       #{state,jdbcType=SMALLINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.AttrDef" >
     insert into ta_attr_def
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="attrId != null" >
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.base.param.db.model.AttrDefExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.AttrDefExample" resultType="java.lang.Integer" >
     select count(*) from ta_attr_def
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.AttrDef" >
     update ta_attr_def
     <set >
       <if test="attrPkgCode != null" >
@@ -230,7 +230,7 @@
     </set>
     where Attr_Id = #{attrId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.base.param.db.model.AttrDef" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.AttrDef" >
     update ta_attr_def
     set Attr_Pkg_Code = #{attrPkgCode,jdbcType=VARCHAR},
       Attr_Code = #{attrCode,jdbcType=VARCHAR},

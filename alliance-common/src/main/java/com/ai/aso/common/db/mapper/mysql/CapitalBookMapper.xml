@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.CapitalBookMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CapitalBook" >
+<mapper namespace="com.ai.aso.common.db.dao.CapitalBookMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.CapitalBook" >
     <id column="Book_Id" property="bookId" jdbcType="VARCHAR" />
     <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
     <result column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
@@ -78,7 +78,7 @@
     Book_Id, Cust_Id, Acct_Id, Book_Type, Amount, `State`, Eff_Date, Exp_Date, Object_Id, 
     Ver_, Ext1, Ext2, Ext3
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CapitalBookExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.CapitalBookExample" >
     select
     <if test="distinct" >
       distinct
@@ -102,13 +102,13 @@
     delete from tc_capital_book
     where Book_Id = #{bookId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CapitalBookExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.CapitalBookExample" >
     delete from tc_capital_book
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.CapitalBook" >
     insert into tc_capital_book (Book_Id, Cust_Id, Acct_Id, 
       Book_Type, Amount, `State`, 
       Eff_Date, Exp_Date, Object_Id, 
@@ -120,7 +120,7 @@
       #{ver,jdbcType=BIGINT}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.CapitalBook" >
     insert into tc_capital_book
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="bookId != null" >
@@ -205,7 +205,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CapitalBookExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.CapitalBookExample" resultType="java.lang.Integer" >
     select count(*) from tc_capital_book
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -277,7 +277,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.CapitalBook" >
     update tc_capital_book
     <set >
       <if test="custId != null" >
@@ -319,7 +319,7 @@
     </set>
     where Book_Id = #{bookId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CapitalBook" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.CapitalBook" >
     update tc_capital_book
     set Cust_Id = #{custId,jdbcType=VARCHAR},
       Acct_Id = #{acctId,jdbcType=VARCHAR},

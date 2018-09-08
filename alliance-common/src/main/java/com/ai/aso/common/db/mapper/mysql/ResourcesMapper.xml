@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ResourcesMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Resources" >
+<mapper namespace="com.ai.aso.common.db.dao.ResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.Resources" >
     <id column="Source_Id" property="sourceId" jdbcType="INTEGER" />
     <result column="Parent_Id" property="parentId" jdbcType="INTEGER" />
     <result column="Menu_Name" property="menuName" jdbcType="VARCHAR" />
@@ -91,7 +91,7 @@
     Access_Perm, Access_Interval, Access_Freque, `State`, Create_Date, Modi_Date, Host_Groups, 
     Ext1, Ext2
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ResourcesExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.ResourcesExample" >
     select
     <if test="distinct" >
       distinct
@@ -115,13 +115,13 @@
     delete from tb_resources
     where Source_Id = #{sourceId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ResourcesExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.ResourcesExample" >
     delete from tb_resources
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Resources" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.Resources" >
     insert into tb_resources (Source_Id, Parent_Id, Menu_Name, 
       Menu_Icon, Sour_Name, Sour_Desc, 
       Sour_Type, Show_Seq, Method_Name, 
@@ -141,7 +141,7 @@
       #{hostGroups,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Resources" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.Resources" >
     insert into tb_resources
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="sourceId != null" >
@@ -292,7 +292,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ResourcesExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.ResourcesExample" resultType="java.lang.Integer" >
     select count(*) from tb_resources
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -408,7 +408,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Resources" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.Resources" >
     update tb_resources
     <set >
       <if test="parentId != null" >
@@ -483,7 +483,7 @@
     </set>
     where Source_Id = #{sourceId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Resources" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.Resources" >
     update tb_resources
     set Parent_Id = #{parentId,jdbcType=INTEGER},
       Menu_Name = #{menuName,jdbcType=VARCHAR},

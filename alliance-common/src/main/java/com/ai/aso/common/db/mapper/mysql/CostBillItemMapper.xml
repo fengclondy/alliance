@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.CostBillItemMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CostBillItem" >
+<mapper namespace="com.ai.aso.common.db.dao.CostBillItemMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.CostBillItem" >
     <id column="Cost_Item_Id" property="costItemId" jdbcType="BIGINT" />
     <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
     <result column="Actu_Month" property="actuMonth" jdbcType="VARCHAR" />
@@ -92,7 +92,7 @@
     Income, Discount, Cost_Region, Cost_Center, Ext1, Ext2, Ext3, Cost_Rate, Cost_Region_Name, 
     Cost_Fee
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CostBillItemExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.CostBillItemExample" >
     select
     <if test="distinct" >
       distinct
@@ -116,13 +116,13 @@
     delete from tc_cost_bill_item
     where Cost_Item_Id = #{costItemId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CostBillItemExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.CostBillItemExample" >
     delete from tc_cost_bill_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.CostBillItem" >
     insert into tc_cost_bill_item (Cost_Item_Id, Bill_Month, Actu_Month, 
       Cust_Id, Cust_Name, Region_Id, 
       Region_Name, Busi_Mode, Pay_Type, 
@@ -142,7 +142,7 @@
       #{ext3,jdbcType=VARCHAR}, #{costRate,jdbcType=INTEGER}, #{costRegionName,jdbcType=INTEGER}, 
       #{costFee,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.CostBillItem" >
     insert into tc_cost_bill_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="costItemId != null" >
@@ -299,7 +299,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CostBillItemExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.CostBillItemExample" resultType="java.lang.Integer" >
     select count(*) from tc_cost_bill_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -419,7 +419,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.CostBillItem" >
     update tc_cost_bill_item
     <set >
       <if test="billMonth != null" >
@@ -497,7 +497,7 @@
     </set>
     where Cost_Item_Id = #{costItemId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CostBillItem" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.CostBillItem" >
     update tc_cost_bill_item
     set Bill_Month = #{billMonth,jdbcType=VARCHAR},
       Actu_Month = #{actuMonth,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.DataRecMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataRec" >
+<mapper namespace="com.ai.aso.common.db.dao.DataRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.DataRec" >
     <id column="Rec_No" property="recNo" jdbcType="VARCHAR" />
     <result column="Batch_Code" property="batchCode" jdbcType="VARCHAR" />
     <result column="Rec_Class" property="recClass" jdbcType="SMALLINT" />
@@ -118,7 +118,7 @@
     Trd_Rec, Cost_Region, Cost_Center, Bill_Batch, Bill_Month, Bill_State, Ver_, Ext1, 
     Ext2, Ext3, Data_Type, Region_Id, Result_Code, Trd_Saler, Trd_Activity, Cont_No
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.DataRecExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.DataRecExample" >
     select
     <if test="distinct" >
       distinct
@@ -142,13 +142,13 @@
     delete from tc_data_rec
     where Rec_No = #{recNo,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.DataRecExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.DataRecExample" >
     delete from tc_data_rec
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.DataRec" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.DataRec" >
     insert into tc_data_rec (Rec_No, Batch_Code, Rec_Class, 
       Rec_Mode, Cont_Id, Cust_Id, 
       User_Nbr, Busi_Mode, Goods_Id, 
@@ -184,7 +184,7 @@
       #{trdSaler,jdbcType=VARCHAR}, #{trdActivity,jdbcType=VARCHAR}, #{contNo,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.DataRec" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.DataRec" >
     insert into tc_data_rec
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="recNo != null" >
@@ -485,7 +485,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.DataRecExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.DataRecExample" resultType="java.lang.Integer" >
     select count(*) from tc_data_rec
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -701,7 +701,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.DataRec" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.DataRec" >
     update tc_data_rec
     <set >
       <if test="batchCode != null" >
@@ -851,7 +851,7 @@
     </set>
     where Rec_No = #{recNo,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.DataRec" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.DataRec" >
     update tc_data_rec
     set Batch_Code = #{batchCode,jdbcType=VARCHAR},
       Rec_Class = #{recClass,jdbcType=SMALLINT},

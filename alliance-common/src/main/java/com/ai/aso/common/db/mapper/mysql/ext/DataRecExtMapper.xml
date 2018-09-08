@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ext.DataRecExtMapper">
-    <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataRec">
+<mapper namespace="com.ai.aso.common.db.dao.ext.DataRecExtMapper">
+    <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.DataRec">
         <id column="Rec_No" property="recNo" jdbcType="VARCHAR"/>
         <result column="Batch_Code" property="batchCode" jdbcType="BIGINT"/>
         <result column="Rec_Class" property="recClass" jdbcType="SMALLINT"/>
@@ -85,7 +85,7 @@
 	update tc_data_rec t set t.`state` = #{state} where t.rec_no = #{rec_no}
   </update>
 
-    <update id="crmResultUpdate" parameterType="com.ai.aso.biz.bo.DataRecBo">
+    <update id="crmResultUpdate" parameterType="com.ai.aso.common.bo.DataRecBo">
 	update tc_data_rec t 
 	
 	set t.`state` = #{state} , t.bill_serial = #{billSerial},
@@ -96,7 +96,7 @@
 	where t.rec_no = #{recNo}
   </update>
 
-    <update id="updateVer" parameterType="com.ai.aso.biz.bo.DataRecBo">
+    <update id="updateVer" parameterType="com.ai.aso.common.bo.DataRecBo">
 	update tc_data_rec t 
 	
 	set t.ver_ = t.ver_+1

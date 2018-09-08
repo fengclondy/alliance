@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.OrderMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Order" >
+<mapper namespace="com.ai.aso.common.db.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.Order" >
     <id column="Order_Id" property="orderId" jdbcType="VARCHAR" />
     <result column="Order_No" property="orderNo" jdbcType="VARCHAR" />
     <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
@@ -107,7 +107,7 @@
     Service_Name, Creator_Id, Creator_Name, Create_Date, Comple_Date, Oper_Date, Oper_Comm, 
     Ver_, Payment_Id, Wf_Inst_Id, Note, Ext1, Ext2, Ext3, Ext4, Ext5
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.OrderExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.OrderExample" >
     select
     <if test="distinct" >
       distinct
@@ -131,13 +131,13 @@
     delete from tc_order
     where Order_Id = #{orderId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.OrderExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.OrderExample" >
     delete from tc_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Order" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.Order" >
     insert into tc_order (Order_Id, Order_No, Cust_Id, 
       Cust_Name, Busi_Type, Order_Type, 
       Order_Desc, Pay_Type, Order_Fee, 
@@ -165,7 +165,7 @@
       #{note,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, 
       #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Order" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.Order" >
     insert into tc_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -406,7 +406,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.OrderExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.OrderExample" resultType="java.lang.Integer" >
     select count(*) from tc_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -582,7 +582,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Order" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.Order" >
     update tc_order
     <set >
       <if test="orderNo != null" >
@@ -702,7 +702,7 @@
     </set>
     where Order_Id = #{orderId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Order" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.Order" >
     update tc_order
     set Order_No = #{orderNo,jdbcType=VARCHAR},
       Cust_Id = #{custId,jdbcType=VARCHAR},

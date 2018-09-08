@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ExternalExecRecMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.ExternalExecRec" >
+<mapper namespace="com.ai.aso.common.db.dao.ExternalExecRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.ExternalExecRec" >
     <id column="Exec_Id" property="execId" jdbcType="BIGINT" />
     <result column="Task_Name" property="taskName" jdbcType="VARCHAR" />
     <result column="Url" property="url" jdbcType="VARCHAR" />
@@ -79,7 +79,7 @@
     Exec_Id, Task_Name, Url, `Method`, Params, Re_Code, Re_Mesg, Beg_Time, End_Time, 
     Consume, Remarks, Ext1, Ext2, Ext3
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ExternalExecRecExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.ExternalExecRecExample" >
     select
     <if test="distinct" >
       distinct
@@ -103,13 +103,13 @@
     delete from ta_external_exec_rec
     where Exec_Id = #{execId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ExternalExecRecExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.ExternalExecRecExample" >
     delete from ta_external_exec_rec
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.ExternalExecRec" >
     insert into ta_external_exec_rec (Exec_Id, Task_Name, Url, 
       `Method`, Params, Re_Code, 
       Re_Mesg, Beg_Time, End_Time, 
@@ -121,7 +121,7 @@
       #{consume,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, 
       #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.ExternalExecRec" >
     insert into ta_external_exec_rec
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="execId != null" >
@@ -212,7 +212,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ExternalExecRecExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.ExternalExecRecExample" resultType="java.lang.Integer" >
     select count(*) from ta_external_exec_rec
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -288,7 +288,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.ExternalExecRec" >
     update ta_external_exec_rec
     <set >
       <if test="taskName != null" >
@@ -333,7 +333,7 @@
     </set>
     where Exec_Id = #{execId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.ExternalExecRec" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.ExternalExecRec" >
     update ta_external_exec_rec
     set Task_Name = #{taskName,jdbcType=VARCHAR},
       Url = #{url,jdbcType=VARCHAR},

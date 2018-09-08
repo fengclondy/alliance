@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.PaymentMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Payment" >
+<mapper namespace="com.ai.aso.common.db.dao.PaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.Payment" >
     <id column="Payment_Id" property="paymentId" jdbcType="VARCHAR" />
     <result column="Pay_Mode" property="payMode" jdbcType="INTEGER" />
     <result column="Cost_Type" property="costType" jdbcType="INTEGER" />
@@ -88,7 +88,7 @@
     Pay_Date, Pay_State, Pay_Cert, Bill_Code, Bill_ServId, Bill_Acct, Pay_No, Pay_ReqId, 
     Pay_ResId, `Operator`, Auditor, Ext1, Ext2, Ext3
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.PaymentExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.PaymentExample" >
     select
     <if test="distinct" >
       distinct
@@ -112,13 +112,13 @@
     delete from tc_payment
     where Payment_Id = #{paymentId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.PaymentExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.PaymentExample" >
     delete from tc_payment
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Payment" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.Payment" >
     insert into tc_payment (Payment_Id, Pay_Mode, Cost_Type, 
       Cust_Id, Object_Type, Object_Id, 
       Amount, Apply_Date, Pay_Date, 
@@ -136,7 +136,7 @@
       #{auditor,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
       #{ext3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Payment" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.Payment" >
     insert into tc_payment
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="paymentId != null" >
@@ -275,7 +275,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.PaymentExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.PaymentExample" resultType="java.lang.Integer" >
     select count(*) from tc_payment
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -383,7 +383,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Payment" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.Payment" >
     update tc_payment
     <set >
       <if test="payMode != null" >
@@ -452,7 +452,7 @@
     </set>
     where Payment_Id = #{paymentId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Payment" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.Payment" >
     update tc_payment
     set Pay_Mode = #{payMode,jdbcType=INTEGER},
       Cost_Type = #{costType,jdbcType=INTEGER},

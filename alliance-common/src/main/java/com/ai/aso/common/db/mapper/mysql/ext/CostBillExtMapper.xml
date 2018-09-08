@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ext.CostBillExtMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CostBill" >
+<mapper namespace="com.ai.aso.common.db.dao.ext.CostBillExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.CostBill" >
     <id column="Cost_Id" property="costId" jdbcType="BIGINT" />
     <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
     <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
@@ -40,7 +40,7 @@
 		`Operator` 
 	</sql>
   <insert id="batchInsert" parameterType="java.util.List">
-  	insert into tc_cost_bill
+  	insert into b_cost_bill
     (Cost_Id, Bill_Month, Cust_Id, 
       Cust_Name, Region_Id, Region_Name, 
       Cont_Id, Used_Data, Exp_Data, 
@@ -66,7 +66,7 @@
 		select 
 		<include refid="sum_Column_List" />
  		from
-		tc_cost_bill 
+		b_cost_bill
 		WHERE State=100
 		and Bill_Fee>0 and Ext1='200' and Cust_Id=#{custId}
 

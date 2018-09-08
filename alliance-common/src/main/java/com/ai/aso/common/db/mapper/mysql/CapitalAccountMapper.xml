@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.CapitalAccountMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CapitalAccount" >
+<mapper namespace="com.ai.aso.common.db.dao.CapitalAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.CapitalAccount" >
     <id column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
     <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
     <result column="Acct_Type" property="acctType" jdbcType="SMALLINT" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List" >
     Acct_Id, Cust_Id, Acct_Type, Amount, Create_Date, Ext1, Ext2, Ext3
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CapitalAccountExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.CapitalAccountExample" >
     select
     <if test="distinct" >
       distinct
@@ -96,13 +96,13 @@
     delete from tc_capital_account
     where Acct_Id = #{acctId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CapitalAccountExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.CapitalAccountExample" >
     delete from tc_capital_account
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CapitalAccount" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.CapitalAccount" >
     insert into tc_capital_account (Acct_Id, Cust_Id, Acct_Type, 
       Amount, Create_Date, Ext1, 
       Ext2, Ext3)
@@ -110,7 +110,7 @@
       #{amount,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{ext1,jdbcType=VARCHAR}, 
       #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CapitalAccount" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.CapitalAccount" >
     insert into tc_capital_account
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="acctId != null" >
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CapitalAccountExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.CapitalAccountExample" resultType="java.lang.Integer" >
     select count(*) from tc_capital_account
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -217,7 +217,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CapitalAccount" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.CapitalAccount" >
     update tc_capital_account
     <set >
       <if test="custId != null" >
@@ -244,7 +244,7 @@
     </set>
     where Acct_Id = #{acctId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CapitalAccount" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.CapitalAccount" >
     update tc_capital_account
     set Cust_Id = #{custId,jdbcType=VARCHAR},
       Acct_Type = #{acctType,jdbcType=SMALLINT},

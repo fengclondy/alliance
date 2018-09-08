@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.base.param.db.dao.AttrPkgDefMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.base.param.db.model.AttrPkgDef" >
+<mapper namespace="com.ai.aso.common.db.dao.AttrPkgDefMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.AttrPkgDef" >
     <id column="Attr_Pkg_Code" property="attrPkgCode" jdbcType="VARCHAR" />
     <result column="Attr_Pkg_Name" property="attrPkgName" jdbcType="VARCHAR" />
     <result column="Is_Reload" property="isReload" jdbcType="SMALLINT" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List" >
     Attr_Pkg_Code, Attr_Pkg_Name, Is_Reload, Reload_Class, Ver_
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.base.param.db.model.AttrPkgDefExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.AttrPkgDefExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,19 +93,19 @@
     delete from ta_attr_pkg_def
     where Attr_Pkg_Code = #{attrPkgCode,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.base.param.db.model.AttrPkgDefExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.AttrPkgDefExample" >
     delete from ta_attr_pkg_def
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.base.param.db.model.AttrPkgDef" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.AttrPkgDef" >
     insert into ta_attr_pkg_def (Attr_Pkg_Code, Attr_Pkg_Name, Is_Reload, 
       Reload_Class, Ver_)
     values (#{attrPkgCode,jdbcType=VARCHAR}, #{attrPkgName,jdbcType=VARCHAR}, #{isReload,jdbcType=SMALLINT}, 
       #{reloadClass,jdbcType=VARCHAR}, #{ver,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.base.param.db.model.AttrPkgDef" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.AttrPkgDef" >
     insert into ta_attr_pkg_def
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="attrPkgCode != null" >
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.base.param.db.model.AttrPkgDefExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.AttrPkgDefExample" resultType="java.lang.Integer" >
     select count(*) from ta_attr_pkg_def
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.base.param.db.model.AttrPkgDef" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.AttrPkgDef" >
     update ta_attr_pkg_def
     <set >
       <if test="attrPkgName != null" >
@@ -200,7 +200,7 @@
     </set>
     where Attr_Pkg_Code = #{attrPkgCode,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.base.param.db.model.AttrPkgDef" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.AttrPkgDef" >
     update ta_attr_pkg_def
     set Attr_Pkg_Name = #{attrPkgName,jdbcType=VARCHAR},
       Is_Reload = #{isReload,jdbcType=SMALLINT},

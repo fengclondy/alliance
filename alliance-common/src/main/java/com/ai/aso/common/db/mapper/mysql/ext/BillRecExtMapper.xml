@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ext.BillRecExtMapper">
-    <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.BillRec">
+<mapper namespace="com.ai.aso.common.db.dao.ext.BillRecExtMapper">
+    <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.BillRec">
         <id column="Bill_Rec_Id" property="billRecId" jdbcType="BIGINT"/>
         <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR"/>
         <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR"/>
@@ -86,7 +86,7 @@
    <select id="selectBillRec" resultMap="BaseResultMap" parameterType="java.lang.String">
   		select
   		 <include refid="Base_Column_List_" />
-		 from tc_bill_rec
+		 from b_bill_rec
 		<where>
 			<if test="batchCode != null and batchCode != '' "> AND Bill_Month like #{batchCode}</if>
 			<![CDATA[ 
@@ -96,7 +96,7 @@
 		ORDER BY Cust_Id
   </select>
     <insert id="batchInsert" parameterType="java.util.List">
-        insert into tc_bill_rec (Bill_Rec_Id, Bill_Month, Bill_Batch,
+        insert into b_bill_rec (Bill_Rec_Id, Bill_Month, Bill_Batch,
         Cust_Id, Cust_Name, Busi_Mode,
         Source_Type, Cont_Id, Pay_Type,
         Rec_No, Rec_Class, Rec_Mode,
@@ -129,7 +129,7 @@
     <select id="selectBillRecGroupCust" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="CustGroup_Column_List"/>
-        from tc_bill_rec
+        from b_bill_rec
         where Bill_Batch = #{billBatch}
         group by Cust_Id
     </select>
@@ -137,7 +137,7 @@
     <select id="queryBillRecByCont" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="CustGroup_Column_List"/>
-        from tc_bill_rec
+        from b_bill_rec
         where Bill_Batch = #{billBatch} AND Cont_Id=#{contId}
         group by Cont_Id
     </select>
@@ -145,7 +145,7 @@
         select
         <include refid="CustGroup_Column_List"/>
         from
-        tc_bill_rec
+        b_bill_rec
         where Bill_Month=#{billMonth}
         AND Bill_Batch in
         (
@@ -161,7 +161,7 @@
         select
         <include refid="CustGroup_Column_List"/>
         from
-        tc_bill_rec
+        b_bill_rec
         where Cont_Id =#{contId}
         AND Bill_Batch in
         (
@@ -175,7 +175,7 @@
 
 
     <update id="updateBillMonth" parameterType="map">
-    update tc_bill_rec b, tc_cust_bill c
+    update b_bill_rec b, tc_cust_bill c
     set b.Bill_Month = #{billMonth}
     where b.Bill_Batch = c.Bill_Batch
     and b.Cust_Id = c.Cust_Id
@@ -188,7 +188,7 @@
 </update>
 
     <update id="updateBillMonthByCust" parameterType="map">
-        update tc_bill_rec b, tc_cust_bill c
+        update b_bill_rec b, tc_cust_bill c
         set b.Bill_Month = #{billMonth}
         where  c.Cont_Id =#{contId}
         and b.Bill_Batch in
@@ -199,6 +199,6 @@
         )
     </update>
     <select id="selectNewbillBatch" resultType="java.lang.String">
-  	select max(Bill_Batch) from tc_bill_rec
+  	select max(Bill_Batch) from b_bill_rec
   </select>
 </mapper>

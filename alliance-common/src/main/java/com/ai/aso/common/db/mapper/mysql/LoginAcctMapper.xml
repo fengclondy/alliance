@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.LoginAcctMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.LoginAcct" >
+<mapper namespace="com.ai.aso.common.db.dao.LoginAcctMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.LoginAcct" >
     <id column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
     <result column="Username" property="username" jdbcType="VARCHAR" />
     <result column="Nickname" property="nickname" jdbcType="VARCHAR" />
@@ -80,7 +80,7 @@
     Acct_Id, Username, Nickname, `Password`, Pw_Salt, System_Code, `State`, Create_Date, 
     Modi_Date, Eff_Date, Exp_Date, Pw_Mdate, Ext1, Ext2, Ext3
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.LoginAcctExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.LoginAcctExample" >
     select
     <if test="distinct" >
       distinct
@@ -104,13 +104,13 @@
     delete from tb_login_acct
     where Acct_Id = #{acctId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.LoginAcctExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.LoginAcctExample" >
     delete from tb_login_acct
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.LoginAcct" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.LoginAcct" >
     insert into tb_login_acct (Acct_Id, Username, Nickname, 
       `Password`, Pw_Salt, System_Code, 
       `State`, Create_Date, Modi_Date, 
@@ -122,7 +122,7 @@
       #{effDate,jdbcType=TIMESTAMP}, #{expDate,jdbcType=TIMESTAMP}, #{pwMdate,jdbcType=TIMESTAMP}, 
       #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.LoginAcct" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.LoginAcct" >
     insert into tb_login_acct
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="acctId != null" >
@@ -219,7 +219,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.LoginAcctExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.LoginAcctExample" resultType="java.lang.Integer" >
     select count(*) from tb_login_acct
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -299,7 +299,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.LoginAcct" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.LoginAcct" >
     update tb_login_acct
     <set >
       <if test="username != null" >
@@ -347,7 +347,7 @@
     </set>
     where Acct_Id = #{acctId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.LoginAcct" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.LoginAcct" >
     update tb_login_acct
     set Username = #{username,jdbcType=VARCHAR},
       Nickname = #{nickname,jdbcType=VARCHAR},

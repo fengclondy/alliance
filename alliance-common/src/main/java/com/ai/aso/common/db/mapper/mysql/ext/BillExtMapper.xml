@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ext.BillExtMapper">
+<mapper namespace="com.ai.aso.common.db.dao.ext.BillExtMapper">
 
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.BillRec" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.BillRec" >
     <id column="Bill_Rec_Id" property="billRecId" jdbcType="BIGINT" />
     <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
     <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR" />
@@ -53,7 +53,7 @@
   </resultMap>
 
 	<insert id="batchObtainBillRec" parameterType="java.lang.String">
-		insert into TC_BILL_REC(
+		insert into b_BILL_REC(
 			Bill_Month, Bill_Batch, Source_Type, Pay_Type, Data_Book_Id, Cap_Book_Id,
 			Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, Cust_Name,
 			Region_Id, Region_Name, Busi_Mode, User_Nbr, Cost_Region, Cost_Region_Name,
@@ -69,13 +69,13 @@
 			Goods_Name, Data_Val, Discount, Bill_Fee, Total_Fee, Off_fee, 0 Cost_Rate,
 			0 Cost_Fee, Remarks, State, Create_Date, End_Date, Trd_Rec, Trd_Saler,
 			Trd_Activity, Cost_Center, 100 State, null, null, null
-		from TC_DATA_REC
+		from b_DATA_REC
 		where State = 2 and Bill_Batch = #{billBatch} and Bill_State=200
 	</insert>
 
 
     <insert id="ObtainBillRec" parameterType="java.lang.String">
-        insert into TC_BILL_REC(
+        insert into b_BILL_REC(
         Bill_Month, Bill_Batch, Source_Type, Pay_Type, Data_Book_Id, Cap_Book_Id,
         Rec_No, Batch_Code, Rec_Class, Rec_Mode, Cont_Id, Cont_No, Cust_Id, Cust_Name,
         Region_Id, Region_Name, Busi_Mode, User_Nbr, Cost_Region, Cost_Region_Name,
@@ -91,19 +91,19 @@
         Goods_Name, Data_Val, Discount, Bill_Fee, Total_Fee, Off_fee, 0 Cost_Rate,
         0 Cost_Fee, Remarks, State, Create_Date, End_Date, Trd_Rec, Trd_Saler,
         Trd_Activity, Cost_Center, 100 State, null, null, null
-        from TC_DATA_REC
+        from b_DATA_REC
         where State = 2 and Bill_Batch = #{billBatch} and Bill_State=200 AND Cont_Id=#{contId}
     </insert>
 
 	<update id="updateCostRate" parameterType="map">
-		update TC_BILL_REC
+		update b_BILL_REC
 		set Cust_Name = #{custName},
 		    Cost_Rate = #{costRate},
 		    Cost_Fee = Bill_Fee * #{costRate} /100
 		where Bill_Batch = #{billBatch} and Cust_Id = #{custId}
 	</update>
 <update id="updateCostRateCont" parameterType="map">
-		update TC_BILL_REC
+		update b_BILL_REC
 		set Cust_Name = #{custName},
 		    Cost_Rate = #{costRate},
 		    Cost_Fee = Bill_Fee * #{costRate} /100

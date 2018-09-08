@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ext.DataBookaExtMapper" >
+<mapper namespace="com.ai.aso.common.db.dao.ext.DataBookaExtMapper" >
 	<!-- <update id="updateDataBooka">
 		update TC_DATA_BOOKA  
         set Cumu_Val=#{amount}+Cumu_Val,ver_=#{ver_}+1 

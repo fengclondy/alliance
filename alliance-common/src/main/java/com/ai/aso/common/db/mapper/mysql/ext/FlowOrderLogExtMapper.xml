@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ext.FlowOrderLogExtMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.FlowOrderLog" >
+<mapper namespace="com.ai.aso.common.db.dao.ext.FlowOrderLogExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.FlowOrderLog" >
     <id column="request_no" jdbcType="VARCHAR" property="requestNo" />
     <result column="cont_id" jdbcType="VARCHAR" property="contId" />
     <result column="phone_id" jdbcType="VARCHAR" property="phoneId" />

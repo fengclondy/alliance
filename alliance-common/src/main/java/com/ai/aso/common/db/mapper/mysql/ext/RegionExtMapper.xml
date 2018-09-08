@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ext.RegionExtMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Region" >
+<mapper namespace="com.ai.aso.common.db.dao.ext.RegionExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.Region" >
     <id column="Region_Id" property="regionId" jdbcType="INTEGER" />
     <result column="P_Region_Id" property="pRegionId" jdbcType="INTEGER" />
     <result column="Region_Name" property="regionName" jdbcType="VARCHAR" />

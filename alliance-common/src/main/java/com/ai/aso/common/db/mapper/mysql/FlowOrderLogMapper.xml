@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.FlowOrderLogMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.FlowOrderLog" >
+<mapper namespace="com.ai.aso.common.db.dao.FlowOrderLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.FlowOrderLog" >
     <id column="request_no" property="requestNo" jdbcType="VARCHAR" />
     <result column="cont_id" property="contId" jdbcType="VARCHAR" />
     <result column="phone_id" property="phoneId" jdbcType="VARCHAR" />
@@ -78,7 +78,7 @@
     request_no, cont_id, phone_id, offer_id, discount, request_data, state, create_date, 
     result_code, result_date, back_code, back_desc, back_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.FlowOrderLogExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.FlowOrderLogExample" >
     select
     <if test="distinct" >
       distinct
@@ -102,13 +102,13 @@
     delete from tc_flow_order_log
     where request_no = #{requestNo,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.FlowOrderLogExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.FlowOrderLogExample" >
     delete from tc_flow_order_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.FlowOrderLog" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.FlowOrderLog" >
     insert into tc_flow_order_log (request_no, cont_id, phone_id, 
       offer_id, discount, request_data, 
       state, create_date, result_code, 
@@ -120,7 +120,7 @@
       #{resultDate,jdbcType=TIMESTAMP}, #{backCode,jdbcType=VARCHAR}, #{backDesc,jdbcType=VARCHAR}, 
       #{backDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.FlowOrderLog" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.FlowOrderLog" >
     insert into tc_flow_order_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="requestNo != null" >
@@ -205,7 +205,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.FlowOrderLogExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.FlowOrderLogExample" resultType="java.lang.Integer" >
     select count(*) from tc_flow_order_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -277,7 +277,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.FlowOrderLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.FlowOrderLog" >
     update tc_flow_order_log
     <set >
       <if test="contId != null" >
@@ -319,7 +319,7 @@
     </set>
     where request_no = #{requestNo,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.FlowOrderLog" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.FlowOrderLog" >
     update tc_flow_order_log
     set cont_id = #{contId,jdbcType=VARCHAR},
       phone_id = #{phoneId,jdbcType=VARCHAR},

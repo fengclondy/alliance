@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.CustExtMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.CustExt" >
+<mapper namespace="com.ai.aso.common.db.dao.CustExtMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.CustExt" >
     <id column="Cust_Ext_Id" property="custExtId" jdbcType="BIGINT" />
     <result column="Company_Name" property="companyName" jdbcType="VARCHAR" />
     <result column="Company_Type" property="companyType" jdbcType="SMALLINT" />
@@ -99,7 +99,7 @@
     Company_Ext09, Company_Ext10, Company_Ext11, Company_Ext12, Company_Ext13, Snap_Flag, 
     Snap_Ver, Company_Ext14, Company_Ext15, Company_Ext16, Company_Ext17
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.CustExtExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.CustExtExample" >
     select
     <if test="distinct" >
       distinct
@@ -123,13 +123,13 @@
     delete from tc_cust_ext
     where Cust_Ext_Id = #{custExtId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.CustExtExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.CustExtExample" >
     delete from tc_cust_ext
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.CustExt" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.CustExt" >
     insert into tc_cust_ext (Cust_Ext_Id, Company_Name, Company_Type, 
       Legel_Name, Legel_Cert, Is_Taxpayer, 
       Certificate, Company_Addr, Company_Phone, 
@@ -153,7 +153,7 @@
       #{companyExt14,jdbcType=VARCHAR}, #{companyExt15,jdbcType=VARCHAR}, #{companyExt16,jdbcType=VARCHAR}, 
       #{companyExt17,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.CustExt" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.CustExt" >
     insert into tc_cust_ext
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="custExtId != null" >
@@ -346,7 +346,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.CustExtExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.CustExtExample" resultType="java.lang.Integer" >
     select count(*) from tc_cust_ext
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -490,7 +490,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.CustExt" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.CustExt" >
     update tc_cust_ext
     <set >
       <if test="companyName != null" >
@@ -586,7 +586,7 @@
     </set>
     where Cust_Ext_Id = #{custExtId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.CustExt" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.CustExt" >
     update tc_cust_ext
     set Company_Name = #{companyName,jdbcType=VARCHAR},
       Company_Type = #{companyType,jdbcType=SMALLINT},

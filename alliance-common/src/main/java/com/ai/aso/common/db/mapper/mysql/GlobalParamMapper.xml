@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.base.param.db.dao.GlobalParamMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.base.param.db.model.GlobalParam" >
+<mapper namespace="com.ai.aso.common.db.dao.GlobalParamMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.GlobalParam" >
     <id column="Param_Key" property="paramKey" jdbcType="VARCHAR" />
     <result column="Param_Val" property="paramVal" jdbcType="VARCHAR" />
     <result column="Param_Desc" property="paramDesc" jdbcType="VARCHAR" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List" >
     Param_Key, Param_Val, Param_Desc, Is_Reload, Ver_
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.base.param.db.model.GlobalParamExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.GlobalParamExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,19 +93,19 @@
     delete from ta_global_param
     where Param_Key = #{paramKey,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.base.param.db.model.GlobalParamExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.GlobalParamExample" >
     delete from ta_global_param
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.base.param.db.model.GlobalParam" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.GlobalParam" >
     insert into ta_global_param (Param_Key, Param_Val, Param_Desc, 
       Is_Reload, Ver_)
     values (#{paramKey,jdbcType=VARCHAR}, #{paramVal,jdbcType=VARCHAR}, #{paramDesc,jdbcType=VARCHAR}, 
       #{isReload,jdbcType=SMALLINT}, #{ver,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.base.param.db.model.GlobalParam" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.GlobalParam" >
     insert into ta_global_param
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="paramKey != null" >
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.base.param.db.model.GlobalParamExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.GlobalParamExample" resultType="java.lang.Integer" >
     select count(*) from ta_global_param
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.base.param.db.model.GlobalParam" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.GlobalParam" >
     update ta_global_param
     <set >
       <if test="paramVal != null" >
@@ -200,7 +200,7 @@
     </set>
     where Param_Key = #{paramKey,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.base.param.db.model.GlobalParam" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.GlobalParam" >
     update ta_global_param
     set Param_Val = #{paramVal,jdbcType=VARCHAR},
       Param_Desc = #{paramDesc,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ContractMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.Contract" >
+<mapper namespace="com.ai.aso.common.db.dao.ContractMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.Contract" >
     <id column="Cont_Id" property="contId" jdbcType="VARCHAR" />
     <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
     <result column="Cust_Name" property="custName" jdbcType="VARCHAR" />
@@ -92,7 +92,7 @@
     Pay_Type, Payment, Deposit, Payed_Fee, Cont_Off, Create_Date, Eff_Date, Exp_Date, 
     `State`, Sub_State, Region_Id, Service_Id, Payment_Id, Ext1, Ext2, Ext3, Ext4, Ext5
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ContractExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.ContractExample" >
     select
     <if test="distinct" >
       distinct
@@ -116,13 +116,13 @@
     delete from tc_contract
     where Cont_Id = #{contId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ContractExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.ContractExample" >
     delete from tc_contract
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.Contract" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.Contract" >
     insert into tc_contract (Cont_Id, Cust_Id, Cust_Name, 
       Cont_No, Cont_Name, Cont_Copy, 
       Cont_Value, Busi_Type, Pay_Type, 
@@ -142,7 +142,7 @@
       #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, 
       #{ext5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.Contract" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.Contract" >
     insert into tc_contract
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="contId != null" >
@@ -305,7 +305,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ContractExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.ContractExample" resultType="java.lang.Integer" >
     select count(*) from tc_contract
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -429,7 +429,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.Contract" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.Contract" >
     update tc_contract
     <set >
       <if test="custId != null" >
@@ -510,7 +510,7 @@
     </set>
     where Cont_Id = #{contId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.Contract" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.Contract" >
     update tc_contract
     set Cust_Id = #{custId,jdbcType=VARCHAR},
       Cust_Name = #{custName,jdbcType=VARCHAR},

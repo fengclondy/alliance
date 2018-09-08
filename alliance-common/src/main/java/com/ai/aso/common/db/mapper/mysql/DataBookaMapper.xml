@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.DataBookaMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.DataBooka" >
+<mapper namespace="com.ai.aso.common.db.dao.DataBookaMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.DataBooka" >
     <id column="Book_Id" property="bookId" jdbcType="VARCHAR" />
     <result column="Cust_Id" property="custId" jdbcType="VARCHAR" />
     <result column="Acct_Id" property="acctId" jdbcType="VARCHAR" />
@@ -95,7 +95,7 @@
     Create_Date, Service_Id, Total_Val, Cumu_Val, Bala_Val, Ver_, EXT1, EXT2, EXT3, EXT4, 
     EXT5
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.DataBookaExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.DataBookaExample" >
     select
     <if test="distinct" >
       distinct
@@ -119,13 +119,13 @@
     delete from tc_data_booka
     where Book_Id = #{bookId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.DataBookaExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.DataBookaExample" >
     delete from tc_data_booka
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.DataBooka" >
     insert into tc_data_booka (Book_Id, Cust_Id, Acct_Id, 
       Acct_Type, Cont_Id, Busi_Type, 
       Eff_Date, Exp_Date, Book_Type, 
@@ -147,7 +147,7 @@
       #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.DataBooka" >
     insert into tc_data_booka
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="bookId != null" >
@@ -322,7 +322,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.DataBookaExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.DataBookaExample" resultType="java.lang.Integer" >
     select count(*) from tc_data_booka
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -454,7 +454,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.DataBooka" >
     update tc_data_booka
     <set >
       <if test="custId != null" >
@@ -541,7 +541,7 @@
     </set>
     where Book_Id = #{bookId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.DataBooka" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.DataBooka" >
     update tc_data_booka
     set Cust_Id = #{custId,jdbcType=VARCHAR},
       Acct_Id = #{acctId,jdbcType=VARCHAR},

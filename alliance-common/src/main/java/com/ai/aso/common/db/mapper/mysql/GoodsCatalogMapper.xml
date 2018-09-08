@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.GoodsCatalogMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.GoodsCatalog" >
+<mapper namespace="com.ai.aso.common.db.dao.GoodsCatalogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.GoodsCatalog" >
     <id column="Catalog_Id" property="catalogId" jdbcType="VARCHAR" />
     <result column="P_Catalog_Id" property="pCatalogId" jdbcType="VARCHAR" />
     <result column="Catalog_Name" property="catalogName" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     Catalog_Id, P_Catalog_Id, `Catalog_Name`, Catalog_State
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.GoodsCatalogExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.GoodsCatalogExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from tc_goods_catalog
     where Catalog_Id = #{catalogId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.GoodsCatalogExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.GoodsCatalogExample" >
     delete from tc_goods_catalog
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.GoodsCatalog" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.GoodsCatalog" >
     insert into tc_goods_catalog (Catalog_Id, P_Catalog_Id, `Catalog_Name`, 
       Catalog_State)
     values (#{catalogId,jdbcType=VARCHAR}, #{pCatalogId,jdbcType=VARCHAR}, #{catalogName,jdbcType=VARCHAR}, 
       #{catalogState,jdbcType=SMALLINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.GoodsCatalog" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.GoodsCatalog" >
     insert into tc_goods_catalog
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="catalogId != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.GoodsCatalogExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.GoodsCatalogExample" resultType="java.lang.Integer" >
     select count(*) from tc_goods_catalog
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.GoodsCatalog" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.GoodsCatalog" >
     update tc_goods_catalog
     <set >
       <if test="pCatalogId != null" >
@@ -186,7 +186,7 @@
     </set>
     where Catalog_Id = #{catalogId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.GoodsCatalog" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.GoodsCatalog" >
     update tc_goods_catalog
     set P_Catalog_Id = #{pCatalogId,jdbcType=VARCHAR},
       `Catalog_Name` = #{catalogName,jdbcType=VARCHAR},

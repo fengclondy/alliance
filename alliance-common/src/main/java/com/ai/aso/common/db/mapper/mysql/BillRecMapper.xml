@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.BillRecMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.BillRec" >
+<mapper namespace="com.ai.aso.common.db.dao.BillRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.BillRec" >
     <id column="Bill_Rec_Id" property="billRecId" jdbcType="BIGINT" />
     <result column="Bill_Month" property="billMonth" jdbcType="VARCHAR" />
     <result column="Bill_Batch" property="billBatch" jdbcType="VARCHAR" />
@@ -116,7 +116,7 @@
     Total_Fee, Off_Fee, Cost_Rate, Cost_Fee, Remarks, Rec_State, Sub_Date, Rec_Date, 
     Trd_Rec, Trd_Saler, Trd_Activity, Cost_Center, `State`, Ext1, Ext2, Ext3
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.BillRecExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.BillRecExample" >
     select
     <if test="distinct" >
       distinct
@@ -140,13 +140,13 @@
     delete from tc_bill_rec
     where Bill_Rec_Id = #{billRecId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.BillRecExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.BillRecExample" >
     delete from tc_bill_rec
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.BillRec" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.BillRec" >
     insert into tc_bill_rec (Bill_Rec_Id, Bill_Month, Bill_Batch, 
       Source_Type, Pay_Type, Data_Book_Id, 
       Cap_Book_Id, Rec_No, Batch_Code, 
@@ -180,7 +180,7 @@
       #{costCenter,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}, 
       #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.BillRec" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.BillRec" >
     insert into tc_bill_rec
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="billRecId != null" >
@@ -469,7 +469,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.BillRecExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.BillRecExample" resultType="java.lang.Integer" >
     select count(*) from tc_bill_rec
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -677,7 +677,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.BillRec" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.BillRec" >
     update tc_bill_rec
     <set >
       <if test="billMonth != null" >
@@ -821,7 +821,7 @@
     </set>
     where Bill_Rec_Id = #{billRecId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.BillRec" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.BillRec" >
     update tc_bill_rec
     set Bill_Month = #{billMonth,jdbcType=VARCHAR},
       Bill_Batch = #{billBatch,jdbcType=VARCHAR},

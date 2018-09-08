@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.sequence.dao.SequenceConfMapper">
-	<resultMap id="BaseResultMap" type="com.ai.aso.sequence.dao.model.SequenceConf">
+<mapper namespace="com.ai.aso.common.db.dao.SequenceConfMapper">
+	<resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.SequenceConf">
 		<id column="Seq_Key" property="seqKey" jdbcType="VARCHAR" />
 		<result column="Current_Val" property="currentVal" jdbcType="BIGINT" />
 		<result column="Increment" property="increment" jdbcType="INTEGER" />
@@ -21,18 +21,18 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from ta_sequence
+    from ta_common.db
     where Seq_Key = #{seqKey,jdbcType=VARCHAR}
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap" >
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from ta_sequence
+    from ta_common.db
   </select>
 
-  <update id="saveNumberVal" parameterType="com.ai.aso.sequence.dao.model.SequenceConf" >
-    update ta_sequence
+  <update id="saveNumberVal" parameterType="com.ai.aso.common.db.model.SequenceConf" >
+    update ta_common.db
     <set >
       <if test="currentVal != null" >
         Current_Val = #{currentVal,jdbcType=BIGINT},

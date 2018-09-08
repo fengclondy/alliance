@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.biz.db.dao.ContractSynchronizeMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.biz.db.model.ContractSynchronize" >
+<mapper namespace="com.ai.aso.common.db.dao.ContractSynchronizeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.ContractSynchronize" >
     <id column="Cont_Id" property="contId" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     Cont_Id, state, Create_Date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.biz.db.model.ContractSynchronizeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.ContractSynchronizeExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from tc_contract_synchronize
     where Cont_Id = #{contId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.biz.db.model.ContractSynchronizeExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.ContractSynchronizeExample" >
     delete from tc_contract_synchronize
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.biz.db.model.ContractSynchronize" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.ContractSynchronize" >
     insert into tc_contract_synchronize (Cont_Id, state, Create_Date
       )
     values (#{contId,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.biz.db.model.ContractSynchronize" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.ContractSynchronize" >
     insert into tc_contract_synchronize
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="contId != null" >
@@ -129,7 +129,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.biz.db.model.ContractSynchronizeExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.ContractSynchronizeExample" resultType="java.lang.Integer" >
     select count(*) from tc_contract_synchronize
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -161,7 +161,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.biz.db.model.ContractSynchronize" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.ContractSynchronize" >
     update tc_contract_synchronize
     <set >
       <if test="state != null" >
@@ -173,7 +173,7 @@
     </set>
     where Cont_Id = #{contId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.biz.db.model.ContractSynchronize" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.ContractSynchronize" >
     update tc_contract_synchronize
     set state = #{state,jdbcType=VARCHAR},
       Create_Date = #{createDate,jdbcType=TIMESTAMP}

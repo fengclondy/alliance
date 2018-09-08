@@ -1,4 +1,4 @@
-package com.ai.aso.common.log.model;
+package com.ai.aso.common.db.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,8 +1,8 @@
 package com.ai.aso.manager.interceptor;
 
 import com.ai.aso.base.constants.SysConstants;
-import com.ai.aso.common.log.UnityLogService;
-import com.ai.aso.common.log.model.UserOperLog;
+import com.ai.aso.common.log.service.UnityLogService;
+import com.ai.aso.common.db.model.UserOperLog;
 import com.ai.aso.common.param.GlobalParamSet;
 import com.ai.aso.common.constants.BizConstants;
 import com.ai.aso.security.model.Principal;

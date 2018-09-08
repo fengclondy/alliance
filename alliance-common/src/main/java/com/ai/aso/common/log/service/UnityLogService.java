@@ -6,10 +6,10 @@
  *
  */
 
-package com.ai.aso.common.log;
+package com.ai.aso.common.log.service;
 
-import com.ai.aso.common.log.model.UserLoginLog;
-import com.ai.aso.common.log.model.UserOperLog;
+import com.ai.aso.common.db.model.UserLoginLog;
+import com.ai.aso.common.db.model.UserOperLog;
 
 public interface UnityLogService {
 	

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ai.aso.base.constants.SysConstants;
-import com.ai.aso.common.log.UnityLogService;
-import com.ai.aso.common.log.model.UserLoginLog;
+import com.ai.aso.common.log.service.UnityLogService;
+import com.ai.aso.common.db.model.UserLoginLog;
 import com.ai.aso.common.param.GlobalParamSet;
 import com.ai.aso.common.constants.BizConstants;
 import com.ai.aso.common.service.UserLogService;

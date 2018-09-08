@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.aso.common.log.dao.UserOperLogMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.aso.common.log.model.UserOperLog" >
+<mapper namespace="com.ai.aso.common.db.dao.UserOperLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.aso.common.db.model.UserOperLog" >
     <id column="Id" property="id" jdbcType="BIGINT" />
     <result column="Model_Code" property="modelCode" jdbcType="VARCHAR" />
     <result column="Model_Name" property="modelName" jdbcType="VARCHAR" />
@@ -80,7 +80,7 @@
     Id, Model_Code, Model_Name, Oper_Type, Oper_Comm, Oper_Params, Oper_Result, Log_Date, 
     Log_Level, `Operator`, Operator_Id, Oper_Date, Oper_IP, System_Code, Remarks
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.log.model.UserOperLogExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.aso.common.db.model.UserOperLogExample" >
     select
     <if test="distinct" >
       distinct
@@ -104,13 +104,13 @@
     delete from b_user_oper_log
     where Id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.aso.common.log.model.UserOperLogExample" >
+  <delete id="deleteByExample" parameterType="com.ai.aso.common.db.model.UserOperLogExample" >
     delete from b_user_oper_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+  <insert id="insert" parameterType="com.ai.aso.common.db.model.UserOperLog" >
     insert into b_user_oper_log (Id, Model_Code, Model_Name,
       Oper_Type, Oper_Comm, Oper_Params, 
       Oper_Result, Log_Date, Log_Level, 
@@ -124,7 +124,7 @@
       #{operIp,jdbcType=VARCHAR}, #{systemCode,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+  <insert id="insertSelective" parameterType="com.ai.aso.common.db.model.UserOperLog" >
     insert into b_user_oper_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -221,7 +221,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.aso.common.log.model.UserOperLogExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.aso.common.db.model.UserOperLogExample" resultType="java.lang.Integer" >
     select count(*) from b_user_oper_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -301,7 +301,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.db.model.UserOperLog" >
     update b_user_oper_log
     <set >
       <if test="modelCode != null" >
@@ -349,7 +349,7 @@
     </set>
     where Id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.log.model.UserOperLog" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.db.model.UserOperLog" >
     update b_user_oper_log
     set Model_Code = #{modelCode,jdbcType=VARCHAR},
       Model_Name = #{modelName,jdbcType=VARCHAR},

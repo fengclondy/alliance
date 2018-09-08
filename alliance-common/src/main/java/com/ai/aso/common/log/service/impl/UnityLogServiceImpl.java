@@ -1,13 +1,13 @@
-package com.ai.aso.common.log.impl;
+package com.ai.aso.common.log.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ai.aso.common.log.UnityLogService;
-import com.ai.aso.common.log.dao.UserLoginLogMapper;
-import com.ai.aso.common.log.dao.UserOperLogMapper;
-import com.ai.aso.common.log.model.UserLoginLog;
-import com.ai.aso.common.log.model.UserOperLog;
+import com.ai.aso.common.log.service.UnityLogService;
+import com.ai.aso.common.db.dao.UserLoginLogMapper;
+import com.ai.aso.common.db.dao.UserOperLogMapper;
+import com.ai.aso.common.db.model.UserLoginLog;
+import com.ai.aso.common.db.model.UserOperLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

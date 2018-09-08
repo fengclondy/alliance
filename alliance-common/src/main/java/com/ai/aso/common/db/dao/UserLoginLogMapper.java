@@ -1,9 +1,9 @@
-package com.ai.aso.common.log.dao;
+package com.ai.aso.common.db.dao;
 
 import java.util.List;
 
-import com.ai.aso.common.log.model.UserLoginLog;
-import com.ai.aso.common.log.model.UserLoginLogExample;
+import com.ai.aso.common.db.model.UserLoginLog;
+import com.ai.aso.common.db.model.UserLoginLogExample;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

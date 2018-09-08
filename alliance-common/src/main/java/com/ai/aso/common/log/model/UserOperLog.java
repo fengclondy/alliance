@@ -1,7 +1,9 @@
 package com.ai.aso.common.log.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_USER_OPER_LOG")
 public class UserOperLog {
     private Long id;
 
@@ -32,7 +34,7 @@ public class UserOperLog {
     private String systemCode;
 
     private String remarks;
-
+    @Id
     public Long getId() {
         return id;
     }

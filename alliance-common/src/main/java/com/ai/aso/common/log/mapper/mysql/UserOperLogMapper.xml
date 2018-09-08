@@ -86,7 +86,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tl_user_oper_log
+    from b_user_oper_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,21 +97,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tl_user_oper_log
+    from b_user_oper_log
     where Id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tl_user_oper_log
+    delete from b_user_oper_log
     where Id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.ai.aso.common.log.model.UserOperLogExample" >
-    delete from tl_user_oper_log
+    delete from b_user_oper_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.ai.aso.common.log.model.UserOperLog" >
-    insert into tl_user_oper_log (Id, Model_Code, Model_Name, 
+    insert into b_user_oper_log (Id, Model_Code, Model_Name,
       Oper_Type, Oper_Comm, Oper_Params, 
       Oper_Result, Log_Date, Log_Level, 
       `Operator`, Operator_Id, Oper_Date, 
@@ -125,7 +125,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.aso.common.log.model.UserOperLog" >
-    insert into tl_user_oper_log
+    insert into b_user_oper_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         Id,
@@ -222,13 +222,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ai.aso.common.log.model.UserOperLogExample" resultType="java.lang.Integer" >
-    select count(*) from tl_user_oper_log
+    select count(*) from b_user_oper_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tl_user_oper_log
+    update b_user_oper_log
     <set >
       <if test="record.id != null" >
         Id = #{record.id,jdbcType=BIGINT},
@@ -281,7 +281,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tl_user_oper_log
+    update b_user_oper_log
     set Id = #{record.id,jdbcType=BIGINT},
       Model_Code = #{record.modelCode,jdbcType=VARCHAR},
       Model_Name = #{record.modelName,jdbcType=VARCHAR},
@@ -302,7 +302,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.log.model.UserOperLog" >
-    update tl_user_oper_log
+    update b_user_oper_log
     <set >
       <if test="modelCode != null" >
         Model_Code = #{modelCode,jdbcType=VARCHAR},
@@ -350,7 +350,7 @@
     where Id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.log.model.UserOperLog" >
-    update tl_user_oper_log
+    update b_user_oper_log
     set Model_Code = #{modelCode,jdbcType=VARCHAR},
       Model_Name = #{modelName,jdbcType=VARCHAR},
       Oper_Type = #{operType,jdbcType=VARCHAR},

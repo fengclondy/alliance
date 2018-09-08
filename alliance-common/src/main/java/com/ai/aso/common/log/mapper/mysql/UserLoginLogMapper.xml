@@ -80,7 +80,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tl_user_login_log
+    from b_user_login_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,21 +91,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tl_user_login_log
+    from b_user_login_log
     where Id_ = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tl_user_login_log
+    delete from b_user_login_log
     where Id_ = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.ai.aso.common.log.model.UserLoginLogExample" >
-    delete from tl_user_login_log
+    delete from b_user_login_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
-    insert into tl_user_login_log (Id_, Acct_Id, Username, 
+    insert into b_user_login_log (Id_, Acct_Id, Username,
       Nickname, `Operation`, Login_Date, 
       Login_IP, System_Code, Remarks
       )
@@ -115,7 +115,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
-    insert into tl_user_login_log
+    insert into b_user_login_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         Id_,
@@ -176,13 +176,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ai.aso.common.log.model.UserLoginLogExample" resultType="java.lang.Integer" >
-    select count(*) from tl_user_login_log
+    select count(*) from b_user_login_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tl_user_login_log
+    update b_user_login_log
     <set >
       <if test="record.id != null" >
         Id_ = #{record.id,jdbcType=BIGINT},
@@ -217,7 +217,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tl_user_login_log
+    update b_user_login_log
     set Id_ = #{record.id,jdbcType=BIGINT},
       Acct_Id = #{record.acctId,jdbcType=VARCHAR},
       Username = #{record.username,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
-    update tl_user_login_log
+    update b_user_login_log
     <set >
       <if test="acctId != null" >
         Acct_Id = #{acctId,jdbcType=VARCHAR},
@@ -262,7 +262,7 @@
     where Id_ = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ai.aso.common.log.model.UserLoginLog" >
-    update tl_user_login_log
+    update b_user_login_log
     set Acct_Id = #{acctId,jdbcType=VARCHAR},
       Username = #{username,jdbcType=VARCHAR},
       Nickname = #{nickname,jdbcType=VARCHAR},

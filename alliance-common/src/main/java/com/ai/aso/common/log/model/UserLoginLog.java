@@ -1,7 +1,9 @@
 package com.ai.aso.common.log.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-
+@Entity(name = "B_USER_LOGIN_LOG")
 public class UserLoginLog {
     private Long id;
 
@@ -20,7 +22,7 @@ public class UserLoginLog {
     private String systemCode;
 
     private String remarks;
-
+    @Id
     public Long getId() {
         return id;
     }

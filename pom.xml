@@ -26,6 +26,11 @@
         <module>alliance-base</module>
         <module>alliance-security</module>
         <module>alliance-common</module>
+        <module>alliance-register</module>
+        <module>alliance-dispatch</module>
+        <module>alliance-manager-web</module>
+        <module>alliance-portal-web</module>
+        <module>alliance-open-web</module>
     </modules>
     <dependencyManagement>
         <dependencies>
